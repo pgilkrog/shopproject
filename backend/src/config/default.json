@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://paw123:paw123@contactkeeper-8l5c7.mongodb.net/vintageMusic?retryWrites=true&w=majority",
+    "jwtSecret": "La-Cosa-Nostra"
+}

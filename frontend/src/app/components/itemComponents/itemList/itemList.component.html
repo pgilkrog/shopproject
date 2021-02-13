@@ -1,0 +1,9 @@
+<ul *ngIf="items.length > 0">
+  <li *ngFor="let item of items">
+    <app-itemsingle [item]="item"></app-itemsingle>
+  </li>
+</ul>
+
+<div *ngIf="items.length < 1">
+  <h2>There are no items!</h2>
+</div>

@@ -1,0 +1,27 @@
+<nav>
+  <ul>
+    <li>
+      <a routerLink="">Home</a>
+    </li>
+    <li>
+      <a (click)="gotoProducts()" routerLink="ItemList">Products</a>
+    </li>
+    <li>
+      <a routerLink="CreateStuff">CreateStuff</a>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <a routerLink="">Login</a>
+    </li>
+  </ul>
+</nav>
+
+<ul>
+  <li *ngFor="let category of categories">
+    <a (click)="goToCategory(category.name)" routerLink="FilteredList/{{category.name}}">
+      {{ category.name }}
+    </a>
+  </li>
+</ul>

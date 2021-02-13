@@ -1,0 +1,16 @@
+<h2>Create An Item</h2>
+<form [formGroup]="form" (submit)="createItem()">
+  <input formControlName="name" type="input" placeholder="Item Name" /> <br>
+  <input formControlName="description" type="input" placeholder="Description" /> <br>
+  <input formControlName="price" type="input" placeholder="price" /> <br>
+  <input formControlName="image" type="input" placeholder="image link" /> <br>
+  <input formControlName="companyName" type="input" placeholder="Company Name"/> <br>
+  <select formControlName="category">
+    <option *ngFor="let item of categories" value="{{item.name}}">{{item.name}}</option>
+  </select> <br>
+  <button class="btn btn-secondary" type="submit">Create Item</button>
+</form>
+
+<h2>Create a Category</h2>
+<input type="text" [(ngModel)]="categoryName"/>
+<button (click)="createCategory()">Create Category</button>
