@@ -4,13 +4,15 @@ import { CreateStuffComponent } from './components/admin/createStuff/createstuff
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { ItemDetailComponent } from './components/itemComponents/itemDetail/itemDetail.component';
 import { ItemListComponent } from './components/itemComponents/itemList/itemList.component';
+import { ShoppingCartComponent } from './components/ShoppingCartComps/ShoppingCart/shoppingCart.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'ItemList', component: ItemListComponent },
   { path: 'ItemDetail/:id', component: ItemDetailComponent },
   { path: 'FilteredList/:category', component: ItemListComponent},
-  { path: 'CreateStuff', component: CreateStuffComponent }
+  { path: 'CreateStuff', component: CreateStuffComponent },
+  { path: 'ShoppingCart', component: ShoppingCartComponent }
 ];
 
 @NgModule({

@@ -11,6 +11,8 @@ import { ItemListComponent } from './components/itemComponents/itemList/itemList
 import { ItemSingleComponent } from './components/itemComponents/itemList/itemSingle/itemSingle.component';
 import { ItemDetailComponent } from './components/itemComponents/itemDetail/itemDetail.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { ShoppingCartComponent } from './components/ShoppingCartComps/ShoppingCart/shoppingCart.component';
+import { SpinnerComponent } from './components/UIComponents/Spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     NavbarComponent,
     ItemListComponent,
     ItemSingleComponent,
-    ItemDetailComponent
+    ItemDetailComponent,
+    ShoppingCartComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

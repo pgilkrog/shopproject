@@ -1,0 +1,8 @@
+<div *ngFor="let item of cart">
+  {{ item.name }}
+  {{ item.description }}
+  {{ item.num }}
+  <img src="{{item.image}}" width="100" />
+  <button (click)="removeItem(item)">Remove</button>
+</div>
+

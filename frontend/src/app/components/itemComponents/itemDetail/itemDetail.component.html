@@ -1,6 +1,9 @@
 <div *ngIf="item">
-  {{item.name}}
-
-  <img src="{{item.image}}" />
+  <img src="{{ item.image }}" />
+  <h1>{{ item.name }}</h1>
+  <h2>{{ item.price }} kr.</h2>
+  <p>{{ item.companyName }}</p>
+  <p>{{ item.description }}</p>
 </div>
 
+<button (click)="buy()">Buy</button>
