@@ -16,7 +16,6 @@ export class ItemListComponent implements OnInit, OnDestroy {
   constructor(private itemService: ItemService) {}
 
   ngOnInit(): void {
-    console.log('got to itemlist');
     this.ItemSub = this.itemService.getItemsListener()
       .subscribe((itemsData: { items: Item[] }) => {
         this.items = itemsData.items;

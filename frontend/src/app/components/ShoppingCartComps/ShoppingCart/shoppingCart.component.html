@@ -1,8 +1,40 @@
-<div *ngFor="let item of cart">
-  {{ item.name }}
-  {{ item.description }}
-  {{ item.num }}
-  <img src="{{item.image}}" width="100" />
-  <button (click)="removeItem(item)">Remove</button>
-</div>
-
+<section>
+  <div class="cartWrap">
+    <h2>Your Shopping Cart</h2>
+    <table>
+      <tr *ngFor="let item of cart">
+        <td>
+          <img src="{{item.image}}" width="100" />
+        </td>
+        <td>
+          <p>{{ item.name }}</p>
+        </td>
+        <td>
+          <p><strong>{{ item.price }}</strong> kr.</p>
+        </td>
+        <td>
+          <div class="amountWrap">
+            <button (click)="decreaseAmount(item)">-</button>
+            <input value="{{item.num}}" type="text" readonly disabled />
+            <button (click)="addAmount(item)">+</button>
+          </div>
+        </td>
+        <td>
+          <button (click)="removeItem(item)">X</button>
+        </td>
+        <td>
+          <p>Total Price: <strong>{{item.num * item.price}}</strong> kr.</p>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <div>
+      <form [formGroup]="infoForm" (submit)="completeOrder()">
+        <input formControlName="userEmail" type="input" placeholder="email" /> <br>
+        <input formControlName="address" type="input" placeholder="address" /> <br>
+        <input formControlName="city" type="input" placeholder="city" /> <br><br>
+        <button class="checkBtn" type="submit">Checkout</button>
+      </form>
+    </div>
+  </div>
+</section>

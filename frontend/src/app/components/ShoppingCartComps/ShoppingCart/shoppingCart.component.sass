@@ -1,0 +1,56 @@
+@import '../../../../styles'
+
+section
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  .cartWrap
+    background: #eee
+    border-radius: 10px
+    text-align: center
+    padding: 10px
+    color: #121212
+
+    table
+      border-collapse: collapse
+
+    td
+      border-top: 1px solid #999
+      border-bottom: 1px solid #999
+
+    td + td
+      padding-left: 10px
+
+      button
+        border: none
+        font-size: 1.5rem
+        cursor: pointer
+
+        &:hover
+          background: #888
+
+    .amountWrap
+      display: flex
+      align-items: center
+      border: 1px solid #999
+
+
+      input
+        width: 15px
+        border: none
+        background-color: #eee
+        color: #000
+
+
+  .checkBtn
+    border: none
+    border-radius: 10px
+    background: $secondary-color
+    color: #fff
+    padding: 10px 15px
+    font-size: 1rem
+    cursor: pointer
+
+    &:hover
+      background: #555

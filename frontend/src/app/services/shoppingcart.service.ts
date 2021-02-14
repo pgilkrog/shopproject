@@ -13,8 +13,8 @@ export class ShoppingCartService {
     return this.shoppingcart;
   }
 
-  addToCart(item: Item): void {
-    const itemExistInCart = this.shoppingcart.find(({name}) => name === item.name);
+  addToCart(item: any): void {
+    const itemExistInCart = this.shoppingcart.find(({_id}) => _id === item._id);
     if (!itemExistInCart) {
       this.shoppingcart.push({...item, num: 1});
       this.shoppingcartUpdate();
@@ -26,13 +26,13 @@ export class ShoppingCartService {
     console.log('[AddItemToCart]', item);
   }
 
-  removeFromCart(item: Item): void {
+  removeFromCart(item: any): void {
     let itemExistInCart = this.shoppingcart.find(({_id}) => _id === item._id);
     if (itemExistInCart.num > 1) {
       itemExistInCart.num -= 1;
       this.saveToLocalstorage();
     } else {
-      itemExistInCart = this.shoppingcart.indexOf(item._id);
+      itemExistInCart = this.shoppingcart.indexOf(item);
       this.shoppingcart.splice(itemExistInCart, 1);
       this.shoppingcartUpdate();
     }
@@ -44,6 +44,13 @@ export class ShoppingCartService {
     });
 
     this.saveToLocalstorage();
+  }
+
+  removeItem(item: any): void {
+    let itemExistInCart = this.shoppingcart.find(({_id}) => _id === item._id);
+    itemExistInCart = this.shoppingcart.indexOf(item);
+    this.shoppingcart.splice(itemExistInCart, 1);
+    this.shoppingcartUpdate();
   }
 
   private saveToLocalstorage(): void {

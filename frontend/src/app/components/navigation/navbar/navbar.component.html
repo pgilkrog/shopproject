@@ -24,7 +24,7 @@
 <ul>
   <li *ngFor="let category of categories">
     <a (click)="goToCategory(category.name)" routerLink="FilteredList/{{category.name}}">
-      {{ category.name }}
+      <strong>{{ category.name }}</strong>
     </a>
   </li>
 </ul>
