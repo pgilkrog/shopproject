@@ -1,6 +1,8 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { CartItem } from 'src/app/models/CartItem';
 import { Item } from 'src/app/models/Item';
 import { Order } from 'src/app/models/Order';
 import { OrderService } from 'src/app/services/order.service';
@@ -14,10 +16,15 @@ import { ShoppingCartService } from 'src/app/services/shoppingcart.service';
 
 export class ShoppingCartComponent implements OnInit, OnDestroy {
   infoForm: FormGroup = new FormGroup({});
-  cart: any[] = [];
+  cart: CartItem[] = [];
+  totalItemsInCart = 0;
+  totalPrice = 0;
   private cartSub: Subscription = new Subscription();
 
-  constructor(private cartService: ShoppingCartService, private orderService: OrderService) {}
+  constructor(
+    private cartService: ShoppingCartService,
+    private orderService: OrderService
+  ) {}
 
   ngOnInit(): void {
     this.cart = this.cartService.getShoppingcart();
@@ -32,30 +39,35 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
         validators: [Validators.required]
       })
     });
+
+    this.ItemsInCart();
   }
 
   ngOnDestroy(): void {
     this.cartSub.unsubscribe();
   }
 
-  decreaseAmount(item: any): void {
+  decreaseAmount(item: CartItem): void {
     this.cartService.removeFromCart(item);
+    this.ItemsInCart();
   }
 
-  addAmount(item: any): void {
-    this.cartService.addToCart(item);
+  addAmount(item: CartItem): void {
+    this.cartService.addToCart(item.item);
+    this.ItemsInCart();
   }
 
-  removeItem(item: any): void {
+  removeItem(item: CartItem): void {
     this.cartService.removeItem(item);
+    this.ItemsInCart();
   }
 
   completeOrder(): void{
     const order: Order = {
       _id: '',
       items: this.cart,
-      totalPrice: 23,
-      totalNumberItems: 43,
+      totalPrice: this.totalPrice,
+      totalNumberItems: this.totalItemsInCart,
       status: 'order made',
       userEmail: this.infoForm.value.userEmail,
       address: this.infoForm.value.address,
@@ -63,5 +75,10 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     };
 
     this.orderService.completeOrder(order);
+  }
+
+  ItemsInCart(): void {
+    this.totalItemsInCart = this.cartService.getTotalItems();
+    this.totalPrice = this.cartService.getTotalPrice();
   }
 }

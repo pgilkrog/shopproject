@@ -23,6 +23,7 @@ app.use((req, res, next) => {
 
 app.use('/api/item', require('./routers/itemRoute'));
 app.use('/api/category', require('./routers/categoryRoute'));
+app.use('/api/order', require('./routers/orderRoute'));
 
 const PORT = process.env.APP_PORT || 5000;
 

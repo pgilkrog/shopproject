@@ -1,9 +1,11 @@
-<div *ngIf="item">
+<div class="detailWrap" *ngIf="item">
   <img src="{{ item.image }}" />
-  <h1>{{ item.name }}</h1>
-  <h2>{{ item.price }} kr.</h2>
-  <p>{{ item.companyName }}</p>
-  <p>{{ item.description }}</p>
+  <div class="infoWrap">
+    <h1>{{ item.name }} - {{ item.price }} kr.</h1>
+    <p>{{ item.companyName }}</p>
+    <p>{{ item.description }}</p>
+    <div><button (click)="buy()">Buy</button></div>
+  </div>
 </div>
 
-<button (click)="buy()">Buy</button>
+

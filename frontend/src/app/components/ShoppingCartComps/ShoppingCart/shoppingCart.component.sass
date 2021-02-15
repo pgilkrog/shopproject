@@ -6,7 +6,6 @@ section
   align-items: center
 
   .cartWrap
-    background: #eee
     border-radius: 10px
     text-align: center
     padding: 10px
@@ -16,8 +15,8 @@ section
       border-collapse: collapse
 
     td
-      border-top: 1px solid #999
-      border-bottom: 1px solid #999
+      border-top: 1px solid $blue-color
+      border-bottom: 1px solid $blue-color
 
     td + td
       padding-left: 10px
@@ -26,6 +25,7 @@ section
         border: none
         font-size: 1.5rem
         cursor: pointer
+        background: #fff
 
         &:hover
           background: #888
@@ -35,13 +35,24 @@ section
       align-items: center
       border: 1px solid #999
 
-
       input
         width: 15px
         border: none
-        background-color: #eee
         color: #000
+        background: #fff
 
+  .orderInfo
+    border-top: 1px solid $blue-color
+    display: flex
+    flex-direction: column
+    justify-content: center
+    padding-top: 15px
+
+    input
+      border: 1px solid $blue-color
+      margin: 5px
+      padding: 5px
+      border-radius: 5px
 
   .checkBtn
     border: none

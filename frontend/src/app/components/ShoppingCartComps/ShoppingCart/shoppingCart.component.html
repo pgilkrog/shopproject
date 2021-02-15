@@ -1,34 +1,38 @@
 <section>
   <div class="cartWrap">
     <h2>Your Shopping Cart</h2>
-    <table>
-      <tr *ngFor="let item of cart">
+    <table *ngIf="cart.length > 0">
+      <tr *ngFor="let cartItem of cart">
         <td>
-          <img src="{{item.image}}" width="100" />
+          <img src="{{cartItem.item.image}}" width="100" />
         </td>
         <td>
-          <p>{{ item.name }}</p>
+          <p>{{ cartItem.item.name }}</p>
         </td>
         <td>
-          <p><strong>{{ item.price }}</strong> kr.</p>
+          <p><strong>{{ cartItem.item.price }}</strong> kr.</p>
         </td>
         <td>
           <div class="amountWrap">
-            <button (click)="decreaseAmount(item)">-</button>
-            <input value="{{item.num}}" type="text" readonly disabled />
-            <button (click)="addAmount(item)">+</button>
+            <button (click)="decreaseAmount(cartItem)">-</button>
+            <input value="{{cartItem.num}}" type="text" readonly disabled />
+            <button (click)="addAmount(cartItem)">+</button>
           </div>
         </td>
         <td>
-          <button (click)="removeItem(item)">X</button>
+          <button (click)="removeItem(cartItem)">X</button>
         </td>
         <td>
-          <p>Total Price: <strong>{{item.num * item.price}}</strong> kr.</p>
+          <p>Total Price: <strong>{{cartItem.num * cartItem.item.price}}</strong> kr.</p>
         </td>
       </tr>
     </table>
-    <br>
+      <br>
     <div>
+      <h3>Number of Items: {{totalItemsInCart}} - Total Price: {{totalPrice}} kr.</h3>
+    </div>
+      <br>
+    <div class="orderInfo" *ngIf="cart.length > 0">
       <form [formGroup]="infoForm" (submit)="completeOrder()">
         <input formControlName="userEmail" type="input" placeholder="email" /> <br>
         <input formControlName="address" type="input" placeholder="address" /> <br>

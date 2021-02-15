@@ -1,56 +1,60 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { CartItem } from '../models/CartItem';
 import { Item } from '../models/Item';
 
 @Injectable({ providedIn: 'root' })
 
 export class ShoppingCartService {
-  private shoppingcart: any[] = [];
-  private shoppingcartUpdated = new Subject<{ items: any[] }>();
+  private shoppingcart: CartItem[] = [];
+  private shoppingcartUpdated = new Subject<{ items: CartItem[] }>();
 
-  getShoppingcart(): any[] {
+  getShoppingcart(): CartItem[] {
     this.shoppingcart = JSON.parse(sessionStorage.getItem('shopcart') || '{}');
     return this.shoppingcart;
   }
 
-  addToCart(item: any): void {
-    const itemExistInCart = this.shoppingcart.find(({_id}) => _id === item._id);
+  addToCart(newItem: Item): void {
+    const itemExistInCart = this.shoppingcart.find(({item}) => item._id === newItem._id) || null;
+
     if (!itemExistInCart) {
-      this.shoppingcart.push({...item, num: 1});
-      this.shoppingcartUpdate();
+      const cartItem: CartItem = {
+        item: newItem,
+        num: 1
+      };
+
+      this.shoppingcart.push({...cartItem});
+      this.saveToLocalstorage();
     } else {
       itemExistInCart.num += 1;
       this.saveToLocalstorage();
     }
 
-    console.log('[AddItemToCart]', item);
+    console.log('[AddItemToCart]', newItem);
   }
 
-  removeFromCart(item: any): void {
-    let itemExistInCart = this.shoppingcart.find(({_id}) => _id === item._id);
-    if (itemExistInCart.num > 1) {
-      itemExistInCart.num -= 1;
-      this.saveToLocalstorage();
-    } else {
-      itemExistInCart = this.shoppingcart.indexOf(item);
-      this.shoppingcart.splice(itemExistInCart, 1);
-      this.shoppingcartUpdate();
+  removeFromCart(itemToRemove: CartItem): void {
+    const itemExistInCart = this.shoppingcart.find(({item}) => item === itemToRemove.item);
+
+    if (itemExistInCart){
+      if (itemExistInCart.num > 1) {
+        itemExistInCart.num -= 1;
+        this.saveToLocalstorage();
+      } else {
+        const newItemExistInCart = this.shoppingcart.indexOf(itemToRemove);
+        this.shoppingcart.splice(newItemExistInCart, 1);
+        this.saveToLocalstorage();
+      }
     }
   }
 
-  shoppingcartUpdate(): void {
-    this.shoppingcartUpdated.next({
-      items: [...this.shoppingcart]
-    });
-
-    this.saveToLocalstorage();
-  }
-
-  removeItem(item: any): void {
-    let itemExistInCart = this.shoppingcart.find(({_id}) => _id === item._id);
-    itemExistInCart = this.shoppingcart.indexOf(item);
-    this.shoppingcart.splice(itemExistInCart, 1);
-    this.shoppingcartUpdate();
+  removeItem(cartItem: CartItem): void {
+    const itemExistInCart = this.shoppingcart.find(({item}) => item === cartItem.item);
+    if (itemExistInCart) {
+      const itemIndex = this.shoppingcart.indexOf(itemExistInCart);
+      this.shoppingcart.splice(itemIndex, 1);
+      this.saveToLocalstorage();
+    }
   }
 
   private saveToLocalstorage(): void {
@@ -58,7 +62,31 @@ export class ShoppingCartService {
     sessionStorage.setItem('shopcart', JSON.stringify(this.shoppingcart));
   }
 
-  private removeLocalStorage(): void {
+  removeFromSessionStoreage(): void {
     sessionStorage.removeItem('shopcart');
+  }
+
+  getTotalItems(): number {
+    let numberOfItems = 0;
+
+    if (this.shoppingcart.length > 0) {
+      this.shoppingcart.forEach(item => {
+        numberOfItems += item.num;
+      });
+    }
+
+    return numberOfItems;
+  }
+
+  getTotalPrice(): number {
+    let totalPrice = 0;
+
+    if (this.shoppingcart.length > 0) {
+      this.shoppingcart.forEach(item => {
+        totalPrice += (item.num * item.item.price);
+      });
+    }
+
+    return totalPrice;
   }
 }

@@ -4,6 +4,7 @@ import { CreateStuffComponent } from './components/admin/createStuff/createstuff
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { ItemDetailComponent } from './components/itemComponents/itemDetail/itemDetail.component';
 import { ItemListComponent } from './components/itemComponents/itemList/itemList.component';
+import { OrderCompleteComponent } from './components/ShoppingCartComps/orderComplete/orderComplete.component';
 import { ShoppingCartComponent } from './components/ShoppingCartComps/ShoppingCart/shoppingCart.component';
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'ItemDetail/:id', component: ItemDetailComponent },
   { path: 'FilteredList/:category', component: ItemListComponent},
   { path: 'CreateStuff', component: CreateStuffComponent },
-  { path: 'ShoppingCart', component: ShoppingCartComponent }
+  { path: 'ShoppingCart', component: ShoppingCartComponent },
+  { path: 'CompletedOrder', component: OrderCompleteComponent }
 ];
 
 @NgModule({

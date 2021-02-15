@@ -13,6 +13,7 @@ import { ItemDetailComponent } from './components/itemComponents/itemDetail/item
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { ShoppingCartComponent } from './components/ShoppingCartComps/ShoppingCart/shoppingCart.component';
 import { SpinnerComponent } from './components/UIComponents/Spinner/spinner.component';
+import { OrderCompleteComponent } from './components/ShoppingCartComps/orderComplete/orderComplete.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SpinnerComponent } from './components/UIComponents/Spinner/spinner.comp
     ItemSingleComponent,
     ItemDetailComponent,
     ShoppingCartComponent,
+    OrderCompleteComponent,
     SpinnerComponent
   ],
   imports: [
