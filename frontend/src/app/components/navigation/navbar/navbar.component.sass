@@ -1,11 +1,11 @@
 @import '../../../../styles'
 
-nav
+.navbar
   width: 100%
   background-color: $secondary-color
   display: flex
   justify-content: space-between
-  border-bottom: 2px solid $blue-color
+  border-bottom: 4px solid $blue-color
 
   ul
     margin: 0
@@ -36,11 +36,17 @@ nav
           text-decoration: underline
           transition: .5s
 
-ul
+        i
+          font-size: 1.8rem
+          color: $blue-color
+
+.catMenu
   margin: 0
-  padding: 10px 0 40px 80px
+  background-color: #333
+  padding: 15px 0 15px 80px
   list-style: none
   display: flex
+  border-bottom: 2px solid $blue-color
 
   li
     padding: 0 10px
@@ -53,12 +59,5 @@ ul
 
       &:hover
         color: $darkblue-color
-
-ul li:hover a
-ul li.link-active a
-ul li.link-active a:hover
-ul li.link-active a:focus
-  color: $darkblue-color
-  text-decoration: underline
 
 

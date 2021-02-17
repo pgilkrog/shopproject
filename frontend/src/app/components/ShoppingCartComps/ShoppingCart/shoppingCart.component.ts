@@ -7,6 +7,7 @@ import { Item } from 'src/app/models/Item';
 import { Order } from 'src/app/models/Order';
 import { OrderService } from 'src/app/services/order.service';
 import { ShoppingCartService } from 'src/app/services/shoppingcart.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-shoppingcart',
@@ -23,7 +24,8 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   constructor(
     private cartService: ShoppingCartService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {

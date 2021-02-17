@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CreateStuffComponent } from './components/admin/createStuff/createstuff.component';
@@ -14,6 +14,9 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { ShoppingCartComponent } from './components/ShoppingCartComps/ShoppingCart/shoppingCart.component';
 import { SpinnerComponent } from './components/UIComponents/Spinner/spinner.component';
 import { OrderCompleteComponent } from './components/ShoppingCartComps/orderComplete/orderComplete.component';
+import { SignupSigninComponent } from './components/userComponents/signup-signin/signupsignin.component';
+import { UserpageComponent } from './components/userComponents/userpage/userpage.component';
+import { AuthInterceptor } from './components/auth/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import { OrderCompleteComponent } from './components/ShoppingCartComps/orderComp
     ItemDetailComponent,
     ShoppingCartComponent,
     OrderCompleteComponent,
-    SpinnerComponent
+    SignupSigninComponent,
+    SpinnerComponent,
+    UserpageComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,7 @@ import { OrderCompleteComponent } from './components/ShoppingCartComps/orderComp
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [ {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

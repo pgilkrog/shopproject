@@ -1,4 +1,4 @@
-<nav>
+<nav class="navbar">
   <ul>
     <li [routerLinkActive]='["link-active"]'>
       <a routerLink="">Home</a>
@@ -12,16 +12,20 @@
   </ul>
 
   <ul>
-    <li>
-      <a [routerLinkActive]='["link-active"]' routerLink="">Login</a>
+    <li [routerLinkActive]='["link-active"]' *ngIf="!userIsAuthenticated">
+      <a routerLink="SignupSignin">Login</a>
     </li>
-    <li>
-      <a [routerLinkActive]='["link-active"]' routerLink="ShoppingCart">{{ ItemsInBasket }}<img width="40" src="../../../../assets/images/shoppingcart.png" /></a>
+    <li *ngIf="userIsAuthenticated">
+      <button routerLink="UserPage">UserPage</button>
+      <button (click)="signout()">Signout</button>
+    </li>
+    <li [routerLinkActive]='["link-active"]'>
+      <a routerLink="ShoppingCart">{{ ItemsInBasket }} <i class="fas fa-shopping-cart"></i></a>
     </li>
   </ul>
 </nav>
 
-<ul>
+<ul class="catMenu">
   <li *ngFor="let category of categories" [routerLinkActive]='["link-active"]'>
     <a (click)="goToCategory(category.name)" routerLink="FilteredList/{{category.name}}">
       <strong>{{ category.name }}</strong>

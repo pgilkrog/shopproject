@@ -13,7 +13,6 @@ export class OrderService {
   constructor(private http: HttpClient, private cartService: ShoppingCartService, private rotuer: Router) {}
 
   completeOrder(order: Order): void {
-    console.log('completeOrder', JSON.stringify(order));
     this.http.post<{ completed: boolean }>(this.BACKEND_URL, order).subscribe(responseData => {
       if (responseData.completed === true) {
         this.cartService.removeFromSessionStoreage();

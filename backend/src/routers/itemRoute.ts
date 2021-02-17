@@ -34,9 +34,8 @@ router.get('/cat/:category', async (req: Request, res: Response) => {
     try {
         const fetchedItems = await Item.find({ category: req.params.category })
         res.json({ items: fetchedItems });
-        console.log(fetchedItems);
     } catch (error) {
-        
+        console.error(error.message);
     }
 })
 
@@ -61,4 +60,4 @@ router.post('/', jsonParser, async (req: Request, res: Response, next: any) => {
     }
 })
 
-module.exports = router;
+export = router;

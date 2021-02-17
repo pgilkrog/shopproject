@@ -1,0 +1,38 @@
+@import '../../../../styles'
+
+section
+  height: 60vh
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+
+  span
+    color: $blue-color
+    cursor: pointer
+
+    &:hover
+      color: $darkblue-color
+
+  form
+    width: 300px
+    display: flex
+    flex-direction: column
+
+  input
+    border: 1px solid $blue-color
+    padding: 4px
+    margin: 5px 0
+    font-size: 1.2rem
+
+  button
+    border: none
+    background-color: $darkblue-color
+    color: #fff
+    padding: 10px
+    margin-top: 5px
+    font-weight: 600
+
+    &:hover
+      background: $blue-color
+      cursor: pointer
