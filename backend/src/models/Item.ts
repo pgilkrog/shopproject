@@ -24,6 +24,10 @@ const itemSchema = new mongoose.Schema ({
     category: {
         type: String,
         required: true
+    },
+    amountInStock: {
+        type: Number,
+        default: 0
     }
 });
 

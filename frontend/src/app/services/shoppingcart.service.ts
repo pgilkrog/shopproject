@@ -27,7 +27,7 @@ export class ShoppingCartService {
         num: 1
       };
 
-      this.shoppingcart.push({...cartItem});
+      this.shoppingcart.push(cartItem);
       this.saveToLocalstorage();
     } else {
       itemExistInCart.num += 1;

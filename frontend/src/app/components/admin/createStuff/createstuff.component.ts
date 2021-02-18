@@ -36,10 +36,15 @@ export class CreateStuffComponent implements OnInit {
       }),
       category: new FormControl(null, {
         validators: [Validators.required]
+      }),
+      amountInStock: new FormControl(null, {
+        validators: [Validators.required]
       })
     });
 
-    this.categoryService.getAllCategories().subscribe((result: any) => this.categories = result.categories);
+    this.categoryService.getAllCategories().subscribe((result: any) => {
+      this.categories = result.categories.sort((one: Category, two: Category) => (one.name < two.name ? -1 : 1));
+    });
   }
 
   createItem(): void {
@@ -50,7 +55,8 @@ export class CreateStuffComponent implements OnInit {
       price: this.form.value.price,
       image: this.form.value.image,
       companyName: this.form.value.companyName,
-      category: this.form.value.category
+      category: this.form.value.category,
+      amountInStock: this.form.value.amountInStock
     };
 
     this.itemService.createItem(item);

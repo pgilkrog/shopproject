@@ -12,6 +12,7 @@ export class UserService {
   token = '';
   userId = '';
   role = '';
+
   private isAuthenticated = false;
   private authStatusListener = new Subject<boolean>();
 
@@ -44,7 +45,6 @@ export class UserService {
   }
 
   signin(user: User): void {
-    const authData = {email: 'test@test.com', password: 'hejsa1234'};
     this.http.post<{token: string, id: string, role: string}>(this.BACKEND_URL + '/auth/', user)
     .subscribe(responseData => {
       this.token = responseData.token;

@@ -22,15 +22,7 @@ export class ItemService {
   getAllItems(): void {
     this.http.get<{ items: any }>(BACKEND_URL).pipe(map((itemData) => {
       return { items: itemData.items.map((item: Item) => {
-        return {
-          _id: item._id,
-          name: item.name,
-          description: item.description,
-          price: item.price,
-          image: item.image,
-          companyName: item.companyName,
-          category: item.category
-        };
+        return this.generateItem(item);
       })};
     }))
     .subscribe(data => {
@@ -38,6 +30,13 @@ export class ItemService {
       this.itemsUpdated.next({
         items: [...this.items]
       });
+    });
+  }
+
+  updateItem(item: Item): void {
+    this.http.post(BACKEND_URL + '/' + item._id, item)
+    .subscribe(response => {
+      console.log(response);
     });
   }
 
@@ -48,15 +47,7 @@ export class ItemService {
   getItemByCategory(category: string): any {
     return this.http.get<{items: any}>(BACKEND_URL + '/cat/' + category).pipe(map((itemData) => {
       return { items: itemData.items.map((item: Item) => {
-        return {
-          _id: item._id,
-          name: item.name,
-          description: item.description,
-          price: item.price,
-          image: item.image,
-          companyName: item.companyName,
-          category: item.category
-        };
+        return this.generateItem(item);
       })};
     }))
     .subscribe(data => {
@@ -65,6 +56,19 @@ export class ItemService {
         items: [...this.items]
       });
     });
+  }
+
+  generateItem(item: Item): Item {
+    return {
+      _id: item._id,
+      name: item.name,
+      description: item.description,
+      price: item.price,
+      image: item.image,
+      companyName: item.companyName,
+      category: item.category,
+      amountInStock: item.amountInStock
+    };
   }
 
   createItem(item: Item): void {

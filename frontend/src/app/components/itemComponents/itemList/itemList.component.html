@@ -1,8 +1,14 @@
-<ul *ngIf="items.length > 0">
-  <li *ngFor="let item of items">
-    <app-itemsingle [item]="item"></app-itemsingle>
-  </li>
-</ul>
+<section>
+  <div class="searchInput">
+    <input type="text" />
+  </div>
+
+  <ul *ngIf="items.length > 0">
+    <li *ngFor="let item of items">
+      <app-itemsingle [item]="item"></app-itemsingle>
+    </li>
+  </ul>
+</section>
 
 <div *ngIf="items.length < 1">
   <h2>No products found!</h2>

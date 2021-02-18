@@ -1,9 +1,7 @@
-import { Route } from '@angular/compiler/src/core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CartItem } from 'src/app/models/CartItem';
-import { Item } from 'src/app/models/Item';
 import { Order } from 'src/app/models/Order';
 import { OrderService } from 'src/app/services/order.service';
 import { ShoppingCartService } from 'src/app/services/shoppingcart.service';
@@ -64,7 +62,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     this.ItemsInCart();
   }
 
-  completeOrder(): void{
+  completeOrder(): void {
     const order: Order = {
       _id: '',
       items: this.cart,

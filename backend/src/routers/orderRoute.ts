@@ -10,7 +10,7 @@ const jsonParser = bodyParser.json();
 //@desc Create an Order
 router.post('/', jsonParser, async (req: Request, res: Response) => {
     const { items, totalPrice, totalNumberItems, userEmail, status, address, city } = req.body;
-    //const items = Array.from(req.body.items);
+
     try {
         const newOrder = new Order({
             items,
@@ -27,5 +27,16 @@ router.post('/', jsonParser, async (req: Request, res: Response) => {
         console.log(err.message);
     }
 });
+
+//@desc Get Orders by UserEmail
+router.get('/:email', async(req: Request, res: Response) => {
+
+    try {
+        const fetchedOrders = await Order.find({ userEmail: req.params.email })
+        res.json({ orders: fetchedOrders });
+    } catch (error) {
+        console.error(error.message);
+    }
+})
 
 module.exports = router;

@@ -6,5 +6,6 @@ export interface Item {
   image: string;
   companyName: string;
   category: string;
+  amountInStock: number;
 }
 

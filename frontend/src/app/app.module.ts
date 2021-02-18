@@ -17,6 +17,7 @@ import { OrderCompleteComponent } from './components/ShoppingCartComps/orderComp
 import { SignupSigninComponent } from './components/userComponents/signup-signin/signupsignin.component';
 import { UserpageComponent } from './components/userComponents/userpage/userpage.component';
 import { AuthInterceptor } from './components/auth/auth-interceptor';
+import { DropdownComponent } from './components/navigation/dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AuthInterceptor } from './components/auth/auth-interceptor';
     HomepageComponent,
     CreateStuffComponent,
     NavbarComponent,
+    DropdownComponent,
     ItemListComponent,
     ItemSingleComponent,
     ItemDetailComponent,

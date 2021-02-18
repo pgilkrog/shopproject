@@ -1,0 +1,39 @@
+<nav class="navbar">
+  <button (click)="toggleMenu()">Menu</button>
+  <ul *ngIf="showMenu">
+    <li [routerLinkActive]='["link-active"]'>
+      <a routerLink="">Home</a>
+    </li>
+    <li [routerLinkActive]='["link-active"]'>
+      <a (click)="gotoProducts()" routerLink="ItemList">Products</a>
+      <ul class="catMenu">
+        <li *ngFor="let category of categories" [routerLinkActive]='["link-active"]'>
+          <a (click)="goToCategory(category.name)" routerLink="FilteredList/{{category.name}}">
+            <strong>{{ category.name }}</strong>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li [routerLinkActive]='["link-active"]' *ngIf="userIsAuthenticated && userRole === 'admin'">
+      <a routerLink="CreateStuff">CreateStuff</a>
+    </li>
+    <li [routerLinkActive]='["link-active"]' *ngIf="!userIsAuthenticated">
+      <a routerLink="SignupSignin">Login</a>
+    </li>
+    <li *ngIf="userIsAuthenticated && userRole === 'user'">
+      <a routerLink="UserPage">UserPage</a>
+    </li>
+    <li *ngIf="userIsAuthenticated">
+      <a (click)="signout()">Signout</a>
+    </li>
+    <li>
+      <i class="fas fa-search"></i>
+    </li>
+    <li [routerLinkActive]='["link-active"]'>
+      <a routerLink="ShoppingCart"><i class="fas fa-shopping-cart"></i></a>
+    </li>
+  </ul>
+</nav>
+
+
+

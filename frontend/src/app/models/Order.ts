@@ -1,6 +1,8 @@
+import { CartItem } from './CartItem';
+
 export interface Order {
   _id: string;
-  items: any[];
+  items: CartItem[];
   totalPrice: number;
   totalNumberItems: number;
   userEmail: string;

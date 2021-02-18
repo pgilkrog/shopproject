@@ -4,7 +4,8 @@
     <h1>{{ item.name }} - {{ item.price }} kr.</h1>
     <p>{{ item.companyName }}</p>
     <p>{{ item.description }}</p>
-    <div><button (click)="buy()">Buy</button></div>
+    <p><i class="{{item.amountInStock > 0 ? 'fas fa-check' : 'fas fa-times'}}"></i> {{ item.amountInStock }}: left in stock </p>
+    <div *ngIf="item.amountInStock > 0"><button (click)="buy()">Buy</button></div>
   </div>
 </div>
 

@@ -8,4 +8,10 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'Gaming Shop';
+  screenWidth = 0;
+
+  constructor(){
+    this.screenWidth = window.screen.width;
+  }
+
 }

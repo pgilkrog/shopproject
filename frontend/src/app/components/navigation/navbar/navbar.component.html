@@ -6,21 +6,26 @@
     <li [routerLinkActive]='["link-active"]'>
       <a (click)="gotoProducts()" routerLink="ItemList">Products</a>
     </li>
-    <li [routerLinkActive]='["link-active"]'>
-      <a routerLink="CreateStuff">CreateStuff</a>
-    </li>
   </ul>
 
   <ul>
+    <li [routerLinkActive]='["link-active"]' *ngIf="userIsAuthenticated && userRole === 'admin'">
+      <a routerLink="CreateStuff">CreateStuff</a>
+    </li>
     <li [routerLinkActive]='["link-active"]' *ngIf="!userIsAuthenticated">
       <a routerLink="SignupSignin">Login</a>
     </li>
+    <li *ngIf="userIsAuthenticated && userRole === 'user'">
+      <a routerLink="UserPage">UserPage</a>
+    </li>
     <li *ngIf="userIsAuthenticated">
-      <button routerLink="UserPage">UserPage</button>
-      <button (click)="signout()">Signout</button>
+      <a (click)="signout()">Signout</a>
+    </li>
+    <li>
+      <i class="fas fa-search"></i>
     </li>
     <li [routerLinkActive]='["link-active"]'>
-      <a routerLink="ShoppingCart">{{ ItemsInBasket }} <i class="fas fa-shopping-cart"></i></a>
+      <a routerLink="ShoppingCart"><i class="fas fa-shopping-cart"></i></a>
     </li>
   </ul>
 </nav>

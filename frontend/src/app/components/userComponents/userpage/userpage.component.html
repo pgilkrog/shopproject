@@ -1,4 +1,11 @@
 <div *ngIf="user">
   <h1>{{ user.name }}</h1>
+  <p>Email: {{ user.email }}</p>
+  <section *ngIf="orders.length > 0">
+    <h3>Dine ordre</h3>
+    <ul *ngFor="let order of orders">
+      <li><p><strong>{{ order._id }}</strong>: {{ order.totalNumberItems }} items for = <strong>{{ order.totalPrice }}</strong> kr. - {{ order.status }}</p></li>
+    </ul>
+  </section>
 </div>
 

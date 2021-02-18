@@ -1,3 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar *ngIf="screenWidth > 767"></app-navbar>
+<app-dropdown *ngIf="screenWidth < 768"></app-dropdown>
 
 <router-outlet></router-outlet>

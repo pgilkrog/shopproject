@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
   ItemsInBasket = 0;
 
+  userRole = '';
   userIsAuthenticated = false;
   private authListenerSubs: Subscription = new Subscription();
 
@@ -27,9 +28,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.categoryService.getAllCategories().subscribe((result: any) => this.categories = result.categories);
-
+    this.categoryService.getAllCategories().subscribe((result: any) => {
+      this.categories = result.categories.sort((one: Category, two: Category) => (one.name < two.name ? -1 : 1));
+    });
     this.userService.autoAuthUser();
+    this.userRole = this.userService.getRole();
     this.ItemsInBasket = this.cartService.getTotalItems();
     this.userIsAuthenticated = this.userService.getIsAuth();
 
