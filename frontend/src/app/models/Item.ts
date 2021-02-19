@@ -7,5 +7,6 @@ export interface Item {
   companyName: string;
   category: string;
   amountInStock: number;
+  numberBought: number;
 }
 

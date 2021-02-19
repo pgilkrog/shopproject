@@ -6,7 +6,8 @@ import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-userpage',
-  templateUrl: './userpage.component.html'
+  templateUrl: './userpage.component.html',
+  styleUrls: ['./userpage.component.sass']
 })
 
 export class UserpageComponent implements OnInit {

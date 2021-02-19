@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { CreateStuffComponent } from './components/admin/createStuff/createstuff.component';
 import { NavbarComponent } from './components/navigation/navbar/navbar.component';
 import { ItemListComponent } from './components/itemComponents/itemList/itemList.component';
 import { ItemSingleComponent } from './components/itemComponents/itemList/itemSingle/itemSingle.component';
@@ -18,12 +17,12 @@ import { SignupSigninComponent } from './components/userComponents/signup-signin
 import { UserpageComponent } from './components/userComponents/userpage/userpage.component';
 import { AuthInterceptor } from './components/auth/auth-interceptor';
 import { DropdownComponent } from './components/navigation/dropdown/dropdown.component';
+import { AdminModule } from './components/admin/admin.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
-    CreateStuffComponent,
     NavbarComponent,
     DropdownComponent,
     ItemListComponent,
@@ -33,14 +32,15 @@ import { DropdownComponent } from './components/navigation/dropdown/dropdown.com
     OrderCompleteComponent,
     SignupSigninComponent,
     SpinnerComponent,
-    UserpageComponent
+    UserpageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AdminModule
   ],
   providers: [ {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true} ],
   bootstrap: [AppComponent]

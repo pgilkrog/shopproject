@@ -1,3 +1,10 @@
+<div class="topbar">
+  <ul>
+    <li>About us</li>
+    <li>Support</li>
+    <li>Giveaway</li>
+  </ul>
+</div>
 <nav class="navbar">
   <ul>
     <li [routerLinkActive]='["link-active"]'>
@@ -6,11 +13,17 @@
     <li [routerLinkActive]='["link-active"]'>
       <a (click)="gotoProducts()" routerLink="ItemList">Products</a>
     </li>
+    <li>
+      <a routerLink="">On Sale</a>
+    </li>
+    <li>
+      <a routerLink="">Outlet</a>
+    </li>
   </ul>
 
   <ul>
     <li [routerLinkActive]='["link-active"]' *ngIf="userIsAuthenticated && userRole === 'admin'">
-      <a routerLink="CreateStuff">CreateStuff</a>
+      <a routerLink="AdminPage">Admin</a>
     </li>
     <li [routerLinkActive]='["link-active"]' *ngIf="!userIsAuthenticated">
       <a routerLink="SignupSignin">Login</a>

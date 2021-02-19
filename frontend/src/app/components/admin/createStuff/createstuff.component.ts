@@ -56,7 +56,8 @@ export class CreateStuffComponent implements OnInit {
       image: this.form.value.image,
       companyName: this.form.value.companyName,
       category: this.form.value.category,
-      amountInStock: this.form.value.amountInStock
+      amountInStock: this.form.value.amountInStock,
+      numberBought: 0
     };
 
     this.itemService.createItem(item);

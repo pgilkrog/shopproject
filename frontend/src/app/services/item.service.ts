@@ -19,6 +19,12 @@ export class ItemService {
     return this.itemsUpdated.asObservable();
   }
 
+  getItems(): Observable<Item[]> {
+      return this.http.get<{ items: Item[]}>(BACKEND_URL).pipe(
+        map((data: any) => data.items.map((item: Item) => this.generateItem(item)))
+      );
+  }
+
   getAllItems(): void {
     this.http.get<{ items: any }>(BACKEND_URL).pipe(map((itemData) => {
       return { items: itemData.items.map((item: Item) => {
@@ -44,6 +50,10 @@ export class ItemService {
     return this.http.get<{ item: Item }>(BACKEND_URL + '/' + id);
   }
 
+  getItemByNumberBought(): any {
+
+  }
+
   getItemByCategory(category: string): any {
     return this.http.get<{items: any}>(BACKEND_URL + '/cat/' + category).pipe(map((itemData) => {
       return { items: itemData.items.map((item: Item) => {
@@ -67,7 +77,8 @@ export class ItemService {
       image: item.image,
       companyName: item.companyName,
       category: item.category,
-      amountInStock: item.amountInStock
+      amountInStock: item.amountInStock,
+      numberBought: item.numberBought
     };
   }
 

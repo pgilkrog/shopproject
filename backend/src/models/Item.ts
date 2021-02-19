@@ -15,7 +15,7 @@ const itemSchema = new mongoose.Schema ({
     },
     image: {
         type: String,
-        default: 'http://localhost:5000/images/defaultImg.png'
+        default: 'http://localhost:4000/images/defaultImage.png'
     },
     companyName: {
         type: String,
@@ -26,6 +26,10 @@ const itemSchema = new mongoose.Schema ({
         required: true
     },
     amountInStock: {
+        type: Number,
+        default: 0
+    },
+    numberBought: {
         type: Number,
         default: 0
     }

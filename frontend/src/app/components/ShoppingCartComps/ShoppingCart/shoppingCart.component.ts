@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+
 import { CartItem } from 'src/app/models/CartItem';
 import { Order } from 'src/app/models/Order';
 import { OrderService } from 'src/app/services/order.service';
@@ -13,12 +14,11 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./shoppingCart.component.sass']
 })
 
-export class ShoppingCartComponent implements OnInit, OnDestroy {
+export class ShoppingCartComponent implements OnInit {
   infoForm: FormGroup = new FormGroup({});
   cart: CartItem[] = [];
   totalItemsInCart = 0;
   totalPrice = 0;
-  private cartSub: Subscription = new Subscription();
 
   constructor(
     private cartService: ShoppingCartService,
@@ -27,6 +27,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    console.log('shoppingcart loaded', this.cart.length);
     this.cart = this.cartService.getShoppingcart();
     this.infoForm = new FormGroup({
       userEmail: new FormControl(null, {
@@ -41,10 +42,6 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     });
 
     this.ItemsInCart();
-  }
-
-  ngOnDestroy(): void {
-    this.cartSub.unsubscribe();
   }
 
   decreaseAmount(item: CartItem): void {

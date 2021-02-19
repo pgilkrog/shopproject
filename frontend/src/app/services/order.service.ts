@@ -25,6 +25,7 @@ export class OrderService {
         for (const item of order.items) {
           const newItem = item.item;
           newItem.amountInStock -= item.num;
+          newItem.numberBought += item.num;
           this.itemService.updateItem(newItem);
         }
         this.cartService.removeFromSessionStoreage();

@@ -1,5 +1,21 @@
 @import '../../../../styles'
 
+.topbar
+  width: 100%
+  height: 30px
+  background-color: $blue-color
+  display: flex
+  justify-content: flex-end
+
+  ul
+    list-style: none
+    display: flex
+    align-items: center
+
+    li
+      padding: 0 20px
+      font-weight: 600
+
 .navbar
   width: 100%
   background-color: $secondary-color
@@ -9,7 +25,7 @@
 
   ul
     margin: 0
-    padding: 0
+    padding: 0 20px
     height: 80px
     list-style: none
     display: flex
@@ -21,7 +37,7 @@
       cursor: pointer
 
       &:hover
-        scale: 1.1
+        scale: 1.2
         transition: .5s
 
       a
@@ -58,6 +74,6 @@ i
       text-decoration: none
 
       &:hover
-        color: $darkblue-color
+        color: $primary-color
 
 

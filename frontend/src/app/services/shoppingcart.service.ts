@@ -27,8 +27,10 @@ export class ShoppingCartService {
         num: 1
       };
 
-      this.shoppingcart.push(cartItem);
-      this.saveToLocalstorage();
+      if (this.shoppingcart){
+        this.shoppingcart.push(cartItem);
+        this.saveToLocalstorage();
+      }
     } else {
       itemExistInCart.num += 1;
       this.saveToLocalstorage();
