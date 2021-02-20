@@ -6,6 +6,7 @@ import { Order } from '../models/Order';
 import { ShoppingCartService } from './shoppingcart.service';
 import { map } from 'rxjs/operators';
 import { ItemService } from './item.service';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 
@@ -18,6 +19,10 @@ export class OrderService {
     private router: Router,
     private itemService: ItemService
   ) {}
+
+  getOrderById(orderId: string): any {
+    return this.http.get<{ order: Order }>(this.BACKEND_URL + '/' + orderId);
+  }
 
   completeOrder(order: Order): void {
     this.http.post<{ completed: boolean }>(this.BACKEND_URL, order).subscribe(responseData => {
@@ -35,7 +40,7 @@ export class OrderService {
   }
 
   getOrdersByUserEmail(email: string): any {
-    return this.http.get<{orders: any}>(this.BACKEND_URL + '/' + email).pipe(map((orderData) => {
+    return this.http.get<{orders: any}>(`${this.BACKEND_URL}/email/${email}`).pipe(map((orderData) => {
       return { orders: orderData.orders.map((order: Order) => {
         return {
           _id: order._id,

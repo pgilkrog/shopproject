@@ -39,14 +39,24 @@ router.get('/cat/:category', async (req: Request, res: Response) => {
     }
 })
 
+//desc Get Top Items from NumberBought
+router.get('/pop/pop/', async (req: Request, res: Response) => {
+    try {
+        const fetchedItems = await Item.find({ }).sort({numberBought: -1}).limit(5);
+        res.json({ items: fetchedItems })
+    } catch (error) {
+        console.error('[pop error]', error.message);
+    }
+})
+
 //@desc Update an Item
 router.post('/:id', jsonParser, async (req: Request, res: Response) => {
-    Item.findByIdAndUpdate(req.params.id,{$set:req.body}, {upsert: true},
-        function(err, doc) {
+    Item.findByIdAndUpdate(req.params.id, {$set:req.body}, {upsert: true},
+        (err, doc) => {
             if(err) {
-                console.log(err);
+                console.log('[update Item]', err);
             } else {
-                res.json({ msg: "Favorite Added!" })
+                res.json({ msg: "Favorite Added!" });
             }
         });
 })

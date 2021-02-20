@@ -28,9 +28,21 @@ router.post('/', jsonParser, async (req: Request, res: Response) => {
     }
 });
 
-//@desc Get Orders by UserEmail
-router.get('/:email', async(req: Request, res: Response) => {
+//desc Get order by Id
+router.get('/:id', async(req: Request, res: Response) => {
+    console.log('[order by id]');
+    try {
+        const order = await Order.findById(req.params.id);
+        res.json({ order })
+    } catch(err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+})
 
+//@desc Get Orders by UserEmail
+router.get('/email/:email', async(req: Request, res: Response) => {
+    console.log('[order by email]')
     try {
         const fetchedOrders = await Order.find({ userEmail: req.params.email })
         res.json({ orders: fetchedOrders });

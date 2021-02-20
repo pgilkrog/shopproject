@@ -17,9 +17,9 @@ export class ShoppingCartService {
   addToCart(newItem: Item): void {
     let itemExistInCart;
 
-    if (this.shoppingcart.length > 0 && this.shoppingcart) {
-      itemExistInCart = this.shoppingcart.find(({item}) => item._id === newItem._id) || null;
-    }
+    this.shoppingcart.length > 0 ?
+      itemExistInCart = this.shoppingcart.find(({item}) => item._id === newItem._id) :
+      itemExistInCart = null;
 
     if (!itemExistInCart) {
       const cartItem: CartItem = {
@@ -27,7 +27,7 @@ export class ShoppingCartService {
         num: 1
       };
 
-      if (this.shoppingcart){
+      if (this.shoppingcart) {
         this.shoppingcart.push(cartItem);
         this.saveToLocalstorage();
       }
@@ -51,6 +51,8 @@ export class ShoppingCartService {
         this.shoppingcart.splice(newItemExistInCart, 1);
         this.saveToLocalstorage();
       }
+    } else {
+      return;
     }
   }
 

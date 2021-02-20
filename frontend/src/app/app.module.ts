@@ -18,6 +18,8 @@ import { UserpageComponent } from './components/userComponents/userpage/userpage
 import { AuthInterceptor } from './components/auth/auth-interceptor';
 import { DropdownComponent } from './components/navigation/dropdown/dropdown.component';
 import { AdminModule } from './components/admin/admin.module';
+import { OrderDetailComponent } from './components/orderComponents/orderDetail/orderDetail.component';
+import { FilterPipe } from './components/tools/filterpipe.pipe';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { AdminModule } from './components/admin/admin.module';
     SignupSigninComponent,
     SpinnerComponent,
     UserpageComponent,
+    OrderDetailComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

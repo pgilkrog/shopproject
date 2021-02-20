@@ -16,6 +16,10 @@
       padding: 0 20px
       font-weight: 600
 
+      &:hover
+        color: $primary-color
+        cursor: pointer
+
 .navbar
   width: 100%
   background-color: $secondary-color
@@ -36,9 +40,16 @@
       transition: .5s
       cursor: pointer
 
-      &:hover
-        scale: 1.2
-        transition: .5s
+      h1
+        font-size: 2.5rem
+        color: #fff
+        display: flex
+
+        i
+          font-size: 3rem
+
+        span
+          color: $blue-color
 
       a
         font-family: arial
@@ -48,6 +59,7 @@
         font-weight: 600
 
         &:hover
+          scale: 1.2
           color: $blue-color
           text-decoration: underline
           transition: .5s

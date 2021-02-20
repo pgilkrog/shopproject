@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { Category } from 'src/app/models/Category';
 import { CategoryService } from 'src/app/services/category.service';
 import { ItemService } from 'src/app/services/item.service';
-import { ShoppingCartService } from 'src/app/services/shoppingcart.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -15,14 +14,12 @@ import { UserService } from 'src/app/services/user.service';
 export class NavbarComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
   ItemsInBasket = 0;
-
   userRole = '';
   userIsAuthenticated = false;
   private authListenerSubs: Subscription = new Subscription();
 
   constructor(
     private itemService: ItemService,
-    private cartService: ShoppingCartService,
     private userService: UserService,
     private categoryService: CategoryService
   ) {}
@@ -31,9 +28,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.categoryService.getAllCategories().subscribe((result: any) => {
       this.categories = result.categories.sort((one: Category, two: Category) => (one.name < two.name ? -1 : 1));
     });
+
     this.userService.autoAuthUser();
     this.userRole = this.userService.getRole();
-    this.ItemsInBasket = this.cartService.getTotalItems();
     this.userIsAuthenticated = this.userService.getIsAuth();
 
     this.authListenerSubs = this.userService.getAuthStatusListener()

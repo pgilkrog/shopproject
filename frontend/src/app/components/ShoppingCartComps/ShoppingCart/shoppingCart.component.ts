@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 import { CartItem } from 'src/app/models/CartItem';
 import { Order } from 'src/app/models/Order';
@@ -27,7 +26,6 @@ export class ShoppingCartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('shoppingcart loaded', this.cart.length);
     this.cart = this.cartService.getShoppingcart();
     this.infoForm = new FormGroup({
       userEmail: new FormControl(null, {

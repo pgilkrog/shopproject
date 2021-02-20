@@ -39,19 +39,15 @@ export class ItemService {
     });
   }
 
-  updateItem(item: Item): void {
-    this.http.post(BACKEND_URL + '/' + item._id, item)
-    .subscribe(response => {
-      console.log(response);
-    });
+  getTopFiveItem(): Observable<Item[]> {
+    return this.http.get<{ items: Item[] }>(`${BACKEND_URL}/pop/pop/`).pipe(
+      map((itemData: any) => itemData.items.map((item: Item) => this.generateItem(item)))
+    );
   }
+
 
   getItemById(id: string): any {
     return this.http.get<{ item: Item }>(BACKEND_URL + '/' + id);
-  }
-
-  getItemByNumberBought(): any {
-
   }
 
   getItemByCategory(category: string): any {
@@ -68,6 +64,19 @@ export class ItemService {
     });
   }
 
+  updateItem(item: Item): void {
+    this.http.post(BACKEND_URL + '/' + item._id, item)
+    .subscribe(response => {
+      console.log(response);
+    });
+  }
+
+  createItem(item: Item): void {
+    this.http.post<{ response: string }>(BACKEND_URL, item).subscribe(responseData => {
+      return responseData.response;
+    });
+  }
+
   generateItem(item: Item): Item {
     return {
       _id: item._id,
@@ -80,11 +89,5 @@ export class ItemService {
       amountInStock: item.amountInStock,
       numberBought: item.numberBought
     };
-  }
-
-  createItem(item: Item): void {
-    this.http.post<{ response: string }>(BACKEND_URL, item).subscribe(responseData => {
-      return responseData.response;
-    });
   }
 }

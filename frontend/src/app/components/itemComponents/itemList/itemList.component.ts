@@ -11,6 +11,7 @@ import { ItemService } from 'src/app/services/item.service';
 
 export class ItemListComponent implements OnInit, OnDestroy {
   items: Item[] = [];
+  name = '';
   private ItemSub: Subscription = new Subscription();
 
   constructor(private itemService: ItemService) {}

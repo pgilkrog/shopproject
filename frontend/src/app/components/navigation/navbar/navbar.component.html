@@ -5,19 +5,22 @@
     <li>Giveaway</li>
   </ul>
 </div>
+
 <nav class="navbar">
   <ul>
-    <li [routerLinkActive]='["link-active"]'>
-      <a routerLink="">Home</a>
+    <li>
+      <div>
+        <h1 routerLink="Home"><i class="fas fa-cogs"></i> Gamer<span>Gear</span></h1>
+      </div>
+    </li>
+    <li [routerLinkActive]='["link-active"]' style="margin-left: 40px">
+      <a routerLink="Home">Home</a>
     </li>
     <li [routerLinkActive]='["link-active"]'>
       <a (click)="gotoProducts()" routerLink="ItemList">Products</a>
     </li>
     <li>
       <a routerLink="">On Sale</a>
-    </li>
-    <li>
-      <a routerLink="">Outlet</a>
     </li>
   </ul>
 

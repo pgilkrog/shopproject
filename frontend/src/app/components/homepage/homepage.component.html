@@ -1,6 +1,15 @@
 <section>
-  <h1>Gamer Gear</h1>
+  <h1><i class="fas fa-cogs"></i> Gamer<span>Gear</span></h1>
   <h2>Gear For All Your Gaming Needs!</h2>
+</section>
+
+<section class="popItems">
+  <h2>Popular items!</h2>
+  <ul>
+    <li *ngFor="let item of items">
+      <app-itemsingle [item]="item"></app-itemsingle>
+    </li>
+  </ul>
 </section>
 
 <div class="videoWrap">

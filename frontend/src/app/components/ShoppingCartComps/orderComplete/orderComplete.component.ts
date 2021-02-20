@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 
 export class OrderCompleteComponent {
-
+  orderId = '8jg509gh5h757hfgt564';
 }

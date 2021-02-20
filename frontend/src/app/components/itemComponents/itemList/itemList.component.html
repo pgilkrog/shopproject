@@ -1,10 +1,10 @@
 <section>
   <div class="searchInput">
-    <input type="text" />
+    <input type="text" name="search" [(ngModel)]="name" placeholder="search..." />
   </div>
 
   <ul *ngIf="items.length > 0">
-    <li *ngFor="let item of items">
+    <li *ngFor="let item of items | FilterPipe:name">
       <app-itemsingle [item]="item"></app-itemsingle>
     </li>
   </ul>

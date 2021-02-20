@@ -1,14 +1,14 @@
-<section>
+<section style="display: flex;">
   <h1>Update Items</h1>
   <ul *ngIf="items.length > 0">
     <li *ngFor="let item of items" style="cursor: pointer;">
-      <p (click)="focusItem(item)">{{ item.name }} {{ item.numberBought }}</p>
+      <p (click)="focusItem(item)">{{ item.name }} {{ item.amountInStock }}</p>
     </li>
   </ul>
 
-  <div>
+  <div style="margin-left: 50px">
     <form [formGroup]="updateForm" (submit)="updateItem()">
-      <input formControlName="id" type="text" placeholder="id" /><br>
+      <input formControlName="id" type="text" placeholder="id" hidden /><br>
       <input formControlName="name" type="input" placeholder="Item Name" /> <br>
       <input formControlName="description" type="input" placeholder="Description" /> <br>
       <input formControlName="price" type="input" placeholder="price" /> <br>

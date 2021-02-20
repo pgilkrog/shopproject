@@ -21,7 +21,7 @@ export class UpdateItemsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.updateForm = new FormGroup({
-      id: new FormControl({value: '', disabled: true}, {
+      id: new FormControl(null, {
         validators: [Validators.required]
       }),
       name: new FormControl(null, {
@@ -50,7 +50,6 @@ export class UpdateItemsComponent implements OnInit, OnDestroy {
     this.ItemSub = this.itemService.getItems()
       .subscribe((itemsData) => {
         this.items = itemsData;
-        console.log(itemsData);
       });
 
     this.categoryService.getAllCategories().subscribe((result: any) => {

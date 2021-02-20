@@ -1,0 +1,18 @@
+<section *ngIf="order" class="OrderDetailWrap">
+  <div class="OrderItem">
+    <h1>Your Order!</h1>
+    <div style="text-align: left;">
+      <p><strong>Order ID:</strong> {{ order._id }}</p>
+      <p><strong>Order Status:</strong> {{ order.status }}</p>
+      <p><strong>Delivery Adress:</strong> {{ order.address }}, {{ order.city }}</p>
+    </div>
+    <ul>
+      <li *ngFor="let item of order.items">
+        <img src="{{item.item.image}}" width="100" />
+        <p>{{item.num}}:  {{item.item.name}}</p>
+        <p>&nbsp; = {{item.num * item.item.price}} kr.</p>
+      </li>
+    </ul>
+    <p style="text-align: right;">Total price: <strong>{{ order.totalPrice }}</strong> kr.</p>
+  </div>
+</section>

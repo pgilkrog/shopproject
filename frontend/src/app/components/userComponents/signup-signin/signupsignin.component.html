@@ -1,7 +1,7 @@
 <section *ngIf="isSignin">
   <form [formGroup]="signinForm" (submit)="signin()">
     <input formControlName="email" type="text" placeholder="email..." />
-    <input formControlName="password" type="text" placeholder="password..." />
+    <input formControlName="password" type="password" placeholder="password..." />
     <button type="submit">Sign In</button>
   </form>
   <p>Not a member yet? <span (click)="changeForm()">Sign up!</span></p>
@@ -11,7 +11,7 @@
   <form [formGroup]="signupForm" (submit)="signup()">
     <input formControlName="name" type="text" placeholder="name..." />
     <input formControlName="email" type="text" placeholder="email..." />
-    <input formControlName="password" type="text" placeholder="password..." />
+    <input formControlName="password" type="password" placeholder="password..." />
     <button type="submit">Sign Up</button>
   </form>
   <p>Already a member? <span (click)="changeForm()">Sign in!</span></p>

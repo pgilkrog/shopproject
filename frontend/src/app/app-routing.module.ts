@@ -5,6 +5,7 @@ import { AuthGaurd } from './components/auth/auth.guard';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { ItemDetailComponent } from './components/itemComponents/itemDetail/itemDetail.component';
 import { ItemListComponent } from './components/itemComponents/itemList/itemList.component';
+import { OrderDetailComponent } from './components/orderComponents/orderDetail/orderDetail.component';
 import { OrderCompleteComponent } from './components/ShoppingCartComps/orderComplete/orderComplete.component';
 import { ShoppingCartComponent } from './components/ShoppingCartComps/ShoppingCart/shoppingCart.component';
 import { SignupSigninComponent } from './components/userComponents/signup-signin/signupsignin.component';
@@ -19,8 +20,9 @@ const routes: Routes = [
   { path: 'ShoppingCart', component: ShoppingCartComponent },
   { path: 'CompletedOrder', component: OrderCompleteComponent },
   { path: 'SignupSignin', component: SignupSigninComponent },
+  { path: 'OrderDetail/:id', component: OrderDetailComponent },
+  { path: 'UserPage', component: UserpageComponent, canActivate: [AuthGaurd], data: { role: 'user'} },
   { path: 'admin', loadChildren: () => import('./components/admin/admin.module').then(a => a.AdminModule) },
-  { path: 'UserPage', component: UserpageComponent, canActivate: [AuthGaurd], data: { role: 'user'} }
 ];
 
 @NgModule({

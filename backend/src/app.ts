@@ -12,6 +12,7 @@ connection.connectDB();
 
 const app = express();
 
+// CORS
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Headers",
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
     next();
 });
 
+// set up routes
 app.use('/api/item', require('./routers/itemRoute'));
 app.use('/api/category', require('./routers/categoryRoute'));
 app.use('/api/order', require('./routers/orderRoute'));
