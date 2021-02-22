@@ -13,7 +13,11 @@ import { Item } from '../../../models/Item';
 export class ItemDetailComponent implements OnInit {
   item?: Item;
 
-  constructor(private itemService: ItemService, private route: ActivatedRoute, private cartService: ShoppingCartService) {}
+  constructor(
+    private itemService: ItemService,
+    private route: ActivatedRoute,
+    private cartService: ShoppingCartService
+  ) {}
 
   ngOnInit(): void {
     this.itemService.getItemById(this.route.snapshot.paramMap.get('id') as string)

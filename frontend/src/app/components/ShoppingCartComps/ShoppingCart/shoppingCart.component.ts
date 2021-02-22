@@ -27,6 +27,7 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit(): void {
     this.cart = this.cartService.getShoppingcart();
+
     this.infoForm = new FormGroup({
       userEmail: new FormControl(null, {
         validators: [Validators.required]

@@ -7,11 +7,11 @@ import { Item } from '../models/Item';
 
 export class ShoppingCartService {
   private shoppingcart: CartItem[] = [];
-  private shoppingcartUpdated = new Subject<{ items: CartItem[] }>();
 
   getShoppingcart(): CartItem[] {
-    this.shoppingcart = JSON.parse(sessionStorage.getItem('shopcart') || '{}');
-    return this.shoppingcart;
+    return sessionStorage.getItem('shopcart') ?
+      this.shoppingcart = JSON.parse(sessionStorage.getItem('shopcart') as string) :
+      this.shoppingcart = [];
   }
 
   addToCart(newItem: Item): void {
@@ -28,6 +28,7 @@ export class ShoppingCartService {
       };
 
       if (this.shoppingcart) {
+        console.log(this.shoppingcart);
         this.shoppingcart.push(cartItem);
         this.saveToLocalstorage();
       }

@@ -1,4 +1,4 @@
-<section *ngIf="cart.length < 1">
+<section *ngIf="!cart || cart.length <= 0">
   <div class="cartWrap">
     <h2>You have no items!</h2>
     <i class="fas fa-shopping-basket"></i>
