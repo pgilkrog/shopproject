@@ -5,6 +5,7 @@
     <button type="submit">Sign In</button>
   </form>
   <p>Not a member yet? <span (click)="changeForm()">Sign up!</span></p>
+  <p>Forgot your password? <span routerLink="/ResetPassword">Reset it!</span></p>
 </section>
 
 <section *ngIf="!isSignin">

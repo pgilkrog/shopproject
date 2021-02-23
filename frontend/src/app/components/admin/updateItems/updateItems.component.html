@@ -2,7 +2,7 @@
   <h1>Update Items</h1>
   <ul *ngIf="items.length > 0">
     <li *ngFor="let item of items" style="cursor: pointer;">
-      <p (click)="focusItem(item)">{{ item.name }} {{ item.amountInStock }}</p>
+      <p (click)="focusItem(item)">In Stock:<strong>{{ item.amountInStock }}</strong> - {{ item.name }}</p>
     </li>
   </ul>
 
@@ -15,6 +15,7 @@
       <input formControlName="image" type="input" placeholder="image link" /> <br>
       <input formControlName="companyName" type="input" placeholder="Company Name"/> <br>
       <input formControlName="amountInStock" type="input" placeholder="Amount in Stock" /> <br>
+      <input formControlName="numberBought" type="text" hidden />
       <select formControlName="category">
         <option *ngFor="let item of categories" value="{{item.name}}">{{item.name}}</option>
       </select> <br>

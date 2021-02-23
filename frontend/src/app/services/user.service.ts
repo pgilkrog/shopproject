@@ -9,6 +9,7 @@ import { User } from '../models/User';
 
 export class UserService {
   BACKEND_URL = environment.apiUrl + 'user';
+
   token = '';
   userId = '';
   role = '';
@@ -28,6 +29,14 @@ export class UserService {
 
   getRole(): string {
     return this.role;
+  }
+
+  checkUserByEmail(email: string): any {
+    return this.http.get<{ msg: boolean }>(this.BACKEND_URL + '/getByEmail/' + email);
+  }
+
+  resetPassword(password: string): void {
+    console.log(password);
   }
 
   createUser(user: User): void {

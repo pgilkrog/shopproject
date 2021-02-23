@@ -20,6 +20,8 @@ import { DropdownComponent } from './components/navigation/dropdown/dropdown.com
 import { AdminModule } from './components/admin/admin.module';
 import { OrderDetailComponent } from './components/orderComponents/orderDetail/orderDetail.component';
 import { FilterPipe } from './components/tools/filterpipe.pipe';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ResetPasswordComponent } from './components/auth/resetPassword/resetPassword.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { FilterPipe } from './components/tools/filterpipe.pipe';
     SpinnerComponent,
     UserpageComponent,
     OrderDetailComponent,
+    ResetPasswordComponent,
     FilterPipe
   ],
   imports: [
@@ -44,7 +47,8 @@ import { FilterPipe } from './components/tools/filterpipe.pipe';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    AdminModule
+    AdminModule,
+    InfiniteScrollModule
   ],
   providers: [ {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true} ],
   bootstrap: [AppComponent]

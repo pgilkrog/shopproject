@@ -23,6 +23,23 @@ router.get('/auth/', auth, async (req: Request, res: Response) => {
     }
 });
 
+//@desc Find User by Email
+router.get('/getByEmail/:email', jsonParser, body('email', 'Please include a valid email').isEmail(), async (req: Request, res: Response) => {
+    
+    try {
+        const user = await User.findOne({ email: req.params.email });
+        console.log('getByEmail', user);
+        if (user) {
+            res.json({ msg: true })
+        } else {
+            res.json({ msg: false })
+        }        
+    } catch (error) {
+        res.status(500).send('Server error');
+    }
+
+})
+
 // @route       POST api/auth
 // @desc        Auth user & get token
 router.post('/auth/', jsonParser, [

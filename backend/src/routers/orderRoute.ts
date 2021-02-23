@@ -1,5 +1,6 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
+import auth from '../middleware/auth';
 // import {extractFile} from '../middleware/fileMulter';
 
 import { Order } from '../models/Order';
@@ -41,7 +42,7 @@ router.get('/:id', async(req: Request, res: Response) => {
 })
 
 //@desc Get Orders by UserEmail
-router.get('/email/:email', async(req: Request, res: Response) => {
+router.get('/email/:email', auth, async(req: Request, res: Response) => {
     console.log('[order by email]')
     try {
         const fetchedOrders = await Order.find({ userEmail: req.params.email })

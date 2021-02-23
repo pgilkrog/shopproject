@@ -3,7 +3,7 @@ import { Item } from '../models/Item';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, Subject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 const BACKEND_URL = environment.apiUrl + 'item';
 
@@ -45,9 +45,22 @@ export class ItemService {
     );
   }
 
-
   getItemById(id: string): any {
     return this.http.get<{ item: Item }>(BACKEND_URL + '/' + id);
+  }
+
+  searchItems(search: string): any {
+    return this.http.get<{items: any}>(BACKEND_URL + '/search/' + search).pipe(map((itemData) => {
+      return { items: itemData.items.map((item: Item) => {
+        return this.generateItem(item);
+      })};
+    }))
+    .subscribe(data => {
+      this.items = data.items;
+      this.itemsUpdated.next({
+        items: [...this.items]
+      });
+    });
   }
 
   getItemByCategory(category: string): any {

@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import { Category } from '../models/Category';
+import auth from '../middleware/auth';
 
 const router = express.Router();
 const jsonParser = bodyParser.json();
@@ -17,7 +18,7 @@ router.get('/', async (req: Request, res: Response) => {
 })
 
 //@desc create category
-router.post('/', jsonParser, async (req: Request, res: Response, next: any) => {
+router.post('/', auth, jsonParser, async (req: Request, res: Response, next: any) => {
     const {name} = req.body;
     try {
         const newCategory = new Category({

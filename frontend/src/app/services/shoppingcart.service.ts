@@ -15,11 +15,7 @@ export class ShoppingCartService {
   }
 
   addToCart(newItem: Item): void {
-    let itemExistInCart;
-
-    this.shoppingcart.length > 0 ?
-      itemExistInCart = this.shoppingcart.find(({item}) => item._id === newItem._id) :
-      itemExistInCart = null;
+    const itemExistInCart = this.shoppingcart.find(({item}) => item._id === newItem._id);
 
     if (!itemExistInCart) {
       const cartItem: CartItem = {

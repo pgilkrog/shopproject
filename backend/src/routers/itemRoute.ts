@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
+import auth from '../middleware/auth';
 // import {extractFile} from '../middleware/fileMulter';
 
 import { Item } from '../models/Item';
@@ -29,6 +30,20 @@ router.get('/:id', async (req: Request, res: Response) => {
     }
 })
 
+//@desc Search items
+router.get('/search/:search', async (req: Request, res: Response) => {
+    try {
+        const fetchedItems = await (await Item.find({ })).filter((item: any) =>
+            (item.name.toLowerCase().search(new RegExp(req.params.search.toLowerCase())) > -1) ||
+            (item.description.toLowerCase().search(new RegExp(req.params.search.toLowerCase())) > -1) ||
+            (item.category.toLowerCase().search(new RegExp(req.params.search.toLowerCase())) > -1)
+        );
+        res.json({ items: fetchedItems });
+    } catch (error) {
+        console.error(error.mesage);
+    }
+})
+
 //@desc Get item from category
 router.get('/cat/:category', async (req: Request, res: Response) => {
     try {
@@ -36,6 +51,7 @@ router.get('/cat/:category', async (req: Request, res: Response) => {
         res.json({ items: fetchedItems });
     } catch (error) {
         console.error(error.message);
+        res.status(500).send('Server error');
     }
 })
 
@@ -62,8 +78,9 @@ router.post('/:id', jsonParser, async (req: Request, res: Response) => {
 })
 
 //@desc Create Item
-router.post('/', jsonParser, async (req: Request, res: Response, next: any) => {
+router.post('/', auth, jsonParser, async (req: Request, res: Response, next: any) => {
     const { name, description, price, image, companyName, category, amountInStock, numberBought } = req.body;
+    // const url = req.protocol + '://' + req.get("host");
 
     try {
         const newItem = new Item({
@@ -71,6 +88,7 @@ router.post('/', jsonParser, async (req: Request, res: Response, next: any) => {
             description,
             price,
             image,
+            // image: url + '/images/' + req.file.filename,
             companyName,
             category,
             amountInStock,

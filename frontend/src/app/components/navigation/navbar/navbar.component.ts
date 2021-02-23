@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Category } from 'src/app/models/Category';
 import { CategoryService } from 'src/app/services/category.service';
@@ -14,9 +15,13 @@ import { UserService } from 'src/app/services/user.service';
 export class NavbarComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
   ItemsInBasket = 0;
+
   userRole = '';
   userIsAuthenticated = false;
   private authListenerSubs: Subscription = new Subscription();
+
+  showSearchbar = false;
+  searchForm: FormGroup = new FormGroup({});
 
   constructor(
     private itemService: ItemService,
@@ -25,6 +30,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.searchForm = new FormGroup({
+      search: new FormControl(null, {
+        validators: [Validators.required]
+      })
+    });
+
     this.categoryService.getAllCategories().subscribe((result: any) => {
       this.categories = result.categories.sort((one: Category, two: Category) => (one.name < two.name ? -1 : 1));
     });
@@ -39,12 +50,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
       });
   }
 
-  signout(): void{
-    this.userService.signout();
-  }
-
   ngOnDestroy(): void {
     this.authListenerSubs.unsubscribe();
+  }
+
+  signout(): void{
+    this.userService.signout();
   }
 
   gotoProducts(): void {
@@ -53,5 +64,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   goToCategory(category: string): void {
     this.itemService.getItemByCategory(category);
+  }
+
+  search(): void {
+    this.itemService.searchItems(this.searchForm.value.search);
+    this.toggleSearchMenu();
+  }
+
+  toggleSearchMenu(): void {
+    this.showSearchbar = !this.showSearchbar;
   }
 }

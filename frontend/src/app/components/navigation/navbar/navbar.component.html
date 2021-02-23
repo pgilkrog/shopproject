@@ -38,13 +38,28 @@
       <a (click)="signout()">Signout</a>
     </li>
     <li>
-      <i class="fas fa-search"></i>
+      <i class="fas fa-search" (click)="toggleSearchMenu()"></i>
     </li>
     <li [routerLinkActive]='["link-active"]'>
       <a routerLink="ShoppingCart"><i class="fas fa-shopping-cart"></i></a>
     </li>
   </ul>
 </nav>
+
+<div class="search-form-wrapper" *ngIf="showSearchbar">
+  <form [formGroup]="searchForm" (submit)="search()" class="input-group">
+    <input type="text" formControlName="search" placeholder="Search">
+    <button type="submit" routerLink="FilteredList/{{searchForm.value.search}}">Search</button>
+    <i class="fa fa-window-close" aria-hidden="true" (click)="toggleSearchMenu()"></i>
+  </form>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
 
 <ul class="catMenu">
   <li *ngFor="let category of categories" [routerLinkActive]='["link-active"]'>

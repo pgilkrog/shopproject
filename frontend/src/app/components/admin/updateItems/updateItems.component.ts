@@ -44,12 +44,17 @@ export class UpdateItemsComponent implements OnInit, OnDestroy {
       }),
       amountInStock: new FormControl(null, {
         validators: [Validators.required]
+      }),
+      numberBought : new FormControl(null, {
+        validators: [Validators.required]
       })
     });
 
     this.ItemSub = this.itemService.getItems()
       .subscribe((itemsData) => {
-        this.items = itemsData;
+        this.items = itemsData.sort(
+          (one: Item, two: Item) => (one.amountInStock < two.amountInStock ? -1 : 1)
+        );
       });
 
     this.categoryService.getAllCategories().subscribe((result: any) => {
@@ -73,6 +78,7 @@ export class UpdateItemsComponent implements OnInit, OnDestroy {
     this.updateForm.controls['companyName'].setValue(item.companyName);
     this.updateForm.controls['category'].setValue(item.category);
     this.updateForm.controls['amountInStock'].setValue(item.amountInStock);
+    this.updateForm.controls['numberBought'].setValue(item.numberBought);
     /* tslint:enable:no-string-literal */
   }
 
@@ -86,7 +92,7 @@ export class UpdateItemsComponent implements OnInit, OnDestroy {
       companyName: this.updateForm.value.companyName,
       category: this.updateForm.value.category,
       amountInStock: this.updateForm.value.amountInStock,
-      numberBought: 0
+      numberBought: this.updateForm.value.numberBought
     };
 
     this.itemService.updateItem(newItem);

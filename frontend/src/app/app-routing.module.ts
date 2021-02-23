@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGaurd } from './components/auth/auth.guard';
+import { ResetPasswordComponent } from './components/auth/resetPassword/resetPassword.component';
 
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { ItemDetailComponent } from './components/itemComponents/itemDetail/itemDetail.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'CompletedOrder', component: OrderCompleteComponent },
   { path: 'SignupSignin', component: SignupSigninComponent },
   { path: 'OrderDetail/:id', component: OrderDetailComponent },
+  { path: 'ResetPassword', component: ResetPasswordComponent },
   { path: 'UserPage', component: UserpageComponent, canActivate: [AuthGaurd], data: { role: 'user'} },
   { path: 'admin', loadChildren: () => import('./components/admin/admin.module').then(a => a.AdminModule) },
 ];

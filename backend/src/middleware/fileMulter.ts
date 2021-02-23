@@ -1,4 +1,4 @@
-import * as multer from 'multer';
+import multer from 'multer';
 
 const MIME_TYPE_MAP = {
     'image/png': 'png',
