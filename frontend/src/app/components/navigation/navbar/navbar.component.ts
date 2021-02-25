@@ -16,12 +16,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
   ItemsInBasket = 0;
 
+  showSearchbar = false;
+
   userRole = '';
   userIsAuthenticated = false;
   private authListenerSubs: Subscription = new Subscription();
-
-  showSearchbar = false;
-  searchForm: FormGroup = new FormGroup({});
 
   constructor(
     private itemService: ItemService,
@@ -30,12 +29,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.searchForm = new FormGroup({
-      search: new FormControl(null, {
-        validators: [Validators.required]
-      })
-    });
-
     this.categoryService.getAllCategories().subscribe((result: any) => {
       this.categories = result.categories.sort((one: Category, two: Category) => (one.name < two.name ? -1 : 1));
     });
@@ -64,11 +57,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   goToCategory(category: string): void {
     this.itemService.getItemByCategory(category);
-  }
-
-  search(): void {
-    this.itemService.searchItems(this.searchForm.value.search);
-    this.toggleSearchMenu();
   }
 
   toggleSearchMenu(): void {

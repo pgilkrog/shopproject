@@ -4,11 +4,15 @@ import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-resetpassword',
-  templateUrl: './resetPassword.component.html'
+  templateUrl: './resetPassword.component.html',
+  styleUrls: ['./resetPassword.component.sass']
 })
 
 export class ResetPasswordComponent implements OnInit {
   isEmailValid = false;
+  email = '';
+  response = '';
+
   checkEmailForm: FormGroup = new FormGroup({});
   resetPassForm: FormGroup = new FormGroup({});
 
@@ -34,13 +38,16 @@ export class ResetPasswordComponent implements OnInit {
   checkEmail(): void {
     this.userService.checkUserByEmail(this.checkEmailForm.value.email).subscribe((data: any) => {
       this.isEmailValid = data.msg;
-      console.log(data.msg);
+      !data.msg ? this.response = `* Can't find user!` : this.response = '';
     });
   }
 
   resetPassword(): void {
     if (this.resetPassForm.value.password === this.resetPassForm.value.confirmPassword) {
-      this.userService.resetPassword(this.checkEmailForm.value.password);
+      this.userService.resetPassword(this.resetPassForm.value.password, this.checkEmailForm.value.email);
+      this.response = '';
+    } else {
+      this.response = `* Password is not matching!`;
     }
   }
 }

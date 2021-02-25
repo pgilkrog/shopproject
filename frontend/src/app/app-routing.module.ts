@@ -9,7 +9,7 @@ import { ItemListComponent } from './components/itemComponents/itemList/itemList
 import { OrderDetailComponent } from './components/orderComponents/orderDetail/orderDetail.component';
 import { OrderCompleteComponent } from './components/ShoppingCartComps/orderComplete/orderComplete.component';
 import { ShoppingCartComponent } from './components/ShoppingCartComps/ShoppingCart/shoppingCart.component';
-import { SignupSigninComponent } from './components/userComponents/signup-signin/signupsignin.component';
+import { SignupSigninComponent } from './components/auth/signup-signin/signupsignin.component';
 import { UserpageComponent } from './components/userComponents/userpage/userpage.component';
 
 const routes: Routes = [

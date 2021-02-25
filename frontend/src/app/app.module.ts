@@ -13,7 +13,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { ShoppingCartComponent } from './components/ShoppingCartComps/ShoppingCart/shoppingCart.component';
 import { SpinnerComponent } from './components/UIComponents/Spinner/spinner.component';
 import { OrderCompleteComponent } from './components/ShoppingCartComps/orderComplete/orderComplete.component';
-import { SignupSigninComponent } from './components/userComponents/signup-signin/signupsignin.component';
+import { SignupSigninComponent } from './components/auth/signup-signin/signupsignin.component';
 import { UserpageComponent } from './components/userComponents/userpage/userpage.component';
 import { AuthInterceptor } from './components/auth/auth-interceptor';
 import { DropdownComponent } from './components/navigation/dropdown/dropdown.component';
@@ -22,6 +22,7 @@ import { OrderDetailComponent } from './components/orderComponents/orderDetail/o
 import { FilterPipe } from './components/tools/filterpipe.pipe';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ResetPasswordComponent } from './components/auth/resetPassword/resetPassword.component';
+import { NavSearchComponent } from './components/navigation/navSearch/navSearch.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ResetPasswordComponent } from './components/auth/resetPassword/resetPas
     UserpageComponent,
     OrderDetailComponent,
     ResetPasswordComponent,
-    FilterPipe
+    FilterPipe,
+    NavSearchComponent
   ],
   imports: [
     BrowserModule,

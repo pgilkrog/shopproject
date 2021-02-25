@@ -45,6 +45,16 @@ export class ItemService {
     );
   }
 
+  autoSearchItems(search: string): any {
+    if (search.trim() !== ''){
+      return this.http.get<{ items: Item[] }>(BACKEND_URL + '/autosearch/complete/' + search).pipe(
+        map((itemData: any) => itemData.items.map((item: Item) => this.generateItem(item)))
+      );
+    } else {
+      return [{}];
+    }
+  }
+
   getItemById(id: string): any {
     return this.http.get<{ item: Item }>(BACKEND_URL + '/' + id);
   }

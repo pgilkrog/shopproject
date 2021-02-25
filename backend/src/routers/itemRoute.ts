@@ -19,7 +19,7 @@ router.get('/', async (req: Request, res: Response) => {
     }
 })
 
-//@desc Get Item from ID
+//@desc Get Item By ID
 router.get('/:id', async (req: Request, res: Response) => {
     try {
         const item = await Item.findById(req.params.id);
@@ -30,10 +30,10 @@ router.get('/:id', async (req: Request, res: Response) => {
     }
 })
 
-//@desc Search items
+//@desc Search items with Name, Description, Category
 router.get('/search/:search', async (req: Request, res: Response) => {
     try {
-        const fetchedItems = await (await Item.find({ })).filter((item: any) =>
+        const fetchedItems = (await Item.find({ })).filter((item: any) =>
             (item.name.toLowerCase().search(new RegExp(req.params.search.toLowerCase())) > -1) ||
             (item.description.toLowerCase().search(new RegExp(req.params.search.toLowerCase())) > -1) ||
             (item.category.toLowerCase().search(new RegExp(req.params.search.toLowerCase())) > -1)
@@ -44,7 +44,7 @@ router.get('/search/:search', async (req: Request, res: Response) => {
     }
 })
 
-//@desc Get item from category
+//@desc Get item By category
 router.get('/cat/:category', async (req: Request, res: Response) => {
     try {
         const fetchedItems = await Item.find({ category: req.params.category })
@@ -55,13 +55,24 @@ router.get('/cat/:category', async (req: Request, res: Response) => {
     }
 })
 
-//desc Get Top Items from NumberBought
+//desc Get Top Items By NumberBought
 router.get('/pop/pop/', async (req: Request, res: Response) => {
     try {
         const fetchedItems = await Item.find({ }).sort({numberBought: -1}).limit(5);
         res.json({ items: fetchedItems })
     } catch (error) {
         console.error('[pop error]', error.message);
+    }
+})
+
+router.get('/autosearch/complete/:search', async (req: Request, res: Response) => {
+    try {
+        const fetchedItems = (await Item.find({ })).filter((item: any) => 
+            (item.name.toLowerCase().search(new RegExp(req.params.search.toLowerCase())) > -1)
+        );
+        res.json({ items: fetchedItems });
+    } catch (error) {
+        console.log(error.message);
     }
 })
 

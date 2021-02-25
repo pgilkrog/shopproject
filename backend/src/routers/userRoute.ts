@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
-import bcrypt from 'bcryptjs';
+import bcrypt, { hash } from 'bcryptjs';
 import { body, validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
 import { User }  from '../models/User';
@@ -23,17 +23,17 @@ router.get('/auth/', auth, async (req: Request, res: Response) => {
     }
 });
 
+//@route /getByEmail/:email
 //@desc Find User by Email
 router.get('/getByEmail/:email', jsonParser, body('email', 'Please include a valid email').isEmail(), async (req: Request, res: Response) => {
     
     try {
         const user = await User.findOne({ email: req.params.email });
-        console.log('getByEmail', user);
         if (user) {
             res.json({ msg: true })
         } else {
             res.json({ msg: false })
-        }        
+        }   
     } catch (error) {
         res.status(500).send('Server error');
     }
@@ -103,6 +103,18 @@ router.get('/:id', async (req: Request, res: Response) => {
         console.error(err.message);
         res.status(500).send('Server error');
     }
+})
+
+//@desc Reset Password
+router.post('/resetPassword/', jsonParser, async (req: Request, res: Response) => {
+    const { password, email } = req.body;
+
+    const salt = await bcrypt.genSalt(10);
+    const newPassword = await bcrypt.hash(password, salt);
+
+   await User.findOneAndUpdate({ email: email }, { password: newPassword }).then(() => {
+        res.json({ msg: 'Password Succesfully Reset!' });
+    });
 })
 
 //@desc Create a User

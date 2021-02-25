@@ -1,0 +1,12 @@
+<div class="search-form-wrapper">
+  <form [formGroup]="searchForm" (submit)="search()" class="input-group">
+    <input [formControl]="queryField" type="search" (keydown)="onKeydown($event)"
+      id="keyword" placeholder="Search for you gaming gear" autocomplete="off" autofocus />
+    <button type="submit" routerLink="FilteredList/{{queryField.value}}">Search</button>
+  </form>
+  <ul>
+    <li *ngFor="let item of autoSearchItems | slice:0:5" (click)="onAutoClick(item._id)">
+      <p>{{ item.name }}</p>
+    </li>
+  </ul>
+</div>

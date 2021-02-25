@@ -15,24 +15,29 @@ section
       color: $darkblue-color
 
   form
-    width: 300px
     display: flex
     flex-direction: column
+    border-radius: 10px
+    padding: 30px
+    width: 300px
+    box-shadow: rgba(0, 42, 48, 0.2) 0px 2px 8px 0px
+    text-align: center
 
   input
-    border: 1px solid $blue-color
-    padding: 4px
-    margin: 5px 0
-    font-size: 1.2rem
+    padding: 10px
+    margin: 3px
+    border: none
+    border-bottom: 1px solid $secondary-color
 
   button
+    margin-top: 15px
+    border-radius: 5px
     border: none
     background-color: $darkblue-color
-    color: #fff
-    padding: 10px
-    margin-top: 5px
+    color: $primary-color
+    padding: 10px 0
     font-weight: 600
+    cursor: pointer
 
     &:hover
       background: $blue-color
-      cursor: pointer

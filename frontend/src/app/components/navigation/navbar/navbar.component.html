@@ -46,19 +46,8 @@
   </ul>
 </nav>
 
-<div class="search-form-wrapper" *ngIf="showSearchbar">
-  <form [formGroup]="searchForm" (submit)="search()" class="input-group">
-    <input type="text" formControlName="search" placeholder="Search">
-    <button type="submit" routerLink="FilteredList/{{searchForm.value.search}}">Search</button>
-    <i class="fa fa-window-close" aria-hidden="true" (click)="toggleSearchMenu()"></i>
-  </form>
-  <ul>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-  </ul>
+<div *ngIf="showSearchbar">
+  <app-navsearch (newItemEvent)="toggleSearchMenu()"></app-navsearch>
 </div>
 
 <ul class="catMenu">

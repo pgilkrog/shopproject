@@ -35,8 +35,12 @@ export class UserService {
     return this.http.get<{ msg: boolean }>(this.BACKEND_URL + '/getByEmail/' + email);
   }
 
-  resetPassword(password: string): void {
-    console.log(password);
+  resetPassword(Upassword: string, Uemail: string): void {
+    console.log(Upassword, Uemail);
+    const resetData = { password: Upassword, email: Uemail };
+    this.http.post<{ msg: string }>(this.BACKEND_URL + '/resetPassword/', resetData).subscribe(resData => {
+      console.log(resetData);
+    });
   }
 
   createUser(user: User): void {
