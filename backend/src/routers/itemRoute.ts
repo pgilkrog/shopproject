@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import auth from '../middleware/auth';
 // import {extractFile} from '../middleware/fileMulter';
@@ -65,6 +65,7 @@ router.get('/pop/pop/', async (req: Request, res: Response) => {
     }
 })
 
+//@desc Autocomplete search
 router.get('/autosearch/complete/:search', async (req: Request, res: Response) => {
     try {
         const fetchedItems = (await Item.find({ })).filter((item: any) => 

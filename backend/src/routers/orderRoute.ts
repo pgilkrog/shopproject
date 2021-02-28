@@ -11,7 +11,6 @@ const jsonParser = bodyParser.json();
 //@desc Create an Order
 router.post('/', jsonParser, async (req: Request, res: Response) => {
     const { items, totalPrice, totalNumberItems, userEmail, status, address, city } = req.body;
-
     try {
         const newOrder = new Order({
             items,
@@ -31,7 +30,6 @@ router.post('/', jsonParser, async (req: Request, res: Response) => {
 
 //desc Get order by Id
 router.get('/:id', async(req: Request, res: Response) => {
-    console.log('[order by id]');
     try {
         const order = await Order.findById(req.params.id);
         res.json({ order })
@@ -43,7 +41,6 @@ router.get('/:id', async(req: Request, res: Response) => {
 
 //@desc Get Orders by UserEmail
 router.get('/email/:email', auth, async(req: Request, res: Response) => {
-    console.log('[order by email]')
     try {
         const fetchedOrders = await Order.find({ userEmail: req.params.email })
         res.json({ orders: fetchedOrders });

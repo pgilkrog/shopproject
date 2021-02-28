@@ -4,9 +4,9 @@
       id="keyword" placeholder="Search for you gaming gear" autocomplete="off" autofocus />
     <button type="submit" routerLink="FilteredList/{{queryField.value}}">Search</button>
   </form>
-  <ul>
+  <ul class="autoCompleteList">
     <li *ngFor="let item of autoSearchItems | slice:0:5" (click)="onAutoClick(item._id)">
-      <p>{{ item.name }}</p>
+      <p><strong>{{ item.name }}</strong>: {{ item.description }}</p>
     </li>
   </ul>
 </div>

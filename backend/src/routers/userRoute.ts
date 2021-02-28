@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
-import bcrypt, { hash } from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 import { body, validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
 import { User }  from '../models/User';
@@ -37,7 +37,6 @@ router.get('/getByEmail/:email', jsonParser, body('email', 'Please include a val
     } catch (error) {
         res.status(500).send('Server error');
     }
-
 })
 
 // @route       POST api/auth
@@ -106,7 +105,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 })
 
 //@desc Reset Password
-router.post('/resetPassword/', jsonParser, async (req: Request, res: Response) => {
+router.post('/resetPassword/', body('password').isLength({ min: 6}), jsonParser, async (req: Request, res: Response) => {
     const { password, email } = req.body;
 
     const salt = await bcrypt.genSalt(10);

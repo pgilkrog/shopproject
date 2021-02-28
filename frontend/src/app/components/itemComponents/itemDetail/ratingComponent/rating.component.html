@@ -1,0 +1,20 @@
+<div class="rateWrap">
+  <form class="rateForm" [formGroup]="ratingForm" (submit)="createRating()">
+    <ul class="rating-list">
+      <li *ngFor="let star of stars" [ngClass]="{'selected': (star <= selectedStarValue)}">
+        <i class="fa fa-star" (click)="countStar(star)"></i>
+      </li>
+    </ul>
+    <textarea type="text" placeholder="comment..." formControlName="comment"></textarea>
+    <button type="submit" class="buttonBlue" style="width: 100%">Rate</button>
+  </form>
+  <div *ngIf="ratings.length > 0">
+    <ul *ngFor="let rating of ratings">
+      <li>
+        <p>Test Testensen: <i *ngFor="let num of [1, 2, 3, 4, 5]" class="fa fa-star" [style.color]="num <= rating.rating ? '#14bffe' : '#222'"></i></p>
+
+        <p>{{ rating.commentText }}</p>
+      </li>
+    </ul>
+  </div>
+</div>

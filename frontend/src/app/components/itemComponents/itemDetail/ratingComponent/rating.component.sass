@@ -1,0 +1,34 @@
+@import '../../../../../styles'
+
+.rateWrap
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  .rateForm
+    display: flex
+    flex-direction: column
+    align-items: center
+    width: 350px
+
+    textarea
+      width: 100%
+      height: 150px
+      resize: none
+
+    .rating-list
+      width: 180px
+      list-style: none
+      padding: 0
+
+      i
+        font-size: 1.4rem
+
+    .rating-list li
+      display: inline-block
+      float: right
+      color: $secondary-color
+      padding: 0 5px
+
+    .rating-list li:hover, .rating-list li:hover ~ li, .rating-list li.selected
+      color: $blue-color

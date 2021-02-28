@@ -17,10 +17,7 @@ export class AuthGaurd implements CanActivate {
     return this.checkUserLogin(route, url);
   }
 
-  checkUserLogin(
-    route: ActivatedRouteSnapshot,
-    url: any
-  ): boolean {
+  checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
     if (this.authService.getIsAuth()) {
       const userRole = this.authService.getRole();
 

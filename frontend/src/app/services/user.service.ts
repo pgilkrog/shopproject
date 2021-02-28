@@ -84,6 +84,10 @@ export class UserService {
     return this.http.get<{ user: User }>(this.BACKEND_URL + '/' + this.userId);
   }
 
+  getUserId(): string {
+    return this.userId;
+  }
+
   getToken(): string {
     return this.token;
   }

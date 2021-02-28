@@ -27,6 +27,7 @@ app.use('/api/item', require('./routers/itemRoute'));
 app.use('/api/category', require('./routers/categoryRoute'));
 app.use('/api/order', require('./routers/orderRoute'));
 app.use('/api/user', require('./routers/userRoute'));
+app.use('/api/rating', require('./routers/RatingRoute'));
 
 const PORT = process.env.APP_PORT || 5000;
 

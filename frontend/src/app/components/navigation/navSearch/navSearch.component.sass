@@ -5,12 +5,12 @@
   position: absolute
   left: 0
   right: 0
-  padding: 20px 15px
   background-color: $blue-color
-  z-index: 50
+  z-index: 5
 
   .input-group
     display: flex
+    padding: 20px 15px
 
     button
       border: none
@@ -31,3 +31,22 @@
       border: none
       padding: 5px
       cursor: pointer
+
+  .autoCompleteList
+    width: 100%
+    list-style: none
+    margin: 0
+    padding: 0
+
+    li
+      cursor: pointer
+      padding: 5px 15px
+      transition: .5s
+
+      &:hover
+        background-color: $darkblue-color
+        color: $primary-color
+        transition: .5s
+
+    li + li
+      border-top: 1px solid $secondary-color

@@ -13,11 +13,12 @@ import { ItemService } from 'src/app/services/item.service';
 
 export class NavSearchComponent implements OnInit {
   showSearchbar = false;
-  searchForm: FormGroup = new FormGroup({});
-  autoSearchItems: Item[] = [];
-  queryField: FormControl = new FormControl();
   showDropDown = false;
   check = false;
+
+  autoSearchItems: Item[] = [];
+  searchForm: FormGroup = new FormGroup({});
+  queryField: FormControl = new FormControl();
 
   @Output() newItemEvent = new EventEmitter();
 

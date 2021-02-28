@@ -14,15 +14,17 @@ export class ItemDetailComponent implements OnInit {
   item?: Item;
 
   constructor(
-    private itemService: ItemService,
     private route: ActivatedRoute,
+    private itemService: ItemService,
     private cartService: ShoppingCartService
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(routeParams => {
       this.itemService.getItemById(routeParams.id)
-        .subscribe((data: any) => (this.item) = (data.item as Item));
+        .subscribe((data: any) => {
+          this.item = data.item as Item;
+        });
     });
   }
 

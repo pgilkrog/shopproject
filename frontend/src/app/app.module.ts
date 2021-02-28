@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { AdminModule } from './components/admin/admin.module';
 import { NavbarComponent } from './components/navigation/navbar/navbar.component';
 import { ItemListComponent } from './components/itemComponents/itemList/itemList.component';
 import { ItemSingleComponent } from './components/itemComponents/itemList/itemSingle/itemSingle.component';
@@ -17,12 +18,12 @@ import { SignupSigninComponent } from './components/auth/signup-signin/signupsig
 import { UserpageComponent } from './components/userComponents/userpage/userpage.component';
 import { AuthInterceptor } from './components/auth/auth-interceptor';
 import { DropdownComponent } from './components/navigation/dropdown/dropdown.component';
-import { AdminModule } from './components/admin/admin.module';
 import { OrderDetailComponent } from './components/orderComponents/orderDetail/orderDetail.component';
-import { FilterPipe } from './components/tools/filterpipe.pipe';
+import { FilterPipe } from './components/utils/filterpipe.pipe';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ResetPasswordComponent } from './components/auth/resetPassword/resetPassword.component';
 import { NavSearchComponent } from './components/navigation/navSearch/navSearch.component';
+import { RatingComponent } from './components/itemComponents/itemDetail/ratingComponent/rating.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { NavSearchComponent } from './components/navigation/navSearch/navSearch.
     OrderDetailComponent,
     ResetPasswordComponent,
     FilterPipe,
-    NavSearchComponent
+    NavSearchComponent,
+    RatingComponent
   ],
   imports: [
     BrowserModule,

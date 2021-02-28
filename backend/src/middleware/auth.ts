@@ -4,7 +4,7 @@ import * as config from '../config/default.json';
 
 export = (req: Request, res: Response, next: NextFunction) => {
     // Get token from the header
-    const token = req.header('x-auth-token');
+    const token = req.header('Authorization');
 
     // Check if no token
     if (!token) {
@@ -14,7 +14,6 @@ export = (req: Request, res: Response, next: NextFunction) => {
     try {
         // Verify the token
         const decoded = jwt.verify(token, config.jwtSecret);
-        console.log(decoded);
         // Get the user
         req.body = decoded;
         next();

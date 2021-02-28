@@ -1,12 +1,13 @@
-<div class="detailWrap" *ngIf="item">
-  <img src="{{ item.image }}" />
-  <div class="infoWrap">
-    <h1>{{ item.name }} - {{ item.price }} kr.</h1>
-    <p>{{ item.companyName }}</p>
-    <p>{{ item.description }}</p>
-    <p><i class="{{item.amountInStock > 0 ? 'fas fa-check' : 'fas fa-times'}}"></i> {{ item.amountInStock }}: left in stock </p>
-    <div *ngIf="item.amountInStock > 0"><button (click)="buy()">Buy</button></div>
+<section *ngIf="item">
+  <div class="detailWrap">
+    <img src="{{ item.image }}" />
+    <div class="infoWrap">
+      <h1>{{ item.name }} - {{ item.price }} kr.</h1>
+      <p>{{ item.companyName }}</p>
+      <p>{{ item.description }}</p>
+      <p><i class="{{item.amountInStock > 0 ? 'fas fa-check' : 'fas fa-times'}}"></i> {{ item.amountInStock }}: left in stock </p>
+      <div *ngIf="item.amountInStock > 0"><button (click)="buy()" class="buttonBlue">Buy</button></div>
+    </div>
   </div>
-</div>
-
-
+  <app-rating [itemId]="item?._id"></app-rating>
+</section>
