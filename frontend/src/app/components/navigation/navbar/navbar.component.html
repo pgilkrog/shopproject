@@ -41,7 +41,7 @@
       <i class="fas fa-search" (click)="toggleSearchMenu()"></i>
     </li>
     <li [routerLinkActive]='["link-active"]'>
-      <a routerLink="ShoppingCart"><i class="fas fa-shopping-cart"></i></a>
+      <a routerLink="ShoppingCart"><i class="fas fa-shopping-cart">{{ItemsInBasket}}</i></a>
     </li>
   </ul>
 </nav>

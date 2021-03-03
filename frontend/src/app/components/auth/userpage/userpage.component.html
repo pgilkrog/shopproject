@@ -3,8 +3,8 @@
   <p>Email: {{ user.email }}</p>
   <section class="userOrdersWrap" *ngIf="orders.length > 0">
     <h3>Your orders</h3>
-    <ul *ngFor="let order of orders">
-      <li [ngStyle]="{'backgroundColor': order.status === 'order sendt' ? 'lightgreen' : 'yellow' }" routerLink="/OrderDetail/{{order._id}}">
+    <ul>
+      <li *ngFor="let order of orders" routerLink="/OrderDetail/{{order._id}}">
         <p><strong>{{ order._id }}</strong>: {{ order.totalNumberItems }} items for = <strong>{{ order.totalPrice }}</strong> kr. - {{ order.status }}</p>
       </li>
     </ul>

@@ -9,8 +9,8 @@
     [infiniteScrollThrottle]="50"
     (scrolled)="onScroll()"
   >
-    <ul *ngIf="items.length > 0">
-      <li *ngFor="let item of itemsNew | FilterPipe:name">
+    <ul  *ngIf="items.length > 0">
+      <li [@aliasesAnimation]="itemsNew" *ngFor="let item of itemsNew | FilterPipe:name">
         <app-itemsingle [item]="item"></app-itemsingle>
       </li>
     </ul>

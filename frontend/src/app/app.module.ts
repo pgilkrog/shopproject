@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AdminModule } from './components/admin/admin.module';
 import { NavbarComponent } from './components/navigation/navbar/navbar.component';
@@ -14,16 +15,14 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { ShoppingCartComponent } from './components/ShoppingCartComps/ShoppingCart/shoppingCart.component';
 import { SpinnerComponent } from './components/UIComponents/Spinner/spinner.component';
 import { OrderCompleteComponent } from './components/ShoppingCartComps/orderComplete/orderComplete.component';
-import { SignupSigninComponent } from './components/auth/signup-signin/signupsignin.component';
-import { UserpageComponent } from './components/userComponents/userpage/userpage.component';
 import { AuthInterceptor } from './components/auth/auth-interceptor';
 import { DropdownComponent } from './components/navigation/dropdown/dropdown.component';
 import { OrderDetailComponent } from './components/orderComponents/orderDetail/orderDetail.component';
 import { FilterPipe } from './components/utils/filterpipe.pipe';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { ResetPasswordComponent } from './components/auth/resetPassword/resetPassword.component';
 import { NavSearchComponent } from './components/navigation/navSearch/navSearch.component';
 import { RatingComponent } from './components/itemComponents/itemDetail/ratingComponent/rating.component';
+import { AuthModule } from './components/auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -36,11 +35,8 @@ import { RatingComponent } from './components/itemComponents/itemDetail/ratingCo
     ItemDetailComponent,
     ShoppingCartComponent,
     OrderCompleteComponent,
-    SignupSigninComponent,
     SpinnerComponent,
-    UserpageComponent,
     OrderDetailComponent,
-    ResetPasswordComponent,
     FilterPipe,
     NavSearchComponent,
     RatingComponent
@@ -52,7 +48,9 @@ import { RatingComponent } from './components/itemComponents/itemDetail/ratingCo
     ReactiveFormsModule,
     FormsModule,
     AdminModule,
-    InfiniteScrollModule
+    AuthModule,
+    InfiniteScrollModule,
+    BrowserAnimationsModule
   ],
   providers: [ {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true} ],
   bootstrap: [AppComponent]

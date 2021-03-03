@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppComponent } from 'src/app/app.component';
+
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminPageComponent } from './adminpage/adminpage.component';
 import { CreateStuffComponent } from './createStuff/createstuff.component';
@@ -20,7 +20,7 @@ import { UpdateItemsComponent } from './updateItems/updateItems.component';
     FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
 
-export class AdminModule {}
+export class AdminModule { }

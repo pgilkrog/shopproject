@@ -2,8 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Category } from 'src/app/models/Category';
+import { ShoppingCart } from 'src/app/models/ShoppingCart';
 import { CategoryService } from 'src/app/services/category.service';
 import { ItemService } from 'src/app/services/item.service';
+import { ShoppingCartService } from 'src/app/services/shoppingcart.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -20,12 +22,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   userRole = '';
   userIsAuthenticated = false;
+
   private authListenerSubs: Subscription = new Subscription();
 
   constructor(
     private itemService: ItemService,
     private userService: UserService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private cartService: ShoppingCartService
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +45,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
       });
+
+    this.ItemsInBasket = (JSON.parse(sessionStorage.getItem('shopcart') as string) as ShoppingCart).itemsAmount;
+    this.cartService.getTotalAmount().subscribe(arg => this.ItemsInBasket = arg.items);
   }
 
   ngOnDestroy(): void {

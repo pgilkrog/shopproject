@@ -1,21 +1,36 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { CartItem } from '../models/CartItem';
 import { Item } from '../models/Item';
+import { ShoppingCart } from '../models/ShoppingCart';
 
 @Injectable({ providedIn: 'root' })
 
 export class ShoppingCartService {
-  private shoppingcart: CartItem[] = [];
+  private shoppingcart: ShoppingCart = {
+    cartItems: [] = [],
+    itemsAmount: 0,
+    totalPrice: 0
+  };
 
-  getShoppingcart(): CartItem[] {
+  private itemsAmount = new Subject<{ items: number }>();
+
+  getShoppingcart(): ShoppingCart {
     return sessionStorage.getItem('shopcart') ?
       this.shoppingcart = JSON.parse(sessionStorage.getItem('shopcart') as string) :
-      this.shoppingcart = [];
+      this.shoppingcart = {
+        cartItems: [] = [],
+        itemsAmount: 0,
+        totalPrice: 0
+      };
+  }
+
+  getTotalAmount(): Observable<{ items: number}> {
+    return this.itemsAmount.asObservable();
   }
 
   addToCart(newItem: Item): void {
-    const itemExistInCart = this.shoppingcart.find(({item}) => item._id === newItem._id);
+    const itemExistInCart = this.shoppingcart.cartItems.find(({item}) => item._id === newItem._id);
 
     if (!itemExistInCart) {
       const cartItem: CartItem = {
@@ -25,7 +40,7 @@ export class ShoppingCartService {
 
       if (this.shoppingcart) {
         console.log(this.shoppingcart);
-        this.shoppingcart.push(cartItem);
+        this.shoppingcart.cartItems.push(cartItem);
         this.saveToLocalstorage();
       }
     } else {
@@ -37,15 +52,15 @@ export class ShoppingCartService {
   }
 
   removeFromCart(itemToRemove: CartItem): void {
-    const itemExistInCart = this.shoppingcart.find(({item}) => item === itemToRemove.item);
+    const itemExistInCart = this.shoppingcart.cartItems.find(({item}) => item === itemToRemove.item);
 
     if (itemExistInCart){
       if (itemExistInCart.num > 1) {
         itemExistInCart.num -= 1;
         this.saveToLocalstorage();
       } else {
-        const newItemExistInCart = this.shoppingcart.indexOf(itemToRemove);
-        this.shoppingcart.splice(newItemExistInCart, 1);
+        const newItemExistInCart = this.shoppingcart.cartItems.indexOf(itemToRemove);
+        this.shoppingcart.cartItems.splice(newItemExistInCart, 1);
         this.saveToLocalstorage();
       }
     } else {
@@ -54,16 +69,17 @@ export class ShoppingCartService {
   }
 
   removeItem(cartItem: CartItem): void {
-    const itemExistInCart = this.shoppingcart.find(({item}) => item === cartItem.item);
+    const itemExistInCart = this.shoppingcart.cartItems.find(({item}) => item === cartItem.item);
     if (itemExistInCart) {
-      const itemIndex = this.shoppingcart.indexOf(itemExistInCart);
-      this.shoppingcart.splice(itemIndex, 1);
+      const itemIndex = this.shoppingcart.cartItems.indexOf(itemExistInCart);
+      this.shoppingcart.cartItems.splice(itemIndex, 1);
       this.saveToLocalstorage();
     }
   }
 
   private saveToLocalstorage(): void {
     console.log('save to localstorage', this.shoppingcart);
+    this.calcPriceAndAmount();
     sessionStorage.setItem('shopcart', JSON.stringify(this.shoppingcart));
   }
 
@@ -71,23 +87,30 @@ export class ShoppingCartService {
     sessionStorage.removeItem('shopcart');
   }
 
+  calcPriceAndAmount(): void {
+    this.shoppingcart.itemsAmount = this.getTotalItems();
+    this.shoppingcart.totalPrice = this.getTotalPrice();
+  }
+
   getTotalItems(): number {
     let numberOfItems = 0;
 
-    if (this.shoppingcart.length > 0) {
-      this.shoppingcart.forEach(item => {
+    if (this.shoppingcart.cartItems.length > 0) {
+      this.shoppingcart.cartItems.forEach(item => {
         numberOfItems += item.num;
       });
     }
-
+    this.itemsAmount.next({
+      items: numberOfItems
+    });
     return numberOfItems;
   }
 
   getTotalPrice(): number {
     let totalPrice = 0;
 
-    if (this.shoppingcart.length > 0) {
-      this.shoppingcart.forEach(item => {
+    if (this.shoppingcart.cartItems.length > 0) {
+      this.shoppingcart.cartItems.forEach(item => {
         totalPrice += (item.num * item.item.price);
       });
     }

@@ -9,5 +9,6 @@
       <div *ngIf="item.amountInStock > 0"><button (click)="buy()" class="buttonBlue">Buy</button></div>
     </div>
   </div>
-  <app-rating [itemId]="item?._id"></app-rating>
+  <app-rating [itemId]="item._id"></app-rating>
 </section>
+<br>

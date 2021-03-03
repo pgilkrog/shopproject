@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { CartItem } from 'src/app/models/CartItem';
 import { Order } from 'src/app/models/Order';
+import { ShoppingCart } from 'src/app/models/ShoppingCart';
 import { OrderService } from 'src/app/services/order.service';
 import { ShoppingCartService } from 'src/app/services/shoppingcart.service';
 import { UserService } from 'src/app/services/user.service';
@@ -15,9 +16,11 @@ import { UserService } from 'src/app/services/user.service';
 
 export class ShoppingCartComponent implements OnInit {
   infoForm: FormGroup = new FormGroup({});
-  cart: CartItem[] = [];
-  totalItemsInCart = 0;
-  totalPrice = 0;
+  cart: ShoppingCart = {
+    cartItems: [] = [],
+    itemsAmount: 0,
+    totalPrice: 0
+  };
 
   constructor(
     private cartService: ShoppingCartService,
@@ -39,31 +42,26 @@ export class ShoppingCartComponent implements OnInit {
         validators: [Validators.required]
       })
     });
-
-    this.ItemsInCart();
   }
 
   decreaseAmount(item: CartItem): void {
     this.cartService.removeFromCart(item);
-    this.ItemsInCart();
   }
 
   addAmount(item: CartItem): void {
     this.cartService.addToCart(item.item);
-    this.ItemsInCart();
   }
 
   removeItem(item: CartItem): void {
     this.cartService.removeItem(item);
-    this.ItemsInCart();
   }
 
   completeOrder(): void {
     const order: Order = {
       _id: '',
-      items: this.cart,
-      totalPrice: this.totalPrice,
-      totalNumberItems: this.totalItemsInCart,
+      items: this.cart.cartItems,
+      totalPrice: this.cart.totalPrice,
+      totalNumberItems: this.cart.itemsAmount,
       status: 'order made',
       userEmail: this.infoForm.value.userEmail,
       address: this.infoForm.value.address,
@@ -71,10 +69,5 @@ export class ShoppingCartComponent implements OnInit {
     };
 
     this.orderService.completeOrder(order);
-  }
-
-  ItemsInCart(): void {
-    this.totalItemsInCart = this.cartService.getTotalItems();
-    this.totalPrice = this.cartService.getTotalPrice();
   }
 }

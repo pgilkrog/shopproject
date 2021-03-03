@@ -82,7 +82,7 @@ router.post('/:id', jsonParser, async (req: Request, res: Response) => {
     Item.findByIdAndUpdate(req.params.id, {$set:req.body}, {upsert: true},
         (err, doc) => {
             if(err) {
-                console.log('[update Item]', err);
+                console.error('[update Item]', err);
             } else {
                 res.json({ msg: "Favorite Added!" });
             }

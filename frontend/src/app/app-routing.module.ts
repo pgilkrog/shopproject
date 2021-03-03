@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGaurd } from './components/auth/auth.guard';
-import { ResetPasswordComponent } from './components/auth/resetPassword/resetPassword.component';
+import { AuthModule } from './components/auth/auth.module';
 
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { ItemDetailComponent } from './components/itemComponents/itemDetail/itemDetail.component';
@@ -9,8 +9,6 @@ import { ItemListComponent } from './components/itemComponents/itemList/itemList
 import { OrderDetailComponent } from './components/orderComponents/orderDetail/orderDetail.component';
 import { OrderCompleteComponent } from './components/ShoppingCartComps/orderComplete/orderComplete.component';
 import { ShoppingCartComponent } from './components/ShoppingCartComps/ShoppingCart/shoppingCart.component';
-import { SignupSigninComponent } from './components/auth/signup-signin/signupsignin.component';
-import { UserpageComponent } from './components/userComponents/userpage/userpage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'Home', pathMatch: 'full' },
@@ -20,11 +18,9 @@ const routes: Routes = [
   { path: 'FilteredList/:category', component: ItemListComponent},
   { path: 'ShoppingCart', component: ShoppingCartComponent },
   { path: 'CompletedOrder', component: OrderCompleteComponent },
-  { path: 'SignupSignin', component: SignupSigninComponent },
   { path: 'OrderDetail/:id', component: OrderDetailComponent },
-  { path: 'ResetPassword', component: ResetPasswordComponent },
-  { path: 'UserPage', component: UserpageComponent, canActivate: [AuthGaurd], data: { role: 'user'} },
   { path: 'admin', loadChildren: () => import('./components/admin/admin.module').then(a => a.AdminModule) },
+  { path: 'auth', loadChildren: () => import('./components/auth/auth.module').then(a => a.AuthModule)},
 ];
 
 @NgModule({
