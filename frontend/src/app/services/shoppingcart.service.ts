@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
 import { CartItem } from '../models/CartItem';
 import { Item } from '../models/Item';
 import { ShoppingCart } from '../models/ShoppingCart';
@@ -13,7 +13,8 @@ export class ShoppingCartService {
     totalPrice: 0
   };
 
-  private itemsAmount = new Subject<{ items: number }>();
+  private itemsAmount = new BehaviorSubject<number>(0);
+  itemsAmount$ = this.itemsAmount.asObservable();
 
   getShoppingcart(): ShoppingCart {
     return sessionStorage.getItem('shopcart') ?
@@ -25,12 +26,12 @@ export class ShoppingCartService {
       };
   }
 
-  getTotalAmount(): Observable<{ items: number}> {
-    return this.itemsAmount.asObservable();
+  getTotalAmount(): Observable<number> {
+    return this.itemsAmount$;
   }
 
   addToCart(newItem: Item): void {
-    const itemExistInCart = this.shoppingcart.cartItems.find(({item}) => item._id === newItem._id);
+    const itemExistInCart = this.shoppingcart.cartItems.find(({item}) => newItem._id === item._id);
 
     if (!itemExistInCart) {
       const cartItem: CartItem = {
@@ -78,7 +79,6 @@ export class ShoppingCartService {
   }
 
   private saveToLocalstorage(): void {
-    console.log('save to localstorage', this.shoppingcart);
     this.calcPriceAndAmount();
     sessionStorage.setItem('shopcart', JSON.stringify(this.shoppingcart));
   }
@@ -100,9 +100,7 @@ export class ShoppingCartService {
         numberOfItems += item.num;
       });
     }
-    this.itemsAmount.next({
-      items: numberOfItems
-    });
+    this.itemsAmount.next(numberOfItems);
     return numberOfItems;
   }
 
@@ -111,7 +109,9 @@ export class ShoppingCartService {
 
     if (this.shoppingcart.cartItems.length > 0) {
       this.shoppingcart.cartItems.forEach(item => {
-        totalPrice += (item.num * item.item.price);
+        item.item.onSale ?
+          totalPrice += (item.num * (item.item.price - item.item.saleAmount)) :
+          totalPrice += (item.num * item.item.price);
       });
     }
 

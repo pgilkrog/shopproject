@@ -1,12 +1,9 @@
 <section class="wrapper" (click)="goToItem()" *ngIf="item">
   <h2>{{ item.name }}</h2>
   <img src="{{ item.image }}" />
-  <p>{{ item.description }} </p>
+  <p>{{ item.description | slice:0:70 }}... </p>
   <div>
-    <h2>{{ item.price }},-</h2>
+    <h2 *ngIf="item.onSale"><span>{{ item.price }}</span> - {{ item.price - item.saleAmount }},-</h2>
+    <h2 *ngIf="!item.onSale">{{ item.price }},-</h2>
   </div>
-</section>
-
-<section>
-
 </section>

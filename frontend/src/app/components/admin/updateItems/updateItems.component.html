@@ -19,6 +19,7 @@
       <select formControlName="category">
         <option *ngFor="let item of categories" value="{{item.name}}">{{item.name}}</option>
       </select> <br>
+      <input formControlName="saleAmount" type="number" placeholder="Sale amount" />
       <button type="submit">Update Item</button>
     </form>
   </div>

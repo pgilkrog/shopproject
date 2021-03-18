@@ -32,6 +32,14 @@ const itemSchema = new mongoose.Schema ({
     numberBought: {
         type: Number,
         default: 0
+    },
+    onSale: {
+        type: Boolean,
+        default: false
+    },
+    saleAmount: {
+        type: Number,
+        default: 0
     }
 });
 

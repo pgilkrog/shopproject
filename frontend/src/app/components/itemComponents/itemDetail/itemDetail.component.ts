@@ -20,11 +20,14 @@ export class ItemDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(routeParams => {
-      this.itemService.getItemById(routeParams.id)
-        .subscribe((data: any) => {
-          this.item = data.item as Item;
-        });
+    this.route.params.subscribe({
+      next: routeParams => {
+        this.itemService.getItemById(routeParams.id)
+          .subscribe((data: any) => {
+            this.item = data.item as Item;
+          });
+      },
+      error: error => console.log(error)
     });
   }
 

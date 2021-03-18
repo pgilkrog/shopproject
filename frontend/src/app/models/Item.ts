@@ -8,5 +8,7 @@ export interface Item {
   category: string;
   amountInStock: number;
   numberBought: number;
+  saleAmount: number;
+  onSale: boolean;
 }
 

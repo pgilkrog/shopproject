@@ -18,7 +18,8 @@
           <p>{{ cartItem.item.name }}</p>
         </td>
         <td>
-          <p><strong>{{ cartItem.item.price }}</strong> kr.</p>
+          <p *ngIf="cartItem.item.onSale"><span>{{ cartItem.item.price }}</span> - {{ cartItem.item.price - cartItem.item.saleAmount }},-</p>
+          <p *ngIf="!cartItem.item.onSale">{{ cartItem.item.price }},-</p>
         </td>
         <td>
           <div class="amountWrap">
@@ -32,7 +33,8 @@
           <i class="fas fa-trash-alt" (click)="removeItem(cartItem)"></i>
         </td>
         <td>
-          <p>Total Price: <strong>{{cartItem.num * cartItem.item.price}}</strong> kr.</p>
+          <p *ngIf="cartItem.item.onSale">Total Price: <strong>{{ cartItem.num * (cartItem.item.price - cartItem.item.saleAmount) }}</strong></p>
+          <p *ngIf="!cartItem.item.onSale">Total price: <strong>{{ cartItem.num * cartItem.item.price }}</strong></p>
         </td>
       </tr>
     </table>

@@ -2,7 +2,9 @@
   <div class="detailWrap">
     <img src="{{ item.image }}" />
     <div class="infoWrap">
-      <h1>{{ item.name }} - {{ item.price }} kr.</h1>
+      <h1>{{ item.name }}</h1>
+      <h2 *ngIf="item.onSale"><span>{{ item.price }}</span> - {{ item.price - item.saleAmount }},-</h2>
+      <h2 *ngIf="!item.onSale">{{ item.price }},-</h2>
       <p>{{ item.companyName }}</p>
       <p>{{ item.description }}</p>
       <p><i class="{{item.amountInStock > 0 ? 'fas fa-check' : 'fas fa-times'}}"></i> {{ item.amountInStock }}: left in stock </p>

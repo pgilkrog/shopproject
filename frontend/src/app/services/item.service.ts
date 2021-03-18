@@ -39,6 +39,21 @@ export class ItemService {
     });
   }
 
+  getItemsOnSale(): any {
+    const onSale = true;
+    return this.http.get<{items: any}>(BACKEND_URL + '/onSale/' + onSale).pipe(map((itemData) => {
+      return { items: itemData.items.map((item: Item) => {
+        return this.generateItem(item);
+      })};
+    }))
+    .subscribe(data => {
+      this.items = data.items;
+      this.itemsUpdated.next({
+        items: [...this.items]
+      });
+    });
+  }
+
   getTopFiveItem(): Observable<Item[]> {
     return this.http.get<{ items: Item[] }>(`${BACKEND_URL}/pop/pop/`).pipe(
       map((itemData: any) => itemData.items.map((item: Item) => this.generateItem(item)))
@@ -110,7 +125,9 @@ export class ItemService {
       companyName: item.companyName,
       category: item.category,
       amountInStock: item.amountInStock,
-      numberBought: item.numberBought
+      numberBought: item.numberBought,
+      saleAmount: item.saleAmount,
+      onSale: item.onSale
     };
   }
 }

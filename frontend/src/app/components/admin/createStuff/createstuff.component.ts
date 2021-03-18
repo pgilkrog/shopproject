@@ -57,7 +57,9 @@ export class CreateStuffComponent implements OnInit {
       companyName: this.form.value.companyName,
       category: this.form.value.category,
       amountInStock: this.form.value.amountInStock,
-      numberBought: 0
+      numberBought: 0,
+      saleAmount: 0,
+      onSale: false
     };
 
     this.itemService.createItem(item);

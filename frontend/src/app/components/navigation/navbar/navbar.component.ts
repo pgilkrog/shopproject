@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Category } from 'src/app/models/Category';
-import { ShoppingCart } from 'src/app/models/ShoppingCart';
 import { CategoryService } from 'src/app/services/category.service';
 import { ItemService } from 'src/app/services/item.service';
 import { ShoppingCartService } from 'src/app/services/shoppingcart.service';
@@ -24,38 +22,48 @@ export class NavbarComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
 
   private authListenerSubs: Subscription = new Subscription();
+  private itemListenerSub: Subscription = new Subscription();
 
   constructor(
     private itemService: ItemService,
     private userService: UserService,
     private categoryService: CategoryService,
     private cartService: ShoppingCartService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.categoryService.getAllCategories().subscribe((result: any) => {
-      this.categories = result.categories.sort((one: Category, two: Category) => (one.name < two.name ? -1 : 1));
+    this.categoryService.getAllCategories().subscribe({
+      error: () => {  },
+      next: (data: any) => this.categories = data.categories,
     });
 
     this.userService.autoAuthUser();
     this.userRole = this.userService.getRole();
     this.userIsAuthenticated = this.userService.getIsAuth();
 
-    this.authListenerSubs = this.userService.getAuthStatusListener()
-      .subscribe(isAuthenticated => {
-        this.userIsAuthenticated = isAuthenticated;
+    this.authListenerSubs = this.userService.getAuthStatusListener().subscribe({
+        next: isAuthenticated => this.userIsAuthenticated = isAuthenticated,
+        error: (error) => console.log(error)
       });
 
-    this.ItemsInBasket = (JSON.parse(sessionStorage.getItem('shopcart') as string) as ShoppingCart).itemsAmount;
-    this.cartService.getTotalAmount().subscribe(arg => this.ItemsInBasket = arg.items);
+    this.itemListenerSub = this.cartService.getTotalAmount().subscribe({
+      complete: () => console.log('Complete. Cookie time.'),
+      next: data => this.ItemsInBasket = data,
+      error: error => console.log(error)
+    });
   }
 
   ngOnDestroy(): void {
     this.authListenerSubs.unsubscribe();
+    this.itemListenerSub.unsubscribe();
   }
 
   signout(): void{
     this.userService.signout();
+  }
+
+  goToSale(): void {
+    this.itemService.getItemsOnSale();
   }
 
   gotoProducts(): void {

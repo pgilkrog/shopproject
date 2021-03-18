@@ -48,8 +48,6 @@ export class ItemListComponent implements OnInit, OnDestroy {
         this.items = itemsData.items;
         this.itemsNew = itemsData.items.slice(0, this.numb);
       });
-
-    this.getItems();
   }
 
   ngOnDestroy(): void {

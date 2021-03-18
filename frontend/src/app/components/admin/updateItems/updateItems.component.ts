@@ -47,6 +47,9 @@ export class UpdateItemsComponent implements OnInit, OnDestroy {
       }),
       numberBought : new FormControl(null, {
         validators: [Validators.required]
+      }),
+      saleAmount: new FormControl(null, {
+        validators: [Validators.required]
       })
     });
 
@@ -69,6 +72,7 @@ export class UpdateItemsComponent implements OnInit, OnDestroy {
   }
 
   focusItem(item: Item): void {
+    console.log(item);
     /* tslint:disable:no-string-literal */
     this.updateForm.controls['id'].setValue(item._id);
     this.updateForm.controls['name'].setValue(item.name);
@@ -79,6 +83,7 @@ export class UpdateItemsComponent implements OnInit, OnDestroy {
     this.updateForm.controls['category'].setValue(item.category);
     this.updateForm.controls['amountInStock'].setValue(item.amountInStock);
     this.updateForm.controls['numberBought'].setValue(item.numberBought);
+    this.updateForm.controls['saleAmount'].setValue(item.saleAmount);
     /* tslint:enable:no-string-literal */
   }
 
@@ -92,9 +97,15 @@ export class UpdateItemsComponent implements OnInit, OnDestroy {
       companyName: this.updateForm.value.companyName,
       category: this.updateForm.value.category,
       amountInStock: this.updateForm.value.amountInStock,
-      numberBought: this.updateForm.value.numberBought
+      numberBought: this.updateForm.value.numberBought,
+      saleAmount: this.updateForm.value.saleAmount,
+      onSale: this.checkIfSale(this.updateForm.value.saleAmount)
     };
 
     this.itemService.updateItem(newItem);
+  }
+
+  checkIfSale(saleAmount: number): boolean {
+    return saleAmount > 0 ? true : false;
   }
 }

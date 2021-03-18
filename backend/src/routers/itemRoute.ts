@@ -44,6 +44,16 @@ router.get('/search/:search', async (req: Request, res: Response) => {
     }
 })
 
+router.get('/onSale/:onSale', async (req: Request, res: Response) => {
+    try {
+        const fetchedItems = await Item.find({ onSale: req.params.onSale })
+        res.json({ items: fetchedItems });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server error');
+    }
+})
+
 //@desc Get item By category
 router.get('/cat/:category', async (req: Request, res: Response) => {
     try {
