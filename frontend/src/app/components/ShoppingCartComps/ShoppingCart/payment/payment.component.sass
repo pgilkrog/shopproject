@@ -1,0 +1,45 @@
+@import '../../../../../styles'
+
+section
+  position: absolute
+  z-index: 100
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  background-color: rgba(0,0,0,.9)
+  display: flex
+  align-items: center
+  justify-content: center
+
+  .paymentWrap
+    background-color: $primary-color
+    border-radius: 10px
+    padding: 10px
+
+    div
+
+      input
+        border: 1px solid $blue-color
+        margin: 5px
+        padding: 5px
+        border-radius: 5px
+
+    button
+      background: $secondary-color
+      color: $primary-color
+      border: none
+      border-radius: 5px
+      padding: 10px
+      cursor: pointer
+
+      &:hover
+        background-color: $darkblue-color
+
+.fa-window-close
+  float: right
+  cursor: pointer
+  font-size: 1.5rem
+
+  &:hover
+    color: #555

@@ -17,6 +17,7 @@ export class UserpageComponent implements OnInit {
   constructor(private userService: UserService, private orderService: OrderService) { }
 
   ngOnInit(): void {
+    this.userService.autoAuthUser();
     this.userService.getUserById().subscribe(
       (data: any) => {
         this.user = data.user as User;

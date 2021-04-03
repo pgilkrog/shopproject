@@ -23,6 +23,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NavSearchComponent } from './components/navigation/navSearch/navSearch.component';
 import { RatingComponent } from './components/itemComponents/itemDetail/ratingComponent/rating.component';
 import { AuthModule } from './components/auth/auth.module';
+import { PaymentComponent } from './components/ShoppingCartComps/ShoppingCart/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AuthModule } from './components/auth/auth.module';
     OrderDetailComponent,
     FilterPipe,
     NavSearchComponent,
-    RatingComponent
+    RatingComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

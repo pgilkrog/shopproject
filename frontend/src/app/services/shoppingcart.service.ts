@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { CartItem } from '../models/CartItem';
 import { Item } from '../models/Item';
 import { ShoppingCart } from '../models/ShoppingCart';
@@ -79,17 +79,13 @@ export class ShoppingCartService {
   }
 
   private saveToLocalstorage(): void {
-    this.calcPriceAndAmount();
+    this.shoppingcart.itemsAmount = this.getTotalItems();
+    this.shoppingcart.totalPrice = this.getTotalPrice();
     sessionStorage.setItem('shopcart', JSON.stringify(this.shoppingcart));
   }
 
   removeFromSessionStoreage(): void {
     sessionStorage.removeItem('shopcart');
-  }
-
-  calcPriceAndAmount(): void {
-    this.shoppingcart.itemsAmount = this.getTotalItems();
-    this.shoppingcart.totalPrice = this.getTotalPrice();
   }
 
   getTotalItems(): number {

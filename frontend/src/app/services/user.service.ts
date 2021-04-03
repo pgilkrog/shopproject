@@ -104,6 +104,16 @@ export class UserService {
     this.role = authInformation.userRole;
     this.isAuthenticated = true;
     this.authStatusListener.next(true);
+
+    const data = { id: this.userId };
+    this.http.post(this.BACKEND_URL + '/refreshToken/', data).subscribe({
+      next: (tokenData: any) => {
+        this.token = tokenData.token;
+        localStorage.setItem('token', tokenData.token);
+        console.log('hvor tit kører jeg refreshToken?');
+      },
+      error: err => console.log('[autoauth error]', err)
+    });
   }
 
   private saveAuthData(): void {
@@ -124,8 +134,7 @@ export class UserService {
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
     const userRole = localStorage.getItem('userRole');
-
-    if (!token || !userId) {
+    if (!token && !userId) {
       return;
     }
 

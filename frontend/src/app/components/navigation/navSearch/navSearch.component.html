@@ -5,8 +5,8 @@
     <button type="submit" routerLink="FilteredList/{{queryField.value}}">Search</button>
   </form>
   <ul class="autoCompleteList">
-    <li *ngFor="let item of autoSearchItems | slice:0:5" (click)="onAutoClick(item._id)">
-      <p><strong>{{ item.name }}</strong>: {{ item.description | slice:0:50 }}</p>
+    <li *ngFor="let item of autoSearchItems" (click)="onAutoClick(item._id)">
+      <img src="{{ item.image }}" height="40" /><strong>{{ item.name }}</strong>: {{ item.description | slice:0:50 }}
     </li>
   </ul>
 </div>

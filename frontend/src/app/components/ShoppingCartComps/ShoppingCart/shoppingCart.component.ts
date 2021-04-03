@@ -15,6 +15,11 @@ import { UserService } from 'src/app/services/user.service';
 })
 
 export class ShoppingCartComponent implements OnInit {
+  orderProcessNumber = 1;
+  showPaymentModal = false;
+  paymentMethodNumber = 0;
+  paymentSuccessful = false;
+
   infoForm: FormGroup = new FormGroup({});
   cart: ShoppingCart = {
     cartItems: [] = [],
@@ -33,7 +38,7 @@ export class ShoppingCartComponent implements OnInit {
 
     this.infoForm = new FormGroup({
       userEmail: new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, Validators.email]
       }),
       address: new FormControl(null, {
         validators: [Validators.required]
@@ -42,6 +47,30 @@ export class ShoppingCartComponent implements OnInit {
         validators: [Validators.required]
       })
     });
+  }
+
+  checkDeliveryInfo(): boolean {
+    let check = false;
+
+    if (this.infoForm.valid) {
+      check = true;
+      this.orderProcessNumber = 3;
+    }
+
+    return check;
+  }
+
+  changeShowPayment(methodNumber: number): void {
+    this.paymentMethodNumber = methodNumber;
+    this.showPaymentModal = !this.showPaymentModal;
+  }
+
+  paymentSuccess(): void {
+    this.paymentSuccessful = true;
+  }
+
+  orderProcess(numb: number): void {
+    this.orderProcessNumber = numb;
   }
 
   decreaseAmount(item: CartItem): void {

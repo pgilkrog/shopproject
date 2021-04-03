@@ -13,10 +13,33 @@ const jsonParser = bodyParser.json();
 
 // @route       GET api/auth
 // @desc        Get logged in user
-router.get('/auth/', auth, async (req: Request, res: Response) => {
+router.post('/refreshToken/', jsonParser, async (req: Request, res: Response) => {
     try{
-        const user = await User.findById(req.body.user._id).select('-password');
-        res.json(user);
+        // const { _id } = req.body;
+        const user = await User.findById(req.body.id).select('-password') as any;
+
+        if (!user) {
+            return res.status(400).json({ msg: 'Invalid credentials!'});
+        }
+
+        const payload = {
+            user: {
+                _id: user._id
+            }
+        }
+
+        const id = user._id;
+        const role = user.type;
+
+        // Make a json web token
+        jwt.sign(payload, config.jwtSecret, {
+            expiresIn: 3600
+        }, (err, token) => {
+            if (err) {
+                throw err;
+            }
+            res.json({ token });
+        });            
     } catch(err) {
         console.error(err.message)
         res.status(500).send('Server error');
@@ -26,7 +49,6 @@ router.get('/auth/', auth, async (req: Request, res: Response) => {
 //@route /getByEmail/:email
 //@desc Find User by Email
 router.get('/getByEmail/:email', jsonParser, body('email', 'Please include a valid email').isEmail(), async (req: Request, res: Response) => {
-    
     try {
         const user = await User.findOne({ email: req.params.email });
         if (user) {
@@ -67,7 +89,7 @@ router.post('/auth/', jsonParser, [
         if(!isMatch) {
             return res.status(400).json({ msg: 'Invalid credentials!'});
         }
-        
+
         const payload = {
             user: {
                 _id: user._id

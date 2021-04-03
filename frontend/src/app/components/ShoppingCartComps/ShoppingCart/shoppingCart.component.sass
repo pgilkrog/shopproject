@@ -4,6 +4,7 @@ section
   display: flex
   flex-direction: column
   align-items: center
+  text-align: center
 
   .cartWrap
     border-radius: 10px
@@ -54,10 +55,9 @@ section
         background: #fff
 
   .orderInfo
-    border-top: 1px solid $blue-color
     display: flex
     flex-direction: column
-    justify-content: center
+    align-items: center
     padding-top: 15px
 
     input
@@ -66,7 +66,33 @@ section
       padding: 5px
       border-radius: 5px
 
-  .checkBtn
+  .paymentWrap
+    display: flex
+    flex-direction: column
+
+    .icons
+      display: flex
+      text-align: center
+      padding-bottom: 20px
+
+      div:hover
+        cursor: pointer
+        color: $blue-color
+
+      i
+        font-size: 3rem
+
+    div + div
+      padding-left: 20px
+
+.fa-trash-alt
+  color: $danger-color
+
+  &:hover
+    filter: brightness(85%)
+
+.buttons
+  button
     border: none
     border-radius: 10px
     background: $secondary-color
@@ -76,10 +102,7 @@ section
     cursor: pointer
 
     &:hover
-      background: #555
+      background-color: $darkblue-color
 
-.fa-trash-alt
-  color: $danger-color
-
-  &:hover
-    filter: brightness(85%)
+  button + button
+    margin-left: 20px

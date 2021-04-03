@@ -1,0 +1,36 @@
+<section>
+  <div class="paymentWrap">
+    <i class="fas fa-window-close" (click)="close()"></i><br>
+    <div *ngIf="paymentMethodNumb === 1 && !paymentSuccess">
+      <h1>Payment with Paypal</h1>
+      <button (click)="simulatePayment()">Check paypal</button>
+    </div>
+
+    <div *ngIf="paymentMethodNumb === 2 && !paymentSuccess">
+      <h1>Payment with Card</h1>
+      <input type="text" placeholder="card number..." /><br>
+      <input type="text" placeholder="expiration date..." />
+      <input type="text" placeholder="control numbers..." /> <br>
+      <button (click)="simulatePayment()">Pay now</button>
+    </div>
+
+    <div *ngIf="paymentMethodNumb === 3 && !paymentSuccess">
+      <h1>Payment with Mobilepay</h1>
+      <button (click)="simulatePayment()">Transfor from phone</button>
+    </div>
+
+    <div *ngIf="paymentMethodNumb === 4 && !paymentSuccess">
+      <h1>Payment with Giftcard</h1>
+      <input placeholder="giftcard code..." />
+      <button (click)="simulatePayment()">Use giftcard</button>
+    </div>
+
+    <div *ngIf="paymentSuccess">
+      <h1>Payment was a success!</h1>
+      <i class="fas fa-check"></i>
+    </div>
+
+    <app-spinner *ngIf="showSpinner"></app-spinner> <br>
+
+  </div>
+</section>

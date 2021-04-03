@@ -47,6 +47,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
       .subscribe((itemsData: { items: Item[] }) => {
         this.items = itemsData.items;
         this.itemsNew = itemsData.items.slice(0, this.numb);
+        this.showSpinner = false;
       });
   }
 
