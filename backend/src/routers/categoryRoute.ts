@@ -10,6 +10,11 @@ const jsonParser = bodyParser.json();
 router.get('/', async (req: Request, res: Response) => {
     try {
         const fetchedCategories = await Category.find({ });
+        fetchedCategories.sort(function(a: any, b: any){
+            if(a.name < b.name) { return -1; }
+            if(a.name > b.name) { return 1; }
+            return 0;
+        });
         res.json({ categories: fetchedCategories })
     } catch(err) {
         console.error(err.message);

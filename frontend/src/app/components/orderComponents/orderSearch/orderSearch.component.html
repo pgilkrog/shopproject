@@ -1,0 +1,9 @@
+<section>
+  <h1>Find your order!</h1>
+  <form [formGroup]="searchForm" (submit)="searchOrder()">
+    <input type="text" formControlName="orderNumber" placeholder="ordernumber..." /> <br>
+    <button class="buttonBlue" type="submit">Find Order</button>
+  </form>
+</section>
+
+

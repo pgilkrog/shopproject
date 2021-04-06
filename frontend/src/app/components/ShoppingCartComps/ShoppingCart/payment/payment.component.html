@@ -16,7 +16,7 @@
 
     <div *ngIf="paymentMethodNumb === 3 && !paymentSuccess">
       <h1>Payment with Mobilepay</h1>
-      <button (click)="simulatePayment()">Transfor from phone</button>
+      <button (click)="simulatePayment()">Transfer money from phone</button>
     </div>
 
     <div *ngIf="paymentMethodNumb === 4 && !paymentSuccess">
@@ -27,7 +27,8 @@
 
     <div *ngIf="paymentSuccess">
       <h1>Payment was a success!</h1>
-      <i class="fas fa-check"></i>
+      <i class="fas fa-check"></i> <br>
+      <button (click)="close()">Close</button>
     </div>
 
     <app-spinner *ngIf="showSpinner"></app-spinner> <br>

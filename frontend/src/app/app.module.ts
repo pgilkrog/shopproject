@@ -24,6 +24,8 @@ import { NavSearchComponent } from './components/navigation/navSearch/navSearch.
 import { RatingComponent } from './components/itemComponents/itemDetail/ratingComponent/rating.component';
 import { AuthModule } from './components/auth/auth.module';
 import { PaymentComponent } from './components/ShoppingCartComps/ShoppingCart/payment/payment.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { OrderSearchComponent } from './components/orderComponents/orderSearch/orderSearch.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { PaymentComponent } from './components/ShoppingCartComps/ShoppingCart/pa
     FilterPipe,
     NavSearchComponent,
     RatingComponent,
-    PaymentComponent
+    PaymentComponent,
+    FooterComponent,
+    OrderSearchComponent
   ],
   imports: [
     BrowserModule,

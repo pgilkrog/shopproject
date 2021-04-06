@@ -25,8 +25,8 @@ export class OrderService {
   }
 
   completeOrder(order: Order): void {
-    this.http.post<{ completed: boolean }>(this.BACKEND_URL, order).subscribe(responseData => {
-      if (responseData.completed === true) {
+    this.http.post<{ newOrderId: string }>(this.BACKEND_URL, order).subscribe(responseData => {
+      if (responseData) {
         for (const item of order.items) {
           const newItem = item.item;
           newItem.amountInStock -= item.num;
@@ -34,7 +34,7 @@ export class OrderService {
           this.itemService.updateItem(newItem);
         }
         this.cartService.removeFromSessionStoreage();
-        this.router.navigate(['CompletedOrder']);
+        this.router.navigate(['/CompletedOrder/' + responseData.newOrderId]);
       }
     });
   }

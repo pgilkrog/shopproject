@@ -36,7 +36,6 @@ export class NavSearchComponent implements OnInit {
       switchMap(search => this.itemService.autoSearchItems(search)))
       .subscribe((result: any) => {
         this.autoSearchItems = [];
-        this.CheckText();
         Object.keys(result).map((index: any) => {
           this.autoSearchItems.push(result[index]);
         });
@@ -44,8 +43,11 @@ export class NavSearchComponent implements OnInit {
   }
 
   search(): void {
-    this.itemService.searchItems(this.queryField.value);
-    this.newItemEvent.emit();
+    if(this.CheckText()) {
+      this.itemService.searchItems(this.queryField.value.trim());
+      this.newItemEvent.emit();
+      this.route.navigate(['FilteredList/' + this.searchForm.value.search]);
+    }
   }
 
   CheckText(): boolean {

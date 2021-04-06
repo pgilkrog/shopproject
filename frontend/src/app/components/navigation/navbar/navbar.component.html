@@ -1,8 +1,21 @@
 <div class="topbar">
   <ul>
-    <li>About us</li>
-    <li>Support</li>
-    <li>Giveaway</li>
+    <li (click)="gotoProducts()" routerLink="ItemList">All</li>
+    <li *ngFor="let category of categories">
+      <span (click)="goToCategory(category.name)" routerLink="FilteredList/{{category.name}}">
+        {{ category.name }}
+      </span>
+    </li>
+  </ul>
+  <ul>
+    <li [routerLinkActive]='["link-active"]' *ngIf="userIsAuthenticated && userRole === 'admin'">
+      <span routerLink="AdminPage">Admin</span>
+    </li>
+    <li [routerLinkActive]='["link-active"]' *ngIf="!userIsAuthenticated">
+      <span routerLink="SignupSignin">Login</span>
+    </li>
+    <li *ngIf="userIsAuthenticated && userRole === 'user'" routerLink="UserPage">Userpage</li>
+    <li *ngIf="userIsAuthenticated" (click)="signout()">Logout</li>
   </ul>
 </div>
 
@@ -24,24 +37,12 @@
     </li>
   </ul>
 
-  <ul>
-    <li [routerLinkActive]='["link-active"]' *ngIf="userIsAuthenticated && userRole === 'admin'">
-      <a routerLink="AdminPage">Admin</a>
-    </li>
-    <li [routerLinkActive]='["link-active"]' *ngIf="!userIsAuthenticated">
-      <a routerLink="SignupSignin">Login</a>
-    </li>
-    <li *ngIf="userIsAuthenticated && userRole === 'user'">
-      <a routerLink="UserPage">UserPage</a>
-    </li>
-    <li *ngIf="userIsAuthenticated">
-      <a (click)="signout()">Signout</a>
-    </li>
+  <ul class="leftSide">
     <li>
       <i class="fas fa-search" (click)="toggleSearchMenu()"></i>
     </li>
     <li [routerLinkActive]='["link-active"]'>
-      <a routerLink="ShoppingCart"><i class="fas fa-shopping-cart">{{ItemsInBasket}}</i></a>
+      <i routerLink="ShoppingCart" class="fas fa-shopping-cart">{{ItemsInBasket}}</i>
     </li>
   </ul>
 </nav>
@@ -49,11 +50,3 @@
 <div *ngIf="showSearchbar">
   <app-navsearch (newItemEvent)="toggleSearchMenu()"></app-navsearch>
 </div>
-
-<ul class="catMenu">
-  <li *ngFor="let category of categories" [routerLinkActive]='["link-active"]'>
-    <a (click)="goToCategory(category.name)" routerLink="FilteredList/{{category.name}}">
-      <strong>{{ category.name }}</strong>
-    </a>
-  </li>
-</ul>

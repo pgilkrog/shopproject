@@ -22,7 +22,7 @@ router.post('/', jsonParser, async (req: Request, res: Response) => {
             city
         })
         await newOrder.save();
-        res.json({ completed: true });
+        res.json({ newOrderId: newOrder._id });
     } catch (err) {
         console.log(err.message);
     }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ordercomplete',
@@ -6,6 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./orderComplete.component.sass']
 })
 
-export class OrderCompleteComponent {
-  orderId = '8jg509gh5h757hfgt564';
+export class OrderCompleteComponent implements OnInit {
+  orderId = '';
+
+  constructor(private activeRoute: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.activeRoute.params.subscribe({
+      next: routeParams => this.orderId = routeParams.orderId,
+      error: error => console.log(error)
+    });
+  }
 }

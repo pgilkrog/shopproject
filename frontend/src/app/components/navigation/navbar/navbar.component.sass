@@ -5,7 +5,7 @@
   height: 30px
   background-color: $blue-color
   display: flex
-  justify-content: flex-end
+  justify-content: space-between
 
   ul
     list-style: none
@@ -42,11 +42,14 @@
 
       h1
         font-size: 2.5rem
+        padding: 0
+        margin: 0
         color: #fff
         display: flex
 
         i
           font-size: 3rem
+          color: $blue-color
 
         span
           color: $blue-color
@@ -68,29 +71,10 @@
         position: absolute
         z-index: 10
 
-i
-  font-size: 1.8rem
-  color: $blue-color
+.leftSide
+  i
+    font-size: 1.8rem
+    color: $blue-color
 
-  &:hover
-    color: white
-
-.catMenu
-  margin: 0
-  background-color: #444
-  padding: 15px 0 15px 80px
-  list-style: none
-  display: flex
-  border-bottom: 2px solid $blue-color
-
-  li
-    padding: 0 10px
-    transition: .5s
-
-    a
-      cursor: pointer
-      color: $blue-color
-      text-decoration: none
-
-      &:hover
-        color: $primary-color
+    &:hover
+      color: white
