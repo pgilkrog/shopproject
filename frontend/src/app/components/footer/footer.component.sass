@@ -29,13 +29,27 @@ footer
     p
       color: $primary-color
 
-    ul
+    .bottomLinks
       list-style: none
       display: flex
 
-      li
+      i
         color: $blue-color
         font-size: 2rem
+        cursor: pointer
+        transition: .3s
+
+        &:hover
+          color: $primary-color
+          transform: scale(1.2)
 
       li + li
         padding-left: 20px
+
+a
+  font-style: normal
+  text-decoration: none
+  color: $primary-color
+
+  &:hover
+    color: $blue-color

@@ -2,8 +2,10 @@
 
 section
   display: flex
+  height: 60vh
   flex-direction: column
   align-items: center
+  justify-content: center
   text-align: center
 
   .cartWrap
@@ -11,10 +13,6 @@ section
     text-align: center
     padding: 10px
     color: #121212
-
-    span
-      color: $danger-color
-      text-decoration: line-through
 
     .fa-shopping-basket
       font-size: 4rem
@@ -96,7 +94,7 @@ section
     border: none
     border-radius: 10px
     background: $secondary-color
-    color: #fff
+    color: $primary-color
     padding: 10px 15px
     font-size: 1rem
     cursor: pointer
@@ -106,3 +104,7 @@ section
 
   button + button
     margin-left: 20px
+
+span
+  color: $danger-color
+  text-decoration: line-through

@@ -35,4 +35,15 @@ router.get('/:itemId', jsonParser, async (req: Request, res: Response) => {
     }
 })
 
+//@desc Get ratings by user id
+router.get('/userratings/:userId', jsonParser, async (req: Request, res: Response) => {
+    try {
+        const fetchedRatings = await Rating.find({ userId: req.params.userId });
+        res.json({ ratings: fetchedRatings });
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send('Server Error')
+    }
+})
+
 module.exports = router;

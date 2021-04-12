@@ -17,8 +17,14 @@ export class RatingService {
     });
   }
 
-  getOrdersByItemId(itemId: string): any {
+  getRatingsByItemId(itemId: string): any {
     return this.http.get<{ ratings: any }>(this.BACKEND_URL + '/' + itemId).pipe(map((data) => {
+      return { ratings: data.ratings };
+    }));
+  }
+
+  getRatingsByUserId(userId: string): any {
+    return this.http.get<{ ratings: Rating }>(this.BACKEND_URL + '/userratings/' + userId).pipe(map((data) => {
       return { ratings: data.ratings };
     }));
   }

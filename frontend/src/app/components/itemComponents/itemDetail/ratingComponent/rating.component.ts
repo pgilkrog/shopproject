@@ -15,20 +15,31 @@ export class RatingComponent implements OnInit {
   stars: number[] = [5, 4, 3, 2, 1];
   selectedStarValue = 0;
   ratings: Rating[] = [];
+  hasRated = false;
   @Input() itemId = '';
 
   constructor(private userService: UserService, private ratingService: RatingService) {}
 
   ngOnInit(): void {
-    console.log(this.itemId);
     this.ratingForm = new FormGroup({
       comment: new FormControl(null, {
         validators: [Validators.required]
       })
     });
 
-    this.ratingService.getOrdersByItemId(this.itemId).subscribe((data: any) => this.ratings = data.ratings);
+    this.ratingService.getRatingsByItemId(this.itemId).subscribe((data: any) => {
+      this.ratings = data.ratings;
+      this.chechIfUserRated(data.ratings);
+    });
+  }
 
+  chechIfUserRated(ratings: Rating[]): void {
+    ratings.forEach(element => {
+      if (element.userId === this.userService.getUserId()) {
+        this.hasRated = true;
+        this.ratingForm.disable();
+      }
+    });
   }
 
   countStar(star: number): void {

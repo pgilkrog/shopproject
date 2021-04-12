@@ -1,5 +1,5 @@
 <div class="rateWrap">
-  <form class="rateForm" [formGroup]="ratingForm" (submit)="createRating()">
+  <form class="rateForm" [formGroup]="ratingForm" (submit)="createRating()" *ngIf="!hasRated">
     <ul class="rating-list">
       <li *ngFor="let star of stars" [ngClass]="{'selected': (star <= selectedStarValue)}">
         <i class="fa fa-star" (click)="countStar(star)"></i>
@@ -8,6 +8,7 @@
     <textarea type="text" placeholder="comment..." formControlName="comment"></textarea>
     <button type="submit" class="buttonBlue">Rate</button>
   </form>
+  <p *ngIf="hasRated">You have rated this product!</p>
   <div *ngIf="ratings.length > 0" style="padding-top: 20px">
     <div class="userRating" *ngFor="let rating of ratings">
       <p><strong>Test Testensen:</strong>&nbsp;<i *ngFor="let num of [1, 2, 3, 4, 5]" class="fa fa-star" [style.color]="num <= rating.rating ? '#14bffe' : '#222'"></i></p>

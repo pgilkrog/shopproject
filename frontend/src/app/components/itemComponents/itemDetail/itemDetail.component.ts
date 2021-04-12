@@ -25,6 +25,7 @@ export class ItemDetailComponent implements OnInit {
         this.itemService.getItemById(routeParams.id)
           .subscribe((data: any) => {
             this.item = data.item as Item;
+            console.log(data.item);
           });
       },
       error: error => console.log(error)

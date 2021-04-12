@@ -9,4 +9,12 @@
       </li>
     </ul>
   </section>
+  <section *ngIf="ratings.length > 0">
+    <h3>Your Ratings</h3>
+    <ul>
+      <li *ngFor="let rating of ratings" routerLink="/ItemDetail/{{rating.itemId}}">
+        <p><strong>{{ rating.itemId }} {{ rating.rating }}</strong> {{ rating.commentText }}</p>
+      </li>
+    </ul>
+  </section>
 </section>
