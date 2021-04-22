@@ -11,7 +11,13 @@
   <p *ngIf="hasRated">You have rated this product!</p>
   <div *ngIf="ratings.length > 0" style="padding-top: 20px">
     <div class="userRating" *ngFor="let rating of ratings">
-      <p><strong>Test Testensen:</strong>&nbsp;<i *ngFor="let num of [1, 2, 3, 4, 5]" class="fa fa-star" [style.color]="num <= rating.rating ? '#14bffe' : '#222'"></i></p>
+      <p>
+        <strong>Test Testensen:</strong>&nbsp;
+        <i
+          *ngFor="let num of [1, 2, 3, 4, 5]"
+          class="fa fa-star"
+          [style.color]="num <= rating.rating ? '#14bffe' : '#222'"></i>
+      </p>
       <p>{{ rating.commentText }}</p>
     </div>
   </div>

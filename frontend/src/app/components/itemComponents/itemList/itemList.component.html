@@ -1,6 +1,11 @@
 <section>
   <div class="searchInput">
-    <input type="text" name="search" [(ngModel)]="name" placeholder="search current list..." />
+    <input
+      type="text"
+      name="search"
+      [(ngModel)]="searchName"
+      placeholder="search current list..."
+    />
   </div>
   <div
     class="search-results"
@@ -10,14 +15,13 @@
     (scrolled)="onScroll()"
   >
     <ul  *ngIf="items.length > 0">
-      <li [@aliasesAnimation]="itemsNew" *ngFor="let item of itemsNew | FilterPipe:name">
+      <li [@aliasesAnimation]="itemsNew" *ngFor="let item of itemsNew | FilterPipe:searchName">
         <app-itemsingle [item]="item"></app-itemsingle>
       </li>
     </ul>
   </div>
   <app-spinner *ngIf="showSpinner"></app-spinner>
 </section>
-
 
 <div *ngIf="items.length < 1">
   <h2>No products found!</h2>

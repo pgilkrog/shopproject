@@ -31,56 +31,63 @@ export class ShoppingCartService {
   }
 
   addToCart(newItem: Item): void {
+    // check if items exists in cart
     const itemExistInCart = this.shoppingcart.cartItems.find(({item}) => newItem._id === item._id);
 
+    // if not, add new item to cart
     if (!itemExistInCart) {
       const cartItem: CartItem = {
         item: newItem,
         num: 1
       };
 
-      if (this.shoppingcart) {
-        console.log(this.shoppingcart);
-        this.shoppingcart.cartItems.push(cartItem);
-        this.saveToLocalstorage();
-      }
+      // add cartitem to shoppingcart, and save to sessionStorage
+      this.shoppingcart.cartItems.push(cartItem);
+      this.saveToSessionstorage();
+
     } else {
+      // if items exists in cart, add 1 in amount, and save to sessionStorage
       itemExistInCart.num += 1;
-      this.saveToLocalstorage();
+      this.saveToSessionstorage();
     }
 
     console.log('[AddItemToCart]', newItem);
   }
 
-  removeFromCart(itemToRemove: CartItem): void {
+  decreaseItemAmount(itemToRemove: CartItem): void {
+    // check if items exists in cart
     const itemExistInCart = this.shoppingcart.cartItems.find(({item}) => item === itemToRemove.item);
 
     if (itemExistInCart){
+      // check if amount is higher than 1
       if (itemExistInCart.num > 1) {
+        // decrease by 1 if yes, and save to SessionStorage
         itemExistInCart.num -= 1;
-        this.saveToLocalstorage();
+        this.saveToSessionstorage();
       } else {
+        // if amount is 1, find index of items, and remove from cart, and save to storage
         const newItemExistInCart = this.shoppingcart.cartItems.indexOf(itemToRemove);
         this.shoppingcart.cartItems.splice(newItemExistInCart, 1);
-        this.saveToLocalstorage();
+        this.saveToSessionstorage();
       }
     } else {
       return;
     }
   }
 
-  removeItem(cartItem: CartItem): void {
+  removeItemFromCart(cartItem: CartItem): void {
+    // check if item exists in cart.
     const itemExistInCart = this.shoppingcart.cartItems.find(({item}) => item === cartItem.item);
     if (itemExistInCart) {
+      // if yes, find index of item and remove completely from cart, and save to storage.
       const itemIndex = this.shoppingcart.cartItems.indexOf(itemExistInCart);
       this.shoppingcart.cartItems.splice(itemIndex, 1);
-      this.saveToLocalstorage();
+      this.saveToSessionstorage();
     }
   }
 
-  private saveToLocalstorage(): void {
-    this.shoppingcart.itemsAmount = this.getTotalItems();
-    this.shoppingcart.totalPrice = this.getTotalPrice();
+  private saveToSessionstorage(): void {
+    this.totalPriceAndItemsAmount();
     sessionStorage.setItem('shopcart', JSON.stringify(this.shoppingcart));
   }
 
@@ -88,29 +95,21 @@ export class ShoppingCartService {
     sessionStorage.removeItem('shopcart');
   }
 
-  getTotalItems(): number {
+  totalPriceAndItemsAmount(): void {
     let numberOfItems = 0;
-
-    if (this.shoppingcart.cartItems.length > 0) {
-      this.shoppingcart.cartItems.forEach(item => {
-        numberOfItems += item.num;
-      });
-    }
-    this.itemsAmount.next(numberOfItems);
-    return numberOfItems;
-  }
-
-  getTotalPrice(): number {
     let totalPrice = 0;
 
     if (this.shoppingcart.cartItems.length > 0) {
       this.shoppingcart.cartItems.forEach(item => {
+        numberOfItems += item.num;
         item.item.onSale ?
-          totalPrice += (item.num * (item.item.price - item.item.saleAmount)) :
-          totalPrice += (item.num * item.item.price);
+        totalPrice += (item.num * (item.item.price - item.item.saleAmount)) :
+        totalPrice += (item.num * item.item.price);
       });
     }
+    this.itemsAmount.next(numberOfItems);
 
-    return totalPrice;
+    this.shoppingcart.itemsAmount = numberOfItems;
+    this.shoppingcart.totalPrice = totalPrice;
   }
 }

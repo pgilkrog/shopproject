@@ -5,7 +5,12 @@
     <h3>Your orders</h3>
     <ul>
       <li *ngFor="let order of orders" routerLink="/OrderDetail/{{order._id}}">
-        <p><strong>{{ order._id }}</strong>: {{ order.totalNumberItems }} items for = <strong>{{ order.totalPrice }}</strong> kr. - {{ order.status }}</p>
+        <p>
+          <strong>{{ order._id }}</strong>:
+          {{ order.totalNumberItems }} items for =
+          <strong>{{ order.totalPrice }}</strong> kr. -
+          {{ order.status }}
+        </p>
       </li>
     </ul>
   </section>

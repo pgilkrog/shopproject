@@ -74,7 +74,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   decreaseAmount(item: CartItem): void {
-    this.cartService.removeFromCart(item);
+    this.cartService.decreaseItemAmount(item);
   }
 
   addAmount(item: CartItem): void {
@@ -82,7 +82,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   removeItem(item: CartItem): void {
-    this.cartService.removeItem(item);
+    this.cartService.removeItemFromCart(item);
   }
 
   completeOrder(): void {

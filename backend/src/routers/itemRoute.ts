@@ -78,9 +78,10 @@ router.get('/pop/pop/', async (req: Request, res: Response) => {
 //@desc Autocomplete search
 router.get('/autosearch/complete/:search', async (req: Request, res: Response) => {
     try {
-        const fetchedItems = (await Item.find({ })).filter((item: any) => 
+        const fetchedItems = (await Item.find({ }).limit(6)).filter((item: any) => 
             (item.name.toLowerCase().search(new RegExp(req.params.search.toLowerCase())) > -1)
         );
+
         res.json({ items: fetchedItems });
     } catch (error) {
         console.log(error.message);

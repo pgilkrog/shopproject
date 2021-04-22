@@ -41,7 +41,7 @@ export class ItemService {
 
   getItemsOnSale(): any {
     const onSale = true;
-    return this.http.get<{items: any}>(BACKEND_URL + '/onSale/' + onSale).pipe(map((itemData) => {
+    return this.http.get<{items: Item[]}>(BACKEND_URL + '/onSale/' + onSale).pipe(map((itemData) => {
       return { items: itemData.items.map((item: Item) => {
         return this.generateItem(item);
       })};

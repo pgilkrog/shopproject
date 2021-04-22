@@ -12,11 +12,10 @@ import { ItemService } from 'src/app/services/item.service';
 })
 
 export class NavSearchComponent implements OnInit {
+  autoSearchItems: Item[] = [];
   showSearchbar = false;
   showDropDown = false;
-  check = false;
 
-  autoSearchItems: Item[] = [];
   searchForm: FormGroup = new FormGroup({});
   queryField: FormControl = new FormControl();
 
@@ -64,7 +63,7 @@ export class NavSearchComponent implements OnInit {
     this.newItemEvent.emit();
   }
 
-  onKeydown(event: any): any {
+  onKeydown(event: any): void {
     if (event.key === 'Enter' && (this.queryField.value.trim() !== '' && this.queryField.value.trim() !== ' ')) {
       this.search();
     }

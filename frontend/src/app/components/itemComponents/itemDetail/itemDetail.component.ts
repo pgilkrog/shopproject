@@ -33,7 +33,7 @@ export class ItemDetailComponent implements OnInit {
   }
 
   buy(): void {
-    if (this.item != null){
+    if (this.item){
       this.cartService.addToCart(this.item);
     }
   }

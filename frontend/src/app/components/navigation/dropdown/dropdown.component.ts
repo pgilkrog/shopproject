@@ -34,7 +34,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
     });
     this.userService.autoAuthUser();
     this.userRole = this.userService.getRole();
-    this.ItemsInBasket = this.cartService.getTotalItems();
+    // this.ItemsInBasket = this.cartService.getTotalItems();
     this.userIsAuthenticated = this.userService.getIsAuth();
 
     this.authListenerSubs = this.userService.getAuthStatusListener()

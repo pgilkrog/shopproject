@@ -13,9 +13,10 @@ import { UserService } from 'src/app/services/user.service';
 export class RatingComponent implements OnInit {
   ratingForm: FormGroup = new FormGroup({});
   stars: number[] = [5, 4, 3, 2, 1];
-  selectedStarValue = 0;
   ratings: Rating[] = [];
+  selectedStarValue = 0;
   hasRated = false;
+
   @Input() itemId = '';
 
   constructor(private userService: UserService, private ratingService: RatingService) {}
@@ -34,6 +35,7 @@ export class RatingComponent implements OnInit {
   }
 
   chechIfUserRated(ratings: Rating[]): void {
+    // check all ratings for items, to check if current user has rated
     ratings.forEach(element => {
       if (element.userId === this.userService.getUserId()) {
         this.hasRated = true;

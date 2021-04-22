@@ -32,37 +32,36 @@ import { ItemService } from 'src/app/services/item.service';
 })
 
 export class ItemListComponent implements OnInit, OnDestroy {
+  private ItemSub: Subscription = new Subscription();
   items: Item[] = [];
   itemsNew: Item[] = [];
-  name = '';
-  private ItemSub: Subscription = new Subscription();
-
+  searchName = '';
   showSpinner = true;
-  numb = 10;
+  displayNumb = 10;
 
   constructor(private itemService: ItemService) {}
 
   ngOnInit(): void {
-    this.ItemSub = this.itemService.getItemsListener()
-      .subscribe((itemsData: { items: Item[] }) => {
-        this.items = itemsData.items;
-        this.itemsNew = itemsData.items.slice(0, this.numb);
-        this.showSpinner = false;
-      });
+    this.ItemSub = this.itemService.getItemsListener().subscribe({
+        next: (itemsData: { items: Item[] }) => {
+          // putt all items into items
+          this.items = itemsData.items;
+          // slice itemsNew array, so it only shows a specific amount
+          this.itemsNew = itemsData.items.slice(0, this.displayNumb);
+          this.showSpinner = false;
+        },
+        error: error => console.log(error)
+    });
   }
 
   ngOnDestroy(): void {
     this.ItemSub.unsubscribe();
   }
 
+  // on scrolling, add more items to list.
   onScroll(): void {
     this.showSpinner = true;
-    this.numb += 5;
-    this.getItems();
-  }
-
-  getItems(): void {
-    this.itemsNew = this.items.slice(0, this.numb);
+    this.itemsNew = this.items.slice(0, (this.displayNumb += 5));
     this.showSpinner = false;
   }
 }

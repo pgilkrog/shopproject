@@ -9,13 +9,12 @@ import { User } from '../models/User';
 
 export class UserService {
   BACKEND_URL = environment.apiUrl + 'user';
+  private authStatusListener = new Subject<boolean>();
+  private isAuthenticated = false;
 
   token = '';
   userId = '';
   role = '';
-
-  private isAuthenticated = false;
-  private authStatusListener = new Subject<boolean>();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -36,14 +35,15 @@ export class UserService {
   }
 
   resetPassword(Upassword: string, Uemail: string): void {
-    console.log(Upassword, Uemail);
+    // make object with given information, and send it to backend
     const resetData = { password: Upassword, email: Uemail };
     this.http.post<{ msg: string }>(this.BACKEND_URL + '/resetPassword/', resetData).subscribe(resData => {
-      console.log(resetData);
+      console.log(resData);
     });
   }
 
   createUser(user: User): void {
+    // creates the user, and response with an id, token, userRole
     this.http.post<{token: string, id: string, role: string}>(this.BACKEND_URL, user).subscribe(responseData => {
       this.token = responseData.token;
       this.userId = responseData.id;
@@ -58,8 +58,7 @@ export class UserService {
   }
 
   signin(user: User): void {
-    this.http.post<{token: string, id: string, role: string}>(this.BACKEND_URL + '/auth/', user)
-    .subscribe(responseData => {
+    this.http.post<{token: string, id: string, role: string}>(this.BACKEND_URL + '/auth/', user).subscribe(responseData => {
       this.token = responseData.token;
       this.userId =  responseData.id;
       this.role = responseData.role;
@@ -71,6 +70,7 @@ export class UserService {
       }
     }, error => {
       this.authStatusListener.next(false);
+      console.log(error)
     });
   }
 
@@ -93,9 +93,11 @@ export class UserService {
   }
 
   autoAuthUser(): void {
+    // get information from localstorage
     const authInformation = this.getAuthData();
 
     if (!authInformation) {
+      // if no information is found return
       return;
     }
 
@@ -105,6 +107,7 @@ export class UserService {
     this.isAuthenticated = true;
     this.authStatusListener.next(true);
 
+    // refresh the token with a userId
     const data = { id: this.userId };
     this.http.post(this.BACKEND_URL + '/refreshToken/', data).subscribe({
       next: (tokenData: any) => {
@@ -117,6 +120,7 @@ export class UserService {
   }
 
   private saveAuthData(): void {
+    // saves information in localStorage
     localStorage.setItem('token', this.token);
     localStorage.setItem('userId', this.userId);
     localStorage.setItem('userRole', this.role);
@@ -124,6 +128,7 @@ export class UserService {
   }
 
   private removeAuthData(): void {
+    // removes information from localstorage
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('userRole');
@@ -131,6 +136,7 @@ export class UserService {
   }
 
   private getAuthData(): any {
+    // read information from localstorage and puts them into variables.
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
     const userRole = localStorage.getItem('userRole');
