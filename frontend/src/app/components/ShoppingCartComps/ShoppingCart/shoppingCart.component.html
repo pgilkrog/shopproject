@@ -11,10 +11,10 @@
     <h2>Shopping Cart!</h2>
     <table>
       <tr *ngFor="let cartItem of cart.cartItems">
-        <td>
+        <td routerLink="/ItemDetail/{{cartItem.item._id}}" style="cursor: pointer">
           <img src="{{cartItem.item.image}}" width="100" />
         </td>
-        <td>
+        <td routerLink="/ItemDetail/{{cartItem.item._id}}" style="cursor: pointer">
           <p>{{ cartItem.item.name }}</p>
         </td>
         <td>

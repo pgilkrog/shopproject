@@ -31,12 +31,7 @@ export class ItemService {
         return this.generateItem(item);
       })};
     }))
-    .subscribe(data => {
-      this.items = data.items;
-      this.itemsUpdated.next({
-        items: [...this.items]
-      });
-    });
+    .subscribe(data => this.putDataIntoArrays(data));
   }
 
   getItemsOnSale(): any {
@@ -46,12 +41,7 @@ export class ItemService {
         return this.generateItem(item);
       })};
     }))
-    .subscribe(data => {
-      this.items = data.items;
-      this.itemsUpdated.next({
-        items: [...this.items]
-      });
-    });
+    .subscribe(data => this.putDataIntoArrays(data));
   }
 
   getTopFiveItem(): Observable<Item[]> {
@@ -80,12 +70,7 @@ export class ItemService {
         return this.generateItem(item);
       })};
     }))
-    .subscribe(data => {
-      this.items = data.items;
-      this.itemsUpdated.next({
-        items: [...this.items]
-      });
-    });
+    .subscribe(data => this.putDataIntoArrays(data))
   }
 
   getItemByCategory(category: string): any {
@@ -94,12 +79,7 @@ export class ItemService {
         return this.generateItem(item);
       })};
     }))
-    .subscribe(data => {
-      this.items = data.items;
-      this.itemsUpdated.next({
-        items: [...this.items]
-      });
-    });
+    .subscribe(data => this.putDataIntoArrays(data));
   }
 
   updateItem(item: Item): void {
@@ -112,6 +92,13 @@ export class ItemService {
   createItem(item: Item): void {
     this.http.post<{ response: string }>(BACKEND_URL, item).subscribe(responseData => {
       return responseData.response;
+    });
+  }
+
+  putDataIntoArrays(data: any): void {
+    this.items = data.items;
+    this.itemsUpdated.next({
+      items: [...this.items]
     });
   }
 

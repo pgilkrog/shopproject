@@ -13,8 +13,11 @@
         <i class="{{item.amountInStock > 0 ? 'fas fa-check' : 'fas fa-times'}}"></i>
         {{ item.amountInStock }}: left in stock
       </p>
-      <div *ngIf="item.amountInStock > 0">
+      <div *ngIf="item.amountInStock > 0 && item.amountInStock > checkAmountLeft()">
         <button (click)="buy()" class="buttonBlue">Buy</button>
+      </div>
+      <div *ngIf="item.amountInStock <= 0 || item.amountInStock <= checkAmountLeft()">
+        <button disabled class="disabledButton">Buy</button>
       </div>
     </div>
   </div>

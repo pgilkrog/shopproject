@@ -11,7 +11,7 @@ const orderSchema = new mongoose.Schema ({
     },
     totalNumberItems: {
         type: Number,
-        reqiored: true
+        required: true
     },
     userEmail: {
         type: String,

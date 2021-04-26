@@ -28,10 +28,10 @@
     </li>
     <li [routerLinkActive]='["link-active"]' style="margin-left: 40px">
       <a routerLink="Home">Home</a>
-    </li>|
+    </li>
     <li [routerLinkActive]='["link-active"]'>
       <a (click)="gotoProducts()" routerLink="ItemList">Products</a>
-    </li>|
+    </li>
     <li>
       <a routerLink="ItemList" (click)="goToSale()">Weekly Sale</a>
     </li>
@@ -42,7 +42,8 @@
       <i class="fas fa-search" (click)="toggleSearchMenu()"></i>
     </li>
     <li [routerLinkActive]='["link-active"]'>
-      <i routerLink="ShoppingCart" class="fas fa-shopping-cart">{{ItemsInBasket}}</i>
+      <i routerLink="ShoppingCart" class="fas fa-shopping-cart"></i>
+      <div routerLink="ShoppingCart"><span class="cartNumber"><span *ngIf="ItemsInBasket < 10">0</span>{{ItemsInBasket}}</span></div>
     </li>
   </ul>
 </nav>

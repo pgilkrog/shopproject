@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { CartItem } from '../models/CartItem';
 import { Item } from '../models/Item';
 import { ShoppingCart } from '../models/ShoppingCart';
+import { ItemService } from './item.service';
 
 @Injectable({ providedIn: 'root' })
 
@@ -27,6 +28,7 @@ export class ShoppingCartService {
   }
 
   getTotalAmount(): Observable<number> {
+    this.itemsAmount.next(this.getShoppingcart().itemsAmount);
     return this.itemsAmount$;
   }
 
@@ -75,6 +77,13 @@ export class ShoppingCartService {
     }
   }
 
+  checkAmountLeftOnItem(checkItem: Item): number {
+    // Check if item exists in cart
+    const itemExistInCart = this.shoppingcart.cartItems.find(({item}) => checkItem._id === item._id);
+    // if item exists return number, else return 0
+    return itemExistInCart ? itemExistInCart.num : 0;
+  }
+
   removeItemFromCart(cartItem: CartItem): void {
     // check if item exists in cart.
     const itemExistInCart = this.shoppingcart.cartItems.find(({item}) => item === cartItem.item);
@@ -88,6 +97,7 @@ export class ShoppingCartService {
 
   private saveToSessionstorage(): void {
     this.totalPriceAndItemsAmount();
+    // put shoppingcart into sessoinStorage.
     sessionStorage.setItem('shopcart', JSON.stringify(this.shoppingcart));
   }
 
@@ -99,6 +109,7 @@ export class ShoppingCartService {
     let numberOfItems = 0;
     let totalPrice = 0;
 
+    // go through each items in shoppingcart, and calculate amount of items, and there total price.
     if (this.shoppingcart.cartItems.length > 0) {
       this.shoppingcart.cartItems.forEach(item => {
         numberOfItems += item.num;

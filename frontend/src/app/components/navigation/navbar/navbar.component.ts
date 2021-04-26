@@ -47,7 +47,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       });
 
     this.itemListenerSub = this.cartService.getTotalAmount().subscribe({
-      complete: () => console.log('Complete. Cookie time.'),
       next: data => this.ItemsInBasket = data,
       error: error => console.log(error)
     });

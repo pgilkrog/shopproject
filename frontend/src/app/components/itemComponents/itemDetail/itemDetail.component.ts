@@ -11,7 +11,21 @@ import { Item } from '../../../models/Item';
 })
 
 export class ItemDetailComponent implements OnInit {
-  item?: Item;
+  item: Item = {
+    _id: "",
+    name: "",
+    description: "",
+    price: 0,
+    image: "",
+    companyName: "",
+    category: "",
+    amountInStock: 0,
+    numberBought: 0,
+    saleAmount: 0,
+    onSale: false,
+  };
+  amountLeft: number = 0;
+  checkIfBuy = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,11 +39,14 @@ export class ItemDetailComponent implements OnInit {
         this.itemService.getItemById(routeParams.id)
           .subscribe((data: any) => {
             this.item = data.item as Item;
-            console.log(data.item);
           });
       },
       error: error => console.log(error)
     });
+  }
+
+  checkAmountLeft(): number {
+    return this.cartService.checkAmountLeftOnItem(this.item);
   }
 
   buy(): void {
