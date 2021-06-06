@@ -31,11 +31,14 @@ export class NavSearchComponent implements OnInit {
     });
 
     this.queryField.valueChanges.pipe(
-      debounceTime(500), distinctUntilChanged(),
+      debounceTime(500), 
+      distinctUntilChanged(),
       switchMap(search => this.itemService.autoSearchItems(search)))
       .subscribe((result: any) => {
+        // empty array
         this.autoSearchItems = [];
         Object.keys(result).map((index: any) => {
+          // push new results into autosearch array
           this.autoSearchItems.push(result[index]);
         });
       });

@@ -2,9 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import { AdminModule } from './components/admin/admin.module';
 import { NavbarComponent } from './components/navigation/navbar/navbar.component';
@@ -26,6 +28,7 @@ import { AuthModule } from './components/auth/auth.module';
 import { PaymentComponent } from './components/ShoppingCartComps/ShoppingCart/payment/payment.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { OrderSearchComponent } from './components/orderComponents/orderSearch/orderSearch.component';
+
 
 @NgModule({
   declarations: [
@@ -56,9 +59,20 @@ import { OrderSearchComponent } from './components/orderComponents/orderSearch/o
     AdminModule,
     AuthModule,
     InfiniteScrollModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [ {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}

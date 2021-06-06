@@ -1,0 +1,29 @@
+{
+  "navbar": {
+    "homepage": "Forside",
+    "products": "Produkter",
+    "weekly_sale": "Ugentlig Tilbud",
+    "login": "Log ind",
+    "logout": "Log ud",
+    "userpage": "Brugerprofil"
+  },
+  "homepage": {
+    "moto": "Gear til alle dine spilbehov",
+    "popular_products": "Populære Produkter"
+  },
+  "userpage": {
+    "your_orders": "Dine ordre",
+    "your_ratings": "Dine anmeldelser",
+    "items_for": "varer for"
+  },
+  "footer": {
+    "about_us": "Om os",
+    "support": "Support",
+    "contact": "Kontakt",
+    "jobs": "Job",
+    "find_your_order": "Find Din Ordre",
+    "track_&_trace": "Track & Trace",
+    "return_product": "Returner Produkt",
+    "customer_service": "Kunde Service"
+  }
+}

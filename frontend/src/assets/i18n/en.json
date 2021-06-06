@@ -1,0 +1,29 @@
+{
+  "navbar": {
+    "homepage": "Home",
+    "products": "Products",
+    "weekly_sale": "Weekly Sale",
+    "login": "Login",
+    "logout": "Logout",
+    "userpage": "Userpage"
+  },
+  "homepage": {
+    "moto": "Gear For All Your Gaming Needs",
+    "popular_products": "Populer Products"
+  },
+  "userpage": {
+    "your_orders": "Your orders",
+    "your_ratings": "Your ratings",
+    "items_for": "items for"
+  },
+  "footer": {
+    "about_us": "About us",
+    "support": "Support",
+    "contact": "Contact",
+    "jobs": "Jobs",
+    "find_your_order": "Find Your Order",
+    "track_&_trace": "Track & Trace",
+    "return_product": "Return Product",
+    "customer_service": "Customer Service"
+  }
+}

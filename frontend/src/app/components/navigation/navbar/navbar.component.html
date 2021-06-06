@@ -12,10 +12,14 @@
       <span routerLink="AdminPage">Admin</span>
     </li>
     <li [routerLinkActive]='["link-active"]' *ngIf="!userIsAuthenticated">
-      <span routerLink="SignupSignin">Login</span>
+      <span routerLink="SignupSignin">{{ 'navbar.login' | translate}}</span>
     </li>
-    <li *ngIf="userIsAuthenticated && userRole === 'user'" routerLink="UserPage">Userpage</li>
-    <li *ngIf="userIsAuthenticated" (click)="signout()">Logout</li>
+    <li *ngIf="userIsAuthenticated && userRole === 'user'" routerLink="UserPage">{{ 'navbar.userpage' | translate }}</li>
+    <li *ngIf="userIsAuthenticated" (click)="signout()">{{ 'navbar.logout' | translate }}</li>
+    <li>
+      <img src="https://image.flaticon.com/icons/png/128/197/197374.png" (click)="changeLanguage('en')" />
+      <img src="https://image.flaticon.com/icons/png/128/197/197565.png" (click)="changeLanguage('dk')" />
+    </li>
   </ul>
 </div>
 
@@ -27,13 +31,13 @@
       </div>
     </li>
     <li [routerLinkActive]='["link-active"]' style="margin-left: 40px">
-      <a routerLink="Home">Home</a>
+      <a routerLink="Home">{{ 'navbar.homepage' | translate }}</a>
     </li>
     <li [routerLinkActive]='["link-active"]'>
-      <a (click)="gotoProducts()" routerLink="ItemList">Products</a>
+      <a (click)="gotoProducts()" routerLink="ItemList">{{ 'navbar.products' | translate}}</a>
     </li>
     <li>
-      <a routerLink="ItemList" (click)="goToSale()">Weekly Sale</a>
+      <a routerLink="ItemList" (click)="goToSale()">{{ 'navbar.weekly_sale' | translate}}</a>
     </li>
   </ul>
 

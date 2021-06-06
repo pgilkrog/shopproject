@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { Category } from 'src/app/models/Category';
 import { CategoryService } from 'src/app/services/category.service';
@@ -28,7 +29,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private itemService: ItemService,
     private userService: UserService,
     private categoryService: CategoryService,
-    private cartService: ShoppingCartService
+    private cartService: ShoppingCartService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -75,5 +77,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   toggleSearchMenu(): void {
     this.showSearchbar = !this.showSearchbar;
+  }
+
+  changeLanguage(language: string): void {
+    this.translate.use(language);
   }
 }
