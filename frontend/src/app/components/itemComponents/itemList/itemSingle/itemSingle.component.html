@@ -1,12 +1,24 @@
-<section class="wrapper py-2 px-4" (click)="goToItem()" *ngIf="item">
+<section class="wrapper p-2" (click)="goToItem()" *ngIf="item">
   <h2>{{ item.name }}</h2>
   <img src="{{ item.image }}" />
-  <div>
+  <div class="item-description">
     <p>{{ item.description }}</p>
   </div>
 
-  <div>
-    <h2 *ngIf="item.onSale"><span>{{ item.price }}</span> - {{ item.price - item.saleAmount }},-</h2>
-    <h2 *ngIf="!item.onSale">{{ item.price }},-</h2>
+  <div class="item-bottom-wrap">
+    <h3 *ngIf="item.onSale"><span>{{ prettyCurrency(item.price) }}</span> <br> {{ prettyCurrency(item.price - item.saleAmount) }}</h3>
+    <h3 *ngIf="!item.onSale">{{ prettyCurrency(item.price) }},-</h3>
+    <div>
+      <button
+        *ngIf="item.amountInStock > 0 || item.amountInStock > checkAmountLeft()"
+        class="btn"
+        (click)="buy(); $event.stopPropagation()">
+        <i class="fas fa-cart-plus"></i></button>
+      <button
+        *ngIf="item.amountInStock <= 0 || item.amountInStock <= checkAmountLeft()"
+        class="btn btn-disabled"
+        (click)="$event.stopPropagation()">
+        <i class="fas fa-shopping-cart"></i></button>
+    </div>
   </div>
 </section>

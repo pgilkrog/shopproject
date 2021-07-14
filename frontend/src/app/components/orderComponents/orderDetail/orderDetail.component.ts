@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Order } from 'src/app/models/Order';
 import { OrderService } from 'src/app/services/order.service';
+import { currencyHelper } from '../../../helpers/currencyDisplay';
 
 @Component({
   selector: 'app-orderdetail',
@@ -17,5 +18,9 @@ export class OrderDetailComponent implements OnInit {
   ngOnInit(): void {
     this.orderService.getOrderById(this.route.snapshot.paramMap.get('id') as string)
       .subscribe((data: any) => this.order = data.order as Order);
+  }
+
+  prettyCurrency(numb: number) {
+    return currencyHelper(numb);
   }
 }

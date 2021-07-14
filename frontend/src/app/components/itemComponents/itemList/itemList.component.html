@@ -1,21 +1,19 @@
 <section>
-  <div class="searchInput">
+  <div class="search-input py-2">
     <input
       type="text"
       name="search"
       [(ngModel)]="searchName"
-      placeholder="search current list..."
-    />
+      placeholder="search current list..."/>
   </div>
   <div
     class="search-results"
     infiniteScroll
     [infiniteScrollDistance]="1"
     [infiniteScrollThrottle]="50"
-    (scrolled)="onScroll()"
-  >
+    (scrolled)="onScroll()">
     <ul  *ngIf="items.length > 0">
-      <li [@aliasesAnimation]="itemsNew" *ngFor="let item of itemsNew | FilterPipe:searchName">
+      <li [@aliasesAnimation]="itemsNew" *ngFor="let item of itemsNew | FilterPipe:searchName" class="py-2 px-1">
         <app-itemsingle [item]="item"></app-itemsingle>
       </li>
     </ul>

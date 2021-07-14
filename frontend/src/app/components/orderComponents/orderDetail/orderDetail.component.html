@@ -1,5 +1,5 @@
-<section *ngIf="order" class="OrderDetailWrap">
-  <div class="OrderItem">
+<section *ngIf="order" class="order-detail-wrap py-5">
+  <div class="order-item p-2">
     <h1>Your Order!</h1>
     <div style="text-align: left;">
       <p><strong>Order ID:</strong> {{ order._id }}</p>
@@ -9,10 +9,10 @@
     <ul>
       <li *ngFor="let item of order.items">
         <img src="{{item.item.image}}" width="100" />
-        <p>{{item.num}}:  {{item.item.name}}</p>
-        <p>&nbsp; = {{item.num * item.item.price}} kr.</p>
+        <p class="px-1">{{item.num}}:  {{item.item.name}}</p>
+        <p>&nbsp; = {{ prettyCurrency(item.num * item.item.price) }}.</p>
       </li>
     </ul>
-    <p style="text-align: right;">Total price: <strong>{{ order.totalPrice }}</strong> kr.</p>
+    <p style="text-align: right;">{{ 'general.total_price' | translate }}: <strong>{{ prettyCurrency(order.totalPrice) }}</strong>.</p>
   </div>
 </section>

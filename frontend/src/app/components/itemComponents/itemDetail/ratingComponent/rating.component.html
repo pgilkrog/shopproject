@@ -1,16 +1,16 @@
-<div class="rateWrap">
-  <form class="rateForm" [formGroup]="ratingForm" (submit)="createRating()" *ngIf="!hasRated">
+<div class="rate-wrap">
+  <form class="rate-form" [formGroup]="ratingForm" (submit)="createRating()" *ngIf="!hasRated">
     <ul class="rating-list">
       <li *ngFor="let star of stars" [ngClass]="{'selected': (star <= selectedStarValue)}">
         <i class="fa fa-star" (click)="countStar(star)"></i>
       </li>
     </ul>
     <textarea type="text" placeholder="comment..." formControlName="comment"></textarea>
-    <button type="submit" class="buttonBlue">Rate</button>
+    <button type="submit" class="btn btn-wide">Rate</button>
   </form>
   <p *ngIf="hasRated">You have rated this product!</p>
   <div *ngIf="ratings.length > 0" style="padding-top: 20px">
-    <div class="userRating" *ngFor="let rating of ratings">
+    <div class="user-rating" *ngFor="let rating of ratings">
       <p>
         <strong>Test Testensen:</strong>&nbsp;
         <i

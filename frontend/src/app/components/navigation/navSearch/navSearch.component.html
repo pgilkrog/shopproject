@@ -4,7 +4,7 @@
       id="keyword" placeholder="Search for you gaming gear" autocomplete="off" autofocus />
     <button type="submit">Search</button>
   </form>
-  <ul class="autoCompleteList">
+  <ul class="auto-complete-list">
     <li *ngFor="let item of autoSearchItems" (click)="onAutoClick(item._id)">
       <img src="{{ item.image }}" height="40" /><strong>{{ item.name }}</strong>: {{ item.description | slice:0:50 }}
     </li>

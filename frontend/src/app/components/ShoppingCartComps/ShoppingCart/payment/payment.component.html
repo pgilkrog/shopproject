@@ -1,5 +1,5 @@
 <section>
-  <div class="paymentWrap">
+  <div class="payment-wrap p-2">
     <i class="fas fa-window-close" (click)="close()"></i><br>
     <div *ngIf="paymentMethodNumb === 1 && !paymentSuccess">
       <h1>Payment with Paypal</h1>
@@ -32,6 +32,5 @@
     </div>
     <br>
     <app-spinner *ngIf="showSpinner"></app-spinner> <br>
-
   </div>
 </section>

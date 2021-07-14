@@ -1,4 +1,8 @@
 {
+  "general": {
+    "total_amount": "Total amount",
+    "total_price": "Total price"
+  },
   "navbar": {
     "homepage": "Home",
     "products": "Products",

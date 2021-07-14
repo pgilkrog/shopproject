@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { currencyHelper } from '../../../helpers/currencyDisplay';
 
 import { CartItem } from 'src/app/models/CartItem';
 import { Order } from 'src/app/models/Order';
@@ -98,5 +99,9 @@ export class ShoppingCartComponent implements OnInit {
     };
 
     this.orderService.completeOrder(order);
+  }
+
+  prettyCurrency(numb: number) {
+    return currencyHelper(numb);
   }
 }

@@ -6,7 +6,7 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AdminModule } from './components/admin/admin.module';
 import { NavbarComponent } from './components/navigation/navbar/navbar.component';
@@ -20,7 +20,7 @@ import { OrderCompleteComponent } from './components/ShoppingCartComps/orderComp
 import { AuthInterceptor } from './components/auth/auth-interceptor';
 import { DropdownComponent } from './components/navigation/dropdown/dropdown.component';
 import { OrderDetailComponent } from './components/orderComponents/orderDetail/orderDetail.component';
-import { FilterPipe } from './components/utils/filterpipe.pipe';
+import { FilterPipe } from './utils/filterpipe.pipe';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NavSearchComponent } from './components/navigation/navSearch/navSearch.component';
 import { RatingComponent } from './components/itemComponents/itemDetail/ratingComponent/rating.component';
@@ -28,7 +28,6 @@ import { AuthModule } from './components/auth/auth.module';
 import { PaymentComponent } from './components/ShoppingCartComps/ShoppingCart/payment/payment.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { OrderSearchComponent } from './components/orderComponents/orderSearch/orderSearch.component';
-
 
 @NgModule({
   declarations: [

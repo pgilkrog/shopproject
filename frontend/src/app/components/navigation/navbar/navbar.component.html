@@ -1,4 +1,4 @@
-<div class="topbar">
+<div class="top-bar">
   <ul>
     <li (click)="gotoProducts()" routerLink="ItemList">All</li>
     <li *ngFor="let category of categories">
@@ -41,13 +41,13 @@
     </li>
   </ul>
 
-  <ul class="leftSide">
+  <ul class="left-side">
     <li>
       <i class="fas fa-search" (click)="toggleSearchMenu()"></i>
     </li>
     <li [routerLinkActive]='["link-active"]'>
       <i routerLink="ShoppingCart" class="fas fa-shopping-cart"></i>
-      <div routerLink="ShoppingCart"><span class="cartNumber"><span *ngIf="ItemsInBasket < 10">0</span>{{ItemsInBasket}}</span></div>
+      <div routerLink="ShoppingCart"><span class="cart-number"><span *ngIf="ItemsInBasket < 10">0</span>{{ItemsInBasket}}</span></div>
     </li>
   </ul>
 </nav>

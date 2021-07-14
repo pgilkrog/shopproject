@@ -1,7 +1,7 @@
 <section *ngIf="item">
-  <div class="detailWrap">
+  <div class="detail-wrap">
     <img src="{{ item.image }}" />
-    <div class="infoWrap">
+    <div class="info-wrap">
       <h1>{{ item.name }}</h1>
       <h2 *ngIf="item.onSale">
         <span>{{ item.price }}</span> - {{ item.price - item.saleAmount }},-
@@ -14,10 +14,10 @@
         {{ item.amountInStock }}: left in stock
       </p>
       <div *ngIf="item.amountInStock > 0 && item.amountInStock > checkAmountLeft()">
-        <button (click)="buy()" class="buttonBlue">Buy</button>
+        <button (click)="buy()" class="btn btn-wide">Buy</button>
       </div>
       <div *ngIf="item.amountInStock <= 0 || item.amountInStock <= checkAmountLeft()">
-        <button disabled class="disabledButton">Buy</button>
+        <button disabled class="btn btn-disabled">Buy</button>
       </div>
     </div>
   </div>
