@@ -1,9 +1,9 @@
 <div class="top-bar">
   <ul>
     <li (click)="gotoProducts()" routerLink="ItemList">All</li>
-    <li *ngFor="let category of categories">
-      <span (click)="goToCategory(category.name)" routerLink="FilteredList/{{category.name}}">
-        {{ category.name }}
+    <li *ngFor="let cat of categories">
+      <span (click)="goToCategory(cat)" routerLink="ItemList/{{cat}}">
+        {{ ('categories.' + cat).toLowerCase() | translate }}
       </span>
     </li>
   </ul>

@@ -52,8 +52,6 @@ export class ShoppingCartService {
       itemExistInCart.num += 1;
       this.saveToSessionstorage();
     }
-
-    console.log('[AddItemToCart]', newItem);
   }
 
   decreaseItemAmount(itemToRemove: CartItem): void {

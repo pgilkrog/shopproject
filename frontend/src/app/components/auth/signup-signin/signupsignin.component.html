@@ -1,19 +1,60 @@
 <section *ngIf="isSignin">
-  <form [formGroup]="signinForm" (submit)="signin()">
-    <input formControlName="email" type="email" placeholder="email..." />
-    <input formControlName="password" type="password" placeholder="password..." />
-    <button type="submit"class="btn btn-wide">Sign In</button>
+  <form
+    [formGroup]="signinForm"
+    (submit)="signin()"
+    class="p-3 card">
+    <input
+      formControlName="email"
+      type="email"
+      placeholder="{{ ('general.email' | translate).toLowerCase() }}..."
+      class="inp" />
+    <input
+      formControlName="password"
+      type="password"
+      placeholder="{{ ('general.password' | translate).toLowerCase() }}..."
+      class="inp" />
+    <button
+      type="submit"
+      class="btn btn-wide mt-2"
+      >{{ 'auth.sign_in' | translate}}</button>
   </form>
-  <p>Not a member yet? <span (click)="changeForm()">Sign up!</span></p>
-  <p>Forgot your password? <span routerLink="/ResetPassword">Reset it!</span></p>
+  <p class="mt-2">
+    {{ 'auth.not_a_member_yet' | translate }}?
+    <span (click)="changeForm()">{{ 'auth.sign_up' | translate}}!</span>
+  </p>
+  <p>
+    {{ 'auth.forgot_your_password' | translate }}?
+    <span routerLink="/ResetPassword">{{ 'auth.reset_it' | translate }}!</span>
+  </p>
 </section>
 
 <section *ngIf="!isSignin">
-  <form [formGroup]="signupForm" (submit)="signup()">
-    <input formControlName="name" type="text" placeholder="name..." />
-    <input formControlName="email" type="email" placeholder="email..." />
-    <input formControlName="password" type="password" placeholder="password..." />
-    <button type="submit"class="btn btn-wide">Sign Up</button>
+  <form
+    [formGroup]="signupForm"
+    (submit)="signup()"
+    class="p-3 card">
+    <input
+      formControlName="name"
+      type="text"
+      placeholder="{{ ('general.name' | translate).toLowerCase() }}..."
+      class="inp" />
+    <input
+      formControlName="email"
+      type="email"
+      placeholder="{{ ('general.email' | translate).toLowerCase() }}..."
+      class="inp" />
+    <input
+      formControlName="password"
+      type="password"
+      placeholder="{{ ('general.password' | translate).toLowerCase() }}..."
+      class="inp" />
+    <button
+      type="submit"
+      class="btn btn-wide mt-2"
+      >{{ 'auth.sign_up' | translate}}</button>
   </form>
-  <p>Already a member? <span (click)="changeForm()">Sign in!</span></p>
+  <p class="mt-2">
+    {{ 'auth.already_a_member?' | translate }}?
+    <span (click)="changeForm()">{{ 'auth.sign_in' | translate}}!</span>
+  </p>
 </section>

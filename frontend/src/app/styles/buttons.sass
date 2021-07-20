@@ -1,10 +1,11 @@
 .btn
   background-color: $darkblue-color
-  color: $primary-color
+  color: $white-color
   border: none
   cursor: pointer
   padding: .8rem
   border-radius: 5px
+  font-size: $base-text
   &:hover
     background-color: $blue-color
 
@@ -16,3 +17,18 @@
   &:hover
     background-color: grey
     cursor: not-allowed
+
+.btn-dark
+  background: $secondary-color
+  color: $white-color
+  &:hover
+    background-color: $darkblue-color
+
+.btn-shoppingcart-amount
+  padding: .3rem 1rem
+  border-radius: 0
+  font-size: $large-text
+  background-color: $white-color
+  color: $secondary-color
+  &:hover
+    background: $grey-color

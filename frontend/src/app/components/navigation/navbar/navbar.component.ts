@@ -14,7 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 
 export class NavbarComponent implements OnInit, OnDestroy {
-  categories: Category[] = [];
+  categories: string[] = [];
   ItemsInBasket = 0;
 
   showSearchbar = false;
@@ -34,10 +34,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.categoryService.getAllCategories().subscribe({
-      error: () => {  },
-      next: (data: any) => this.categories = data.categories,
-    });
+    this.categories = this.categoryService.getCategories;
 
     this.userService.autoAuthUser();
     this.userRole = this.userService.getRole();

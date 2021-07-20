@@ -1,7 +1,10 @@
 {
   "general": {
     "total_amount": "Total amount",
-    "total_price": "Total price"
+    "total_price": "Total price",
+    "name": "Name",
+    "password": "Password",
+    "email": "Email"
   },
   "navbar": {
     "homepage": "Home",
@@ -20,6 +23,17 @@
     "your_ratings": "Your ratings",
     "items_for": "items for"
   },
+  "auth" : {
+    "check_email": "Check Email",
+    "reset_password": "Reset password",
+    "sign_in": "Sign in",
+    "sign_up": "Sign up",
+    "sign_out": "Sign out",
+    "reset_it": "Reset it",
+    "already_a_member?": "Already a member",
+    "forgot_your_password": "Forgot your password",
+    "not_a_member_yet": "Not a member yet"
+  },
   "footer": {
     "about_us": "About us",
     "support": "Support",
@@ -29,5 +43,16 @@
     "track_&_trace": "Track & Trace",
     "return_product": "Return Product",
     "customer_service": "Customer Service"
+  },
+  "categories": {
+    "accessory": "Accessory",
+    "computer": "Computer",
+    "controller": "Controller",
+    "headset": "Headset",
+    "keyboard": "Keyboard",
+    "laptop": "Laptop",
+    "mouse": "Mouse",
+    "mousepad": "Mousepad",
+    "screen": "Screen"
   }
 }

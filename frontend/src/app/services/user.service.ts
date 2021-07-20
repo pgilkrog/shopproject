@@ -53,6 +53,7 @@ export class UserService {
         this.saveAuthData();
       }
     }, error => {
+      console.log(error);
       this.authStatusListener.next(false);
     });
   }

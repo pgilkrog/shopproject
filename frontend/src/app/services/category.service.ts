@@ -10,9 +10,23 @@ const BACKEND_URL = environment.apiUrl + 'category';
 @Injectable({ providedIn: 'root' })
 
 export class CategoryService {
-  categories: Category[] = [];
+  categories: string[] = [
+    "Accessory",
+    "Computer",
+    "Controller",
+    "Headset",
+    "Keyboard",
+    "Laptop",
+    "Mouse",
+    "Mousepad",
+    "Screen",
+  ];
 
   constructor(private http: HttpClient) {}
+
+  get getCategories(): string[] {
+    return this.categories;
+  }
 
   getAllCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(BACKEND_URL).pipe(tap(

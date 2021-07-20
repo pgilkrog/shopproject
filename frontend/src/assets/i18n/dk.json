@@ -25,5 +25,16 @@
     "track_&_trace": "Track & Trace",
     "return_product": "Returner Produkt",
     "customer_service": "Kunde Service"
+  },
+  "categories": {
+    "accessory": "Tilbehør",
+    "computer": "Computer",
+    "controller": "Controller",
+    "headset": "Headset",
+    "keyboard": "Tastatur",
+    "laptop": "Bærbar",
+    "mouse": "Mus",
+    "mousepad": "Mussemåtte",
+    "screen": "Skærm"
   }
 }

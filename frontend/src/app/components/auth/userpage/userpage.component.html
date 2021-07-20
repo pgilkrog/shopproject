@@ -1,10 +1,17 @@
-<section *ngIf="user" class="userpageWrap">
+<section
+  *ngIf="user"
+  class="userpage-wrap p-4">
   <h1>{{ user.name }}</h1>
   <p>Email: {{ user.email }}</p>
-  <section class="userOrdersWrap" *ngIf="orders.length > 0">
+  <section
+    class="user-orders-wrap pl-4"
+    *ngIf="orders.length > 0">
     <h3>{{ 'userpage.your_orders' | translate }}</h3>
     <ul>
-      <li *ngFor="let order of orders" routerLink="/OrderDetail/{{order._id}}">
+      <li
+        *ngFor="let order of orders"
+        routerLink="/OrderDetail/{{order._id}}"
+        class="p-2">
         <p>
           <strong>{{ order._id }}</strong>:
           {{ order.totalNumberItems }} {{ 'userpage.items_for' | translate}} =
@@ -17,8 +24,12 @@
   <section *ngIf="ratings.length > 0">
     <h3>{{ 'userpage.your_ratings' | translate }}</h3>
     <ul>
-      <li *ngFor="let rating of ratings" routerLink="/ItemDetail/{{rating.itemId}}">
-        <p><strong>{{ rating.itemId }} {{ rating.rating }}</strong> {{ rating.commentText }}</p>
+      <li
+        *ngFor="let rating of ratings"
+        routerLink="/ItemDetail/{{rating.itemId}}">
+        <p>
+          <strong>{{ rating.itemId }} {{ rating.rating }}</strong> {{ rating.commentText }}
+        </p>
       </li>
     </ul>
   </section>

@@ -4,9 +4,9 @@
     <div class="info-wrap">
       <h1>{{ item.name }}</h1>
       <h2 *ngIf="item.onSale">
-        <span>{{ item.price }}</span> - {{ item.price - item.saleAmount }},-
+        <span>{{ item.price }}</span> - {{ prettyCurrency(item.price - item.saleAmount) }}
       </h2>
-      <h2 *ngIf="!item.onSale">{{ item.price }},-</h2>
+      <h2 *ngIf="!item.onSale">{{ prettyCurrency(item.price) }}</h2>
       <p>{{ item.companyName }}</p>
       <p style="width: 500px">{{ item.description }}</p>
       <p>
@@ -14,10 +14,12 @@
         {{ item.amountInStock }}: left in stock
       </p>
       <div *ngIf="item.amountInStock > 0 && item.amountInStock > checkAmountLeft()">
-        <button (click)="buy()" class="btn btn-wide">Buy</button>
+        <button (click)="buy()" class="btn"><i class="fas fa-cart-plus"></i></button>
       </div>
       <div *ngIf="item.amountInStock <= 0 || item.amountInStock <= checkAmountLeft()">
-        <button disabled class="btn btn-disabled">Buy</button>
+        <button disabled class="btn btn-disabled">
+          <i class="fas fa-shopping-cart"></i>
+        </button>
       </div>
     </div>
   </div>

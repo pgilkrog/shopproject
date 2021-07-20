@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'Home', component: HomepageComponent },
   { path: 'ItemList', component: ItemListComponent },
   { path: 'ItemDetail/:id', component: ItemDetailComponent },
-  { path: 'FilteredList/:category', component: ItemListComponent},
+  { path: 'ItemList/:category', component: ItemListComponent},
   { path: 'ShoppingCart', component: ShoppingCartComponent },
   { path: 'CompletedOrder/:orderId', component: OrderCompleteComponent },
   { path: 'OrderSearch', component: OrderSearchComponent },

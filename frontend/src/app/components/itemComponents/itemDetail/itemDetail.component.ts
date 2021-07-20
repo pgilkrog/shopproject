@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ItemService } from 'src/app/services/item.service';
 import { ShoppingCartService } from 'src/app/services/shoppingcart.service';
 import { Item } from '../../../models/Item';
+import { currencyHelper } from 'src/app/helpers/currencyDisplay';
 
 @Component({
   selector: 'app-itemdetail',
@@ -30,7 +31,7 @@ export class ItemDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private itemService: ItemService,
-    private cartService: ShoppingCartService
+    private cartService: ShoppingCartService,
   ) {}
 
   ngOnInit(): void {
@@ -53,5 +54,9 @@ export class ItemDetailComponent implements OnInit {
     if (this.item){
       this.cartService.addToCart(this.item);
     }
+  }
+
+  prettyCurrency(numb: number) {
+    return currencyHelper(numb);
   }
 }

@@ -13,7 +13,7 @@ import { ItemService } from 'src/app/services/item.service';
 export class CreateStuffComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   categoryName = '';
-  categories: Category[] = [];
+  categories: string[] = [];
 
   constructor(private itemService: ItemService, private categoryService: CategoryService) { }
 
@@ -42,9 +42,7 @@ export class CreateStuffComponent implements OnInit {
       })
     });
 
-    this.categoryService.getAllCategories().subscribe((result: any) => {
-      this.categories = result.categories.sort((one: Category, two: Category) => (one.name < two.name ? -1 : 1));
-    });
+    this.categories = this.categoryService.getCategories.sort((one: string, two: string) => (one < two ? -1 : 1));
   }
 
   createItem(): void {
