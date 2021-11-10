@@ -33,9 +33,9 @@ export class DropdownComponent implements OnInit, OnDestroy {
       this.categories = result.categories.sort((one: Category, two: Category) => (one.name < two.name ? -1 : 1));
     });
     this.userService.autoAuthUser();
-    this.userRole = this.userService.getRole();
+    this.userRole = this.userService.getRole;
     // this.ItemsInBasket = this.cartService.getTotalItems();
-    this.userIsAuthenticated = this.userService.getIsAuth();
+    this.userIsAuthenticated = this.userService.getIsAuth;
 
     this.authListenerSubs = this.userService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
@@ -52,7 +52,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
   }
 
   gotoProducts(): void {
-    this.itemService.getAllItems();
+    this.itemService.getAllItems;
   }
 
   goToCategory(category: string): void {

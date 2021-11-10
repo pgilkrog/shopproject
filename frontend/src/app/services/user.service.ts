@@ -22,14 +22,6 @@ export class UserService {
     return this.authStatusListener.asObservable();
   }
 
-  getIsAuth(): boolean {
-    return this.isAuthenticated;
-  }
-
-  getRole(): string {
-    return this.role;
-  }
-
   checkUserByEmail(email: string): any {
     return this.http.get<{ msg: boolean }>(this.BACKEND_URL + '/getByEmail/' + email);
   }
@@ -81,21 +73,9 @@ export class UserService {
     this.removeAuthData();
   }
 
-  getUserById(): any {
-    return this.http.get<{ user: User }>(this.BACKEND_URL + '/' + this.userId);
-  }
-
-  getUserId(): string {
-    return this.userId;
-  }
-
-  getToken(): string {
-    return this.token;
-  }
-
   autoAuthUser(): void {
     // get information from localstorage
-    const authInformation = this.getAuthData();
+    const authInformation = this.getAuthData;
 
     if (!authInformation) {
       // if no information is found return
@@ -136,8 +116,28 @@ export class UserService {
     this.router.navigate(['/']);
   }
 
-  private getAuthData(): any {
-    // read information from localstorage and puts them into variables.
+  // getters
+  get getIsAuth(): boolean {
+    return this.isAuthenticated;
+  }
+
+  get getRole(): string {
+    return this.role;
+  }
+
+  get getUserById(): any {
+    return this.http.get<{ user: User }>(this.BACKEND_URL + '/' + this.userId);
+  }
+
+  get getUserId(): string {
+    return this.userId;
+  }
+
+  get getToken(): string {
+    return this.token;
+  }
+
+  get getAuthData(): any {
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
     const userRole = localStorage.getItem('userRole');

@@ -7,7 +7,6 @@ import { Order } from 'src/app/models/Order';
 import { ShoppingCart } from 'src/app/models/ShoppingCart';
 import { OrderService } from 'src/app/services/order.service';
 import { ShoppingCartService } from 'src/app/services/shoppingcart.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-shoppingcart',
@@ -30,12 +29,11 @@ export class ShoppingCartComponent implements OnInit {
 
   constructor(
     private cartService: ShoppingCartService,
-    private orderService: OrderService,
-    private userService: UserService
+    private orderService: OrderService
   ) {}
 
   ngOnInit(): void {
-    this.cart = this.cartService.getShoppingcart();
+    this.cart = this.cartService.getShoppingcart;
 
     this.infoForm = new FormGroup({
       userEmail: new FormControl(null, {

@@ -25,7 +25,7 @@ export class UserpageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.autoAuthUser();
-    this.userService.getUserById().subscribe((data: any) => {
+    this.userService.getUserById.subscribe((data: any) => {
         this.user = data.user as User;
         this.orderService.getOrdersByUserEmail(data.user.email as string).subscribe((dataO: any) => this.orders = dataO.orders);
         this.ratingService.getRatingsByUserId(data.user._id).subscribe((dataR: any) => this.ratings = dataR.ratings);

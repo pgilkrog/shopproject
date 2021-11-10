@@ -12,12 +12,14 @@ export class RatingService {
   constructor(private http: HttpClient){}
 
   createRating(rating: Rating): void {
+    console.log("createRating", rating);
     this.http.post<{ response: string }>(this.BACKEND_URL, rating).subscribe(responseData => {
       return responseData.response;
     });
   }
 
   getRatingsByItemId(itemId: string): any {
+    console.log("getRatingsByItemId", itemId);
     return this.http.get<{ ratings: any }>(this.BACKEND_URL + '/' + itemId).pipe(map((data) => {
       return { ratings: data.ratings };
     }));

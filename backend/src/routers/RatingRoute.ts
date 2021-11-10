@@ -19,18 +19,17 @@ router.post('/', auth, jsonParser, async (req: Request, res: Response) => {
         await newRating.save();
         res.json({ newRating });
     } catch (error) {
-        console.error(error.message);
         res.status(500).send('server error');
     }
 })
 
 //@desc Get ratings by Items Id
 router.get('/:itemId', jsonParser, async (req: Request, res: Response) => {
+    console.log("check", req.params.itemId);
     try {
         const fetchedRatings = await Rating.find({ itemId: req.params.itemId });
         res.json({ ratings: fetchedRatings });
     } catch (error) {
-        console.error(error.message);
         res.status(500).send('server error');
     }
 })
@@ -41,7 +40,6 @@ router.get('/userratings/:userId', jsonParser, async (req: Request, res: Respons
         const fetchedRatings = await Rating.find({ userId: req.params.userId });
         res.json({ ratings: fetchedRatings });
     } catch (error) {
-        console.log(error.message);
         res.status(500).send('Server Error')
     }
 })

@@ -15,14 +15,29 @@ export class ItemService {
 
   constructor(private http: HttpClient) {}
 
+  get productsFromSessionStorage(): Item[] {
+    return JSON.parse(sessionStorage.getItem('products') as string) as Item[]
+  }
+
+  saveToSessionstorage(): void {
+    this.http.get<{ items: any }>(BACKEND_URL).pipe(map((itemData) => {
+      return { items: itemData.items.map((item: Item) => {
+        return this.generateItem(item);
+      })};
+    }))
+    .subscribe(data => {
+      sessionStorage.setItem('products', JSON.stringify(data.items))
+    });
+  }
+
   getItemsListener(): Observable<{items: Item[]}> {
     return this.itemsUpdated.asObservable();
   }
 
   getItems(): Observable<Item[]> {
-      return this.http.get<{ items: Item[]}>(BACKEND_URL).pipe(
-        map((data: any) => data.items.map((item: Item) => this.generateItem(item)))
-      );
+    return this.http.get<{ items: Item[]}>(BACKEND_URL).pipe(
+      map((data: any) => data.items.map((item: Item) => this.generateItem(item)))
+    );
   }
 
   getAllItems(): void {

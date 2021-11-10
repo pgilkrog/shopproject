@@ -17,21 +17,6 @@ export class ShoppingCartService {
   private itemsAmount = new BehaviorSubject<number>(0);
   itemsAmount$ = this.itemsAmount.asObservable();
 
-  getShoppingcart(): ShoppingCart {
-    return sessionStorage.getItem('shopcart') ?
-      this.shoppingcart = JSON.parse(sessionStorage.getItem('shopcart') as string) :
-      this.shoppingcart = {
-        cartItems: [] = [],
-        itemsAmount: 0,
-        totalPrice: 0
-      };
-  }
-
-  getTotalAmount(): Observable<number> {
-    this.itemsAmount.next(this.getShoppingcart().itemsAmount);
-    return this.itemsAmount$;
-  }
-
   addToCart(newItem: Item): void {
     // check if items exists in cart
     const itemExistInCart = this.shoppingcart.cartItems.find(({item}) => newItem._id === item._id);
@@ -120,5 +105,21 @@ export class ShoppingCartService {
 
     this.shoppingcart.itemsAmount = numberOfItems;
     this.shoppingcart.totalPrice = totalPrice;
+  }
+
+  /**** GETTERS ****/
+  get getShoppingcart(): ShoppingCart {
+    return sessionStorage.getItem('shopcart') ?
+      this.shoppingcart = JSON.parse(sessionStorage.getItem('shopcart') as string) :
+      this.shoppingcart = {
+        cartItems: [] = [],
+        itemsAmount: 0,
+        totalPrice: 0
+      };
+  }
+
+  get getTotalAmount(): Observable<number> {
+    this.itemsAmount.next(this.getShoppingcart.itemsAmount);
+    return this.itemsAmount$;
   }
 }

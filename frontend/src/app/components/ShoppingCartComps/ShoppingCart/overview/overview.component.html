@@ -1,0 +1,36 @@
+<h2>Overview</h2>
+<table>
+  <tr *ngFor="let cartItem of cart.cartItems">
+    <td>
+      <img src="{{cartItem.item.image}}" width="100" />
+    </td>
+    <td>
+      <p>{{ cartItem.item.name }}</p>
+    </td>
+    <td>
+      <strong>
+        <p *ngIf="cartItem.item.onSale"><span>{{ prettyCurrency(cartItem.item.price) }}</span> - {{ prettyCurrency(cartItem.item.price - cartItem.item.saleAmount) }}</p>
+        <p *ngIf="!cartItem.item.onSale">{{ prettyCurrency(cartItem.item.price) }}</p>
+      </strong>
+    </td>
+    <td>
+      {{cartItem.num}}
+    </td>
+    <td>
+      <p *ngIf="cartItem.item.onSale">{{ 'general.total_price' | translate }}: <strong>{{ prettyCurrency(cartItem.num * (cartItem.item.price - cartItem.item.saleAmount)) }}</strong></p>
+      <p *ngIf="!cartItem.item.onSale">{{ 'general.total_price' | translate }}: <strong>{{ prettyCurrency(cartItem.num * cartItem.item.price) }}</strong></p>
+    </td>
+  </tr>
+</table>
+<div>
+  <h3>Will be delivered to</h3>
+  <p>
+    {{this.infoForm.value.address}} <br>
+    {{this.infoForm.value.city}}
+  </p>
+</div>
+<div class="buttons">
+  <button (click)="orderProcess()" class="btn btn-dark">Back to payment</button>
+  <button class="checkBtn" (click)="completeOrder()" class="btn btn-dark">Complete your Order!</button>
+</div>
+<br>

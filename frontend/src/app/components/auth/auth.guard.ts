@@ -18,8 +18,8 @@ export class AuthGaurd implements CanActivate {
   }
 
   checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
-    if (this.authService.getIsAuth()) {
-      const userRole = this.authService.getRole();
+    if (this.authService.getIsAuth) {
+      const userRole = this.authService.getRole;
 
       if (route.data.role && route.data.role.indexOf(userRole) === -1) {
         this.router.navigate(['/Home']);

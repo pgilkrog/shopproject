@@ -47,7 +47,9 @@
     </li>
     <li [routerLinkActive]='["link-active"]'>
       <i routerLink="ShoppingCart" class="fas fa-shopping-cart"></i>
-      <div routerLink="ShoppingCart"><span class="cart-number"><span *ngIf="ItemsInBasket < 10">0</span>{{ItemsInBasket}}</span></div>
+      <div routerLink="ShoppingCart" class="number-wrap">
+        <span class="cart-number p-1"><span *ngIf="ItemsInBasket < 10">0</span>{{ItemsInBasket}}</span>
+      </div>
     </li>
   </ul>
 </nav>

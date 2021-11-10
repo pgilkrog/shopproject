@@ -92,7 +92,8 @@
   </div>
 
   <div *ngIf="orderProcessNumber === 4">
-    <h2>Overview</h2>
+    <app-overview [cart]="cart" (progreesEvent)="orderProcess(3)"></app-overview>
+    <!-- <h2>Overview</h2>
     <table>
       <tr *ngFor="let cartItem of cart.cartItems">
         <td>
@@ -127,7 +128,7 @@
       <button (click)="orderProcess(3)" class="btn btn-dark">Back to payment</button>
       <button class="checkBtn" (click)="completeOrder()" class="btn btn-dark">Complete your Order!</button>
     </div>
-    <br>
+    <br> -->
   </div>
 
 </section>

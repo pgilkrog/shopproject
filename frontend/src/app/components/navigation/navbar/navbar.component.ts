@@ -37,15 +37,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.categories = this.categoryService.getCategories;
 
     this.userService.autoAuthUser();
-    this.userRole = this.userService.getRole();
-    this.userIsAuthenticated = this.userService.getIsAuth();
+    this.userRole = this.userService.getRole;
+    this.userIsAuthenticated = this.userService.getIsAuth;
 
     this.authListenerSubs = this.userService.getAuthStatusListener().subscribe({
         next: isAuthenticated => this.userIsAuthenticated = isAuthenticated,
         error: (error) => console.log(error)
       });
 
-    this.itemListenerSub = this.cartService.getTotalAmount().subscribe({
+    this.itemListenerSub = this.cartService.getTotalAmount.subscribe({
       next: data => this.ItemsInBasket = data,
       error: error => console.log(error)
     });

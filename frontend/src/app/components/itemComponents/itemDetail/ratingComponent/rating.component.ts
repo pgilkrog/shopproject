@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Rating } from 'src/app/models/Rating';
 import { RatingService } from 'src/app/services/rating.service';
@@ -17,27 +17,33 @@ export class RatingComponent implements OnInit {
   selectedStarValue = 0;
   hasRated = false;
 
-  @Input() itemId = '';
+  @Input() itemId: string = "";
 
   constructor(private userService: UserService, private ratingService: RatingService) {}
 
   ngOnInit(): void {
+    console.log(this.itemId);
     this.ratingForm = new FormGroup({
       comment: new FormControl(null, {
         validators: [Validators.required]
       })
     });
+  }
 
-    this.ratingService.getRatingsByItemId(this.itemId).subscribe((data: any) => {
-      this.ratings = data.ratings;
-      this.chechIfUserRated(data.ratings);
-    });
+  ngOnChanges() {
+    if(this.itemId !== "") {
+      this.ratingService.getRatingsByItemId(this.itemId).subscribe((data: any) => {
+        console.log("ratingService.getRatingsByItemId", data);
+        this.ratings = data.ratings;
+        this.chechIfUserRated(data.ratings);
+      });
+    }
   }
 
   chechIfUserRated(ratings: Rating[]): void {
     // check all ratings for items, to check if current user has rated
     ratings.forEach(element => {
-      if (element.userId === this.userService.getUserId()) {
+      if (element.userId === this.userService.getUserId) {
         this.hasRated = true;
         this.ratingForm.disable();
       }
@@ -52,7 +58,7 @@ export class RatingComponent implements OnInit {
     const newRating: Rating = {
       _id: '',
       itemId: this.itemId,
-      userId: this.userService.getUserId(),
+      userId: this.userService.getUserId,
       commentText: this.ratingForm.value.comment,
       rating: this.selectedStarValue
     };

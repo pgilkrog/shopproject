@@ -41,7 +41,6 @@ router.post('/refreshToken/', jsonParser, async (req: Request, res: Response) =>
             res.json({ token });
         });            
     } catch(err) {
-        console.error(err.message)
         res.status(500).send('Server error');
     }
 });
@@ -110,7 +109,6 @@ router.post('/auth/', jsonParser, [
         });
 
     } catch(err) {
-        console.error(err.message);
         res.status(500).send('server error');
     }
 });
@@ -121,7 +119,6 @@ router.get('/:id', async (req: Request, res: Response) => {
         const user = await User.findById(req.params.id);
         res.json({ user })
     } catch(err) {
-        console.error(err.message);
         res.status(500).send('Server error');
     }
 })
@@ -193,7 +190,6 @@ async (req: Request, res: Response) => {
             res.json({ token, id, role });
         })
     } catch (err) {
-        console.error(err.message);
         res.status(500).send('server error');
     }
 });

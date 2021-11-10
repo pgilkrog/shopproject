@@ -28,6 +28,7 @@ import { AuthModule } from './components/auth/auth.module';
 import { PaymentComponent } from './components/ShoppingCartComps/ShoppingCart/payment/payment.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { OrderSearchComponent } from './components/orderComponents/orderSearch/orderSearch.component';
+import { OverviewComponent } from './components/ShoppingCartComps/ShoppingCart/overview/overview.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { OrderSearchComponent } from './components/orderComponents/orderSearch/o
     RatingComponent,
     PaymentComponent,
     FooterComponent,
-    OrderSearchComponent
+    OrderSearchComponent,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,
