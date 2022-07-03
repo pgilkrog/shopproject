@@ -42,6 +42,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
   constructor(private itemService: ItemService) {}
 
   ngOnInit(): void {
+    this.itemService.saveToSessionstorage();
     this.ItemSub = this.itemService.getItemsListener().subscribe({
         next: (itemsData: { items: Item[] }) => {
           // putt all items into items

@@ -1,0 +1,22 @@
+@import '../../../../styles'
+
+.category-menu-wrapper
+  position: absolute
+  width: fit-content
+  background-color: $darkblue-color
+  border-radius: 6px
+  margin-left: -12px
+
+  .category-menu-list
+    list-style: none
+    margin: 0
+    padding: 0
+    li
+      list-style: none
+      color: $white-color
+
+      &:hover
+        color: $light-grey-color
+
+    li + li
+      margin-top: 10px

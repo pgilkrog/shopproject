@@ -29,6 +29,7 @@ import { PaymentComponent } from './components/ShoppingCartComps/ShoppingCart/pa
 import { FooterComponent } from './components/footer/footer.component';
 import { OrderSearchComponent } from './components/orderComponents/orderSearch/orderSearch.component';
 import { OverviewComponent } from './components/ShoppingCartComps/ShoppingCart/overview/overview.component';
+import { CategoryMenu } from './components/navigation/categoryMenu/categoryMenu.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { OverviewComponent } from './components/ShoppingCartComps/ShoppingCart/o
     PaymentComponent,
     FooterComponent,
     OrderSearchComponent,
-    OverviewComponent
+    OverviewComponent,
+    CategoryMenu
   ],
   imports: [
     BrowserModule,

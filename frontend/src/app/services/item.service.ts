@@ -15,10 +15,6 @@ export class ItemService {
 
   constructor(private http: HttpClient) {}
 
-  get productsFromSessionStorage(): Item[] {
-    return JSON.parse(sessionStorage.getItem('products') as string) as Item[]
-  }
-
   saveToSessionstorage(): void {
     this.http.get<{ items: any }>(BACKEND_URL).pipe(map((itemData) => {
       return { items: itemData.items.map((item: Item) => {
@@ -26,6 +22,7 @@ export class ItemService {
       })};
     }))
     .subscribe(data => {
+      this.putDataIntoArrays(data.items),
       sessionStorage.setItem('products', JSON.stringify(data.items))
     });
   }
@@ -41,12 +38,7 @@ export class ItemService {
   }
 
   getAllItems(): void {
-    this.http.get<{ items: any }>(BACKEND_URL).pipe(map((itemData) => {
-      return { items: itemData.items.map((item: Item) => {
-        return this.generateItem(item);
-      })};
-    }))
-    .subscribe(data => this.putDataIntoArrays(data));
+    this.putDataIntoArrays(this.productsFromSessionStorage);
   }
 
   getItemsOnSale(): any {
@@ -56,7 +48,7 @@ export class ItemService {
         return this.generateItem(item);
       })};
     }))
-    .subscribe(data => this.putDataIntoArrays(data));
+    .subscribe(data => this.putDataIntoArrays(data.items));
   }
 
   getTopFiveItem(): Observable<Item[]> {
@@ -85,16 +77,11 @@ export class ItemService {
         return this.generateItem(item);
       })};
     }))
-    .subscribe(data => this.putDataIntoArrays(data))
+    .subscribe(data => this.putDataIntoArrays(data.items))
   }
 
-  getItemByCategory(category: string): any {
-    return this.http.get<{items: any}>(BACKEND_URL + '/cat/' + category).pipe(map((itemData) => {
-      return { items: itemData.items.map((item: Item) => {
-        return this.generateItem(item);
-      })};
-    }))
-    .subscribe(data => this.putDataIntoArrays(data));
+  getItemByCategory(category: string): void {
+    this.putDataIntoArrays(this.productsFromSessionStorage.filter(item => item.category === category));
   }
 
   updateItem(item: Item): void {
@@ -111,7 +98,7 @@ export class ItemService {
   }
 
   putDataIntoArrays(data: any): void {
-    this.items = data.items;
+    this.items = data;
     this.itemsUpdated.next({
       items: [...this.items]
     });
@@ -131,5 +118,13 @@ export class ItemService {
       saleAmount: item.saleAmount,
       onSale: item.onSale
     };
+  }
+
+  get itemsList(): Item[] {
+    return this.items;
+  }
+
+  get productsFromSessionStorage(): Item[] {
+    return (sessionStorage.getItem('products') as string) ? JSON.parse(sessionStorage.getItem('products') as string) as Item[] : []
   }
 }

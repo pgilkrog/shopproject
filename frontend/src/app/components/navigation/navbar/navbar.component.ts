@@ -65,7 +65,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   gotoProducts(): void {
-    this.itemService.getAllItems();
+    this.itemService.getItems();
   }
 
   goToCategory(category: string): void {

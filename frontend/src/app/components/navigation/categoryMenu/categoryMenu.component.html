@@ -1,0 +1,9 @@
+<section class="category-menu-wrapper p-2">
+  <ul class="category-menu-list">
+    <li *ngFor="let cat of categories">
+      <span (click)="goToCategory(cat)" routerLink="ItemList/{{cat}}">
+        {{ ('categories.' + cat).toLowerCase() | translate }}
+      </span>
+    </li>
+  </ul>
+</section>

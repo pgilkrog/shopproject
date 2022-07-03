@@ -1,11 +1,11 @@
 <div class="top-bar">
   <ul>
-    <li (click)="gotoProducts()" routerLink="ItemList">All</li>
+    <!-- <li (click)="gotoProducts()" routerLink="ItemList">All</li>
     <li *ngFor="let cat of categories">
       <span (click)="goToCategory(cat)" routerLink="ItemList/{{cat}}">
         {{ ('categories.' + cat).toLowerCase() | translate }}
       </span>
-    </li>
+    </li> -->
   </ul>
   <ul>
     <li [routerLinkActive]='["link-active"]' *ngIf="userIsAuthenticated && userRole === 'admin'">
@@ -33,8 +33,9 @@
     <li [routerLinkActive]='["link-active"]' style="margin-left: 40px">
       <a routerLink="Home">{{ 'navbar.homepage' | translate }}</a>
     </li>
-    <li [routerLinkActive]='["link-active"]'>
+    <li [routerLinkActive]='["link-active"]' class="product-menu-item">
       <a (click)="gotoProducts()" routerLink="ItemList">{{ 'navbar.products' | translate}}</a>
+      <app-category-menu class="category-item"></app-category-menu>
     </li>
     <li>
       <a routerLink="ItemList" (click)="goToSale()">{{ 'navbar.weekly_sale' | translate}}</a>

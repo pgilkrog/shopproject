@@ -13,8 +13,8 @@ router.get('/', async (req: Request, res: Response) => {
     try {
         const fetchedItems = await Item.find({ });
         res.json({ items: fetchedItems });
-    } catch (err) {
-        console.error(err.message);
+    } catch (error: any) {
+        console.error(error.message);
         res.status(500).send('server error');
     }
 })
@@ -24,8 +24,8 @@ router.get('/:id', async (req: Request, res: Response) => {
     try {
         const item = await Item.findById(req.params.id);
         res.json({ item })
-    } catch(err) {
-        console.error(err.message);
+    } catch(error: any) {
+        console.error(error.message);
         res.status(500).send('Server error');
     }
 })
@@ -39,7 +39,7 @@ router.get('/search/:search', async (req: Request, res: Response) => {
             (item.category.toLowerCase().search(new RegExp(req.params.search.toLowerCase())) > -1)
         );
         res.json({ items: fetchedItems });
-    } catch (error) {
+    } catch (error: any) {
         console.error(error.mesage);
     }
 })
@@ -48,7 +48,7 @@ router.get('/onSale/:onSale', async (req: Request, res: Response) => {
     try {
         const fetchedItems = await Item.find({ onSale: req.params.onSale })
         res.json({ items: fetchedItems });
-    } catch (error) {
+    } catch (error: any) {
         console.error(error.message);
         res.status(500).send('Server error');
     }
@@ -59,7 +59,7 @@ router.get('/cat/:category', async (req: Request, res: Response) => {
     try {
         const fetchedItems = await Item.find({ category: req.params.category })
         res.json({ items: fetchedItems });
-    } catch (error) {
+    } catch (error: any) {
         console.error(error.message);
         res.status(500).send('Server error');
     }
@@ -70,7 +70,7 @@ router.get('/pop/pop/', async (req: Request, res: Response) => {
     try {
         const fetchedItems = await Item.find({ }).sort({numberBought: -1}).limit(5);
         res.json({ items: fetchedItems })
-    } catch (error) {
+    } catch (error: any) {
         console.error('[pop error]', error.message);
     }
 })
@@ -81,9 +81,8 @@ router.get('/autosearch/complete/:search', async (req: Request, res: Response) =
         const fetchedItems = (await Item.find({ }).limit(6)).filter((item: any) => 
             (item.name.toLowerCase().search(new RegExp(req.params.search.toLowerCase())) > -1)
         );
-
         res.json({ items: fetchedItems });
-    } catch (error) {
+    } catch (error: any) {
         console.log(error.message);
     }
 })
@@ -120,8 +119,8 @@ router.post('/', auth, jsonParser, async (req: Request, res: Response, next: any
 
         const item = await newItem.save();
         res.json(item);
-    } catch (err) {
-        console.error(err.message);
+    } catch (error: any) {
+        console.error(error.message);
     }
 })
 
